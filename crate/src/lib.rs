@@ -1,4 +1,55 @@
-use wasm_bindgen::prelude::*;
+// import macros (e.g. button!)
+use seed::*;
+use seed::prelude::*;
+
+// Model
+
+struct Model {
+    pub val: i32,
+}
+
+impl Default for Model {
+    fn default() -> Self {
+        Self {
+            val: 0,
+        }
+    }
+}
+
+
+// Update
+
+#[derive(Clone)]
+enum Msg {
+    Increment,
+}
+
+fn update(msg: Msg, model: &mut Model) -> Update<Msg> {
+    match msg {
+        Msg::Increment => model.val += 1,
+    }
+    Render.into()
+}
+
+
+// View
+
+fn view(model: &Model) -> El<Msg> {
+    button![ 
+        simple_ev(Ev::Click, Msg::Increment), 
+        format!("Hello, World × {}", model.val) 
+    ]
+}
+
+// Called by our JS entry point to run the example.
+#[wasm_bindgen]
+pub fn run() {
+    set_panic_hook();
+
+    seed::App::build(Model::default(), update, view)
+        .finish()
+        .run();
+}
 
 cfg_if::cfg_if! {
     // When the `console_error_panic_hook` feature is enabled, we can call the
@@ -18,22 +69,4 @@ cfg_if::cfg_if! {
         #[global_allocator]
         static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
     }
-}
-
-// Called by our JS entry point to run the example.
-#[wasm_bindgen]
-pub fn run() -> Result<(), JsValue> {
-    set_panic_hook();
-
-    let window = web_sys::window().expect("should have a Window");
-    let document = window.document().expect("should have a Document");
-
-    let p: web_sys::Node = document.create_element("p")?.into();
-    p.set_text_content(Some("Hello from Rust, WebAssembly, and Webpack!!!"));
-
-    let body = document.body().expect("should have a body");
-    let body: &web_sys::Node = body.as_ref();
-    body.append_child(&p)?;
-
-    Ok(())
 }
