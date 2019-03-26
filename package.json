@@ -1,0 +1,18 @@
+{
+  "author": "Your Name <email@address.com>",
+  "name": "appname",
+  "version": "0.1.0",
+  "repository": "",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server -d",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "@wasm-tool/wasm-pack-plugin": "0.2.7",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
+  }
+}
