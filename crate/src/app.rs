@@ -34,14 +34,15 @@ pub fn update(msg: Msg, model: &mut Model) -> Update<Msg> {
 // View
 
 pub fn view(model: &Model) -> El<Msg> {
-    div![   
+    div![ 
+        class!["h-screen", "w-screen", "flex", "flex-wrap", "justify-center", "content-center"],
         button![ 
-            class!["shadow-lg", "text-green", "p-4"],
+            class!["mt-8", "mr-8", "p-4", "rounded", "shadow-md", "bg-green-lighter", "hover:bg-green-light"],
             simple_ev(Ev::Click, Msg::Increment), 
             format!("Clicks: {}", model.val) 
         ],
         button![ 
-            class!["shadow-lg", "text-green", "p-4"],
+            class!["mt-8", "p-4", "rounded", "shadow-md", "bg-blue-lighter", "hover:bg-blue-light"],
             simple_ev(Ev::Click, Msg::Increment), 
             format!("Random number from Typescript: {}", 0) 
         ]
