@@ -5,14 +5,16 @@ const dist = path.resolve(__dirname, "dist");
 const WasmPackPlugin = require("@wasm-tool/wasm-pack-plugin");
 
 module.exports = {
-  entry: "./js/index.js",
+  entry: "./index.js",
   output: {
     path: dist,
     filename: "bundle.js"
   },
   devServer: {
     contentBase: dist,
-    hot: true
+    hot: true,
+    host: '0.0.0.0',
+    port: 3000
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -28,6 +30,9 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.tsx?$/,
+        loader: 'ts-loader'
+      }, {
         test: /\.css$/,
         use: [
           'style-loader',

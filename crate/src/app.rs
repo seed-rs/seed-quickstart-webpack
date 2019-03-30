@@ -1,6 +1,6 @@
 use seed::*;
 use seed::prelude::*;
-use crate::js_calls;
+use crate::ts_calls;
 
 // Model
 
@@ -13,7 +13,7 @@ impl Default for Model {
     fn default() -> Self {
         Self {
             clicks: 0,
-            random_number: js_calls::get_random_number(0,100)
+            random_number: ts_calls::helpers::get_random_number(0,100)
         }
     }
 }
@@ -30,7 +30,7 @@ pub enum Msg {
 pub fn update(msg: Msg, model: &mut Model) -> Update<Msg> {
     match msg {
         Msg::Increment => model.clicks += 1,
-        Msg::NewRandomNumber => model.random_number = js_calls::get_random_number(0,100),
+        Msg::NewRandomNumber => model.random_number = ts_calls::helpers::get_random_number(0,100),
     }
     Render.into()
 }
@@ -42,7 +42,7 @@ pub fn view(model: &Model) -> El<Msg> {
     div![ 
         class!["h-screen", "w-screen", "flex", "flex-wrap", "justify-center", "content-center"],
         button![ 
-            class!["mb-8", "mr-8", "p-4", "rounded", "shadow-md", "bg-green-lighter", "hover:bg-green-light"],
+            class!["mb-8", "mx-8", "p-4", "rounded", "shadow-md", "bg-green-lighter", "hover:bg-green-light"],
             simple_ev(Ev::Click, Msg::Increment), 
             format!("Clicks: {}", model.clicks) 
         ],
