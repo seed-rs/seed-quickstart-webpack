@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server -d",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "test": "wasm-pack test ./crate --node"
   },
   "devDependencies": {
     "@wasm-tool/wasm-pack-plugin": "0.2.7",

@@ -43,3 +43,6 @@ features = [
 
 [features]
 default = ["console_error_panic_hook"]
+
+[dev-dependencies]
+wasm-bindgen-test = "0.2.25"
