@@ -60,3 +60,7 @@
   * @import "utilities/background-patterns";
   * @import "utilities/skew-transforms";
   */
+
+.bg-custom {
+  background: url("../static/images/decoration.png") no-repeat fixed center top;
+}

@@ -40,16 +40,22 @@ pub fn update(msg: Msg, model: &mut Model) -> Update<Msg> {
 
 pub fn view(model: &Model) -> El<Msg> {
     div![ 
-        class!["h-screen", "w-screen", "flex", "flex-wrap", "justify-center", "content-center"],
-        button![ 
-            class!["mb-8", "mx-8", "p-4", "rounded", "shadow-md", "bg-green-lighter", "hover:bg-green-light"],
-            simple_ev(Ev::Click, Msg::Increment), 
-            format!("Clicks: {}", model.clicks) 
+        class!["h-screen", "w-screen", "flex", "flex-wrap", "justify-center", "content-center", "bg-custom"],
+        img![                      
+            attrs!{At::Class => "mb-8"; At::Src => "static/images/quickstart.png";}
         ],
-        button![ 
-            class!["mb-8", "p-4", "rounded", "shadow-md", "bg-blue-lighter", "hover:bg-blue-light"],
-            simple_ev(Ev::Click, Msg::NewRandomNumber), 
-            format!("Random number from Typescript: {}", model.random_number) 
+        div![
+            class!["flex", "flex-wrap", "justify-center", "content-center"],
+            button![ 
+                class!["mb-8", "mx-8", "p-4", "rounded", "shadow-md", "bg-green-lighter", "hover:bg-green-light"],
+                simple_ev(Ev::Click, Msg::Increment), 
+                format!("Clicks: {}", model.clicks) 
+            ],
+            button![ 
+                class!["mb-8", "p-4", "rounded", "shadow-md", "bg-blue-lighter", "hover:bg-blue-light"],
+                simple_ev(Ev::Click, Msg::NewRandomNumber), 
+                format!("Random number from Typescript: {}", model.random_number) 
+            ]
         ]
     ]
 }

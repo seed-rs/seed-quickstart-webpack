@@ -1,8 +1,10 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-
 const dist = path.resolve(__dirname, "dist");
+
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WasmPackPlugin = require("@wasm-tool/wasm-pack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: "./index.js",
@@ -17,18 +19,36 @@ module.exports = {
     port: 3000
   },
   plugins: [
+    new CleanWebpackPlugin(),    
     new HtmlWebpackPlugin({
       template: 'index.html'
     }),
-
     new WasmPackPlugin({
       crateDirectory: path.resolve(__dirname, "crate"),
       // WasmPackPlugin defaults to compiling in "dev" profile. To change that, use forceMode: 'release':
       // forceMode: 'release'
     }),
+    new CopyWebpackPlugin([
+      { 
+        from: 'static',
+        to: 'static'
+      }
+    ])
   ],
   module: {
     rules: [
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              emitFile: false,
+              name: '[path][name].[ext]'
+            },            
+          },
+        ],
+      },
       {
         test: /\.tsx?$/,
         loader: 'ts-loader'
