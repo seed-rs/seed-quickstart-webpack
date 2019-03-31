@@ -3,18 +3,18 @@
 > I want to write fast, reliable and efficient web apps. Quickly.  
 > And I like documentation.
 
-The core is Rust framework [Seed](seed-rs.org).
+The core is Rust framework [Seed](https://seed-rs.org).
 
-**LIVE DEMO**: [seed-quickstart-webpack.netlify.com](seed-quickstart-webpack.netlify.com)
+**LIVE DEMO**: [seed-quickstart-webpack.netlify.com](https://seed-quickstart-webpack.netlify.com)
 
 @TODO gif with auto-reload
 
 # I need to install:
 
-1. [Rust](rust-lang.org/tools/install)
-1. [NodeJs](nodejs.org/en/download/)
-1. [Yarn](yarnpkg.com/lang/en/docs/install)
-1. [wasm-pack](rustwasm.github.io/wasm-pack/installer/)
+1. [Rust](https://rust-lang.org/tools/install)
+1. [NodeJs](https://nodejs.org/en/download/)
+1. [Yarn](https://yarnpkg.com/lang/en/docs/install)
+1. [wasm-pack](https://rustwasm.github.io/wasm-pack/installer/)
 
 # How to create my new app:
 
@@ -25,7 +25,7 @@ The core is Rust framework [Seed](seed-rs.org).
 1. Modify `README.md` and `LICENCE`
 1. Run command `yarn` in the project root.
 1. _[Optional]_ Push new app into my repository. (GitHub [guide](https://help.github.com/en/articles/adding-an-existing-project-to-github-using-the-command-line))
-1. _[Optional]_ Setup auto-deploy into [Netlify](www.netlify.com) through [Travis CI](travis-ci.org). (See chapter [Continous integration](#continous-integration))
+1. _[Optional]_ Setup auto-deploy into [Netlify](https://www.netlify.com) through [Travis CI](https://travis-ci.org). (See chapter [Continous integration](#continous-integration))
 
 # Basic commands
 
