@@ -47,12 +47,12 @@ pub fn view(model: &Model) -> El<Msg> {
         div![
             class!["flex", "flex-wrap", "justify-center", "content-center"],
             button![ 
-                class!["mb-8", "mx-8", "p-4", "rounded", "shadow-md", "bg-green-lighter", "hover:bg-green-light"],
+                class!["mb-8", "mx-8", "p-4", "rounded", "shadow-md", "bg-green-lighter", "hover:bg-green-light", "font-bold"],
                 simple_ev(Ev::Click, Msg::Increment), 
                 format!("Clicks: {}", model.clicks) 
             ],
             button![ 
-                class!["mb-8", "p-4", "rounded", "shadow-md", "bg-blue-lighter", "hover:bg-blue-light"],
+                class!["mb-8", "p-4", "rounded", "shadow-md", "bg-blue-lighter", "hover:bg-blue-light", "font-bold"],
                 simple_ev(Ev::Click, Msg::NewRandomNumber), 
                 format!("Random number from Typescript: {}", model.random_number) 
             ]
