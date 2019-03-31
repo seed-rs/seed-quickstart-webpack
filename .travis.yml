@@ -9,10 +9,10 @@ install:
 cache:
   - yarn
   - directories:
-    - node_modules
-    - crate/pkg
-    - crate/target
-    - $HOME/.cargo
+      - node_modules
+      - crate/pkg
+      - crate/target
+      - $HOME/.cargo
 
 script:
   - yarn
@@ -27,7 +27,7 @@ before_deploy:
 
 deploy:
   provider: script
-  script: script: netlify deploy -s $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN -p --dir ./dist
+  script: netlify deploy -s $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN -p --dir ./dist
   skip_cleanup: true
   on:
     branch: master
