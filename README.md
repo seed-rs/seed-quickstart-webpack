@@ -21,6 +21,7 @@ The core is Rust framework [Seed](https://seed-rs.org).
 1. Clone or download this repo.
 1. Change `name` and `author` in `/package.json`
 1. Change `name` and `authors` in `/crate/Cargo.toml`
+1. Change `appname` in imported url to the same name as in the previous steps
 1. Change `title` in `/index.html`
 1. Modify `README.md` and `LICENCE`
 1. Run command `yarn` in the project root.

@@ -7,7 +7,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: "./index.js",
+  entry: "./index.ts",
   output: {
     path: dist,
     filename: "bundle.js"
@@ -33,6 +33,9 @@ module.exports = {
       }
     ])
   ],
+  resolve: {
+    extensions: [".ts", ".js", '.wasm']
+  },
   module: {
     rules: [
       {
@@ -48,8 +51,8 @@ module.exports = {
         ],
       },
       {
-        test: /\.tsx?$/,
-        loader: 'ts-loader'
+        test: /\.ts$/,
+        loader: 'ts-loader',
       }, {
         test: /\.css$/,
         use: [

@@ -1,6 +1,6 @@
 use seed::*;
 use seed::prelude::*;
-use crate::ts_calls;
+use crate::ts_apis;
 
 // Model
 
@@ -13,7 +13,7 @@ impl Default for Model {
     fn default() -> Self {
         Self {
             clicks: 0,
-            random_number: ts_calls::helpers::get_random_number(0,100)
+            random_number: ts_apis::helpers::get_random_number(0,100)
         }
     }
 }
@@ -30,7 +30,7 @@ pub enum Msg {
 pub fn update(msg: Msg, model: &mut Model) -> Update<Msg> {
     match msg {
         Msg::Increment => model.clicks += 1,
-        Msg::NewRandomNumber => model.random_number = ts_calls::helpers::get_random_number(0,100),
+        Msg::NewRandomNumber => model.random_number = ts_apis::helpers::get_random_number(0,100),
     }
     Render.into()
 }

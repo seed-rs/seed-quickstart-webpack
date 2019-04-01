@@ -1,8 +1,6 @@
-use seed;
-use seed::prelude::wasm_bindgen;
-
 mod app;
-mod ts_calls;
+mod ts_apis;
+mod rust_apis;
 
 cfg_if::cfg_if! {
     // When the `console_error_panic_hook` feature is enabled, we can call the
@@ -22,14 +20,4 @@ cfg_if::cfg_if! {
         #[global_allocator]
         static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
     }
-}
-
-// Called by our JS entry point to run the example.
-#[wasm_bindgen]
-pub fn run() {
-    set_panic_hook();
-
-    seed::App::build(app::Model::default(), app::update, app::view)
-        .finish()
-        .run();
 }
