@@ -82,7 +82,7 @@ The core is Rust framework [Seed](https://seed-rs.org).
 
 # Browser and platform support
 
-@TODO (Edge + IE help wanted (=> anaheim), not tested on android mobiles, mac and linux (help wanted))
+@TODO (not tested on android mobiles, mac and linux (help wanted))
 
 # Recommended development tools
 
