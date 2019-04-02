@@ -39,6 +39,7 @@ features = [
   "HtmlElement",
   "Node",
   "Window",
+  "CustomEvent"
 ]
 
 [features]

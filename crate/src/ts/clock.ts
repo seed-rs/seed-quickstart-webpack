@@ -1,6 +1,12 @@
-
 export const startClock = () => {
+    dispatchOnClockTickEvent();
+
     setInterval(() => {
-        console.log("@TODO send event to rust");
-    }, 3000);
+        dispatchOnClockTickEvent();
+    }, 1000);
 };
+
+const dispatchOnClockTickEvent = () => {
+    const event = new CustomEvent('onclocktick', { detail: (new Date()).toLocaleTimeString() });
+    window.dispatchEvent(event);
+}

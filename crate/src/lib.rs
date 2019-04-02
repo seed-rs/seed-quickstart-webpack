@@ -1,6 +1,13 @@
+use wasm_bindgen::JsCast;
+use wasm_bindgen::prelude::*;
+use seed;
+use web_sys;
+
 mod app;
 mod ts_apis;
 mod rust_apis;
+
+type CustomEvents<Ms, Mdl> = fn(&Mdl) -> Vec<Ms>;
 
 cfg_if::cfg_if! {
     // When the `console_error_panic_hook` feature is enabled, we can call the
@@ -20,4 +27,13 @@ cfg_if::cfg_if! {
         #[global_allocator]
         static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
     }
+}
+
+// @TODO use custom_events
+pub fn register_custom_events(custom_events: CustomEvents<app::Msg, app::Model>, state: seed::App<app::Msg, app::Model>) {
+    let window = web_sys::window().expect("should have a window in this context");
+    //https://rustwasm.github.io/wasm-bindgen/examples/closures.html
+    let a = Closure::wrap(Box::new(move |event: web_sys::CustomEvent| state.update(app::Msg::ClockTick(event.detail()))) as Box<dyn Fn(web_sys::CustomEvent)>);
+    window.add_event_listener_with_callback("onclocktick", a.as_ref().unchecked_ref());
+    a.forget();
 }
