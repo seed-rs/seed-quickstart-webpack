@@ -48,10 +48,6 @@ pub fn update(msg: Msg, model: &mut Model) -> Update<Msg> {
 pub fn view(model: &Model) -> El<Msg> {
     div![
         class!["bg-custom"],
-        div![
-                class!["mt-16", "absolute", "pin-x", "text-center", "font-bold", "text-xl"],
-                format!("{}", if let Some(ref time) = model.clock_time { time } else { "" } )
-            ],
         div![ 
             class!["h-screen", "w-screen", "flex", "flex-wrap", "justify-center", "content-center"],
             img![                      
@@ -70,6 +66,10 @@ pub fn view(model: &Model) -> El<Msg> {
                     format!("Random number from Typescript: {}", model.random_number) 
                 ]
             ]
+        ],
+        div![
+            class!["mb-6", "absolute", "pin-x", "pin-b", "text-center", "font-bold", "text-xl", "text-green-light"],
+            format!("{}", if let Some(ref time) = model.clock_time { time } else { "" } )
         ]
     ]
 }
