@@ -4,3 +4,4 @@ crate/bin
 crate/pkg
 crate/target
 crate/wasm-pack.log
+.idea

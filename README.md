@@ -86,7 +86,7 @@ The core is Rust framework [Seed](https://seed-rs.org).
 
 # Recommended development tools
 
-@TODO (rust-analyzer, prettier, vscode...)
+@TODO (rust-analyzer, prettier, vscode..., webstorm + rust plugin)
 
 # Contributing
 

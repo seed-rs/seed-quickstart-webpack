@@ -1,8 +1,8 @@
+use crate::app;
+use crate::register_custom_events;
+use crate::set_panic_hook;
 use seed;
 use wasm_bindgen::prelude::*;
-use crate::app;
-use crate::set_panic_hook;
-use crate::register_custom_events;
 
 // Called by our TS entry point to run the application.
 #[wasm_bindgen]
