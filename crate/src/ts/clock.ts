@@ -7,6 +7,6 @@ export const startClock = () => {
 };
 
 const dispatchOnClockTickEvent = () => {
-    const event = new CustomEvent('onclocktick', { detail: (new Date()).toLocaleTimeString() });
+    const event = new CustomEvent('on_clock_tick', { detail: (new Date()).toLocaleTimeString() });
     window.dispatchEvent(event);
 }
