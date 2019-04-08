@@ -1,3 +1,4 @@
+use crate::generated::css_classes::C;
 use crate::ts_apis;
 use seed::prelude::*;
 use seed::*;
@@ -75,7 +76,7 @@ pub fn update(msg: Msg, model: &mut Model) -> Update<Msg> {
 
 pub fn view(model: &Model) -> El<Msg> {
     div![
-        class!["bg-custom"],
+        class![C.bg_custom],
         div![
             class![
                 "h-screen",

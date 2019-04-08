@@ -4,6 +4,7 @@ use wasm_bindgen::JsCast;
 use web_sys;
 
 mod app;
+mod generated;
 mod rust_apis;
 mod ts_apis;
 
