@@ -155,9 +155,6 @@ pub fn view(model: &Model) -> El<Msg> {
 
 // Subscriptions
 
-// https://seed-rs.org/guide/3
-// > There's currently a bug where window listeners won't work until
-// > the first (non-window-listener) update is triggered.
 pub fn window_events(_model: &Model) -> Vec<dom_types::Listener<Msg>> {
     vec![keyboard_ev("keydown", |ev| Msg::KeyPressed(ev))]
 }

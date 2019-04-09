@@ -6,5 +6,6 @@ crate/target
 crate/wasm-pack.log
 .idea
 
-**/generated/**
+crate/src/generated/**
+!crate/src/generated/mod.rs
 !**/.keep

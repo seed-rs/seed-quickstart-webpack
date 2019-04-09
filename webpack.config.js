@@ -41,7 +41,7 @@ module.exports = {
     ])
   ],
   resolve: {
-    extensions: [".ts", ".js", '.wasm']
+    extensions: [ ".ts", ".js", '.wasm']
   },
   module: {
     rules: [
