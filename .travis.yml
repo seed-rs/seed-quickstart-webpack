@@ -16,7 +16,7 @@ cache:
 
 script:
   - yarn
-  - yarn test
+  - yarn test:node
 
 env:
   - CI=true
