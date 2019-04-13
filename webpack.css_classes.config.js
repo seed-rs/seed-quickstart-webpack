@@ -4,7 +4,7 @@ const dist = path.resolve(__dirname, "dist");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: "./index_only_css.ts",
+  entry: "./index.css_classes.ts",
   output: {
     path: dist,
     filename: "bundle.js"

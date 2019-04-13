@@ -5,7 +5,8 @@ module.exports = {
     require("tailwindcss")("./tailwind.js"),
     require("postcss-typed-css-classes")({
       output_filepath: "./crate/src/generated/css_classes.rs",
-      generator: "rust"
+      generator: "rust",
+      filter: () => true
     }),
     require("autoprefixer")
   ]

@@ -16,6 +16,7 @@ cache:
 
 script:
   - yarn
+  - yarn build
   - yarn test:node
 
 env:
@@ -23,7 +24,7 @@ env:
 
 before_deploy:
   - yarn global add netlify-cli
-  - yarn build
+  - yarn build:release
 
 deploy:
   provider: script

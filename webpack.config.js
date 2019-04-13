@@ -20,7 +20,7 @@ module.exports = {
     port: 3000
   },
   plugins: [
-    new CleanWebpackPlugin(),    
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: 'index.html'
     }),
@@ -29,12 +29,12 @@ module.exports = {
     }),
     // Have this example work in Edge which doesn't ship `TextEncoder` or
     // `TextDecoder` at this time.
-    new webpack.ProvidePlugin({
-      TextDecoder: ['text-encoding', 'TextDecoder'],
-      TextEncoder: ['text-encoding', 'TextEncoder']
-    }),
+    // new webpack.ProvidePlugin({
+    //   TextDecoder: ['text-encoding', 'TextDecoder'],
+    //   TextEncoder: ['text-encoding', 'TextEncoder']
+    // }),
     new CopyWebpackPlugin([
-      { 
+      {
         from: 'static',
         to: 'static'
       }
@@ -53,7 +53,7 @@ module.exports = {
             options: {
               emitFile: false,
               name: '[path][name].[ext]'
-            },            
+            },
           },
         ],
       },

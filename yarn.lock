@@ -3387,9 +3387,10 @@ postcss-selector-parser@^6.0.0, postcss-selector-parser@^6.0.2:
     indexes-of "^1.0.1"
     uniq "^1.0.1"
 
-"postcss-typed-css-classes@https://github.com/MartinKavik/postcss-typed-css-classes.git":
+postcss-typed-css-classes@^0.1.0:
   version "0.1.0"
-  resolved "https://github.com/MartinKavik/postcss-typed-css-classes.git#10edfd6025e26e9ac915e5676da855ce7fad41e4"
+  resolved "https://registry.yarnpkg.com/postcss-typed-css-classes/-/postcss-typed-css-classes-0.1.0.tgz#724cb237932b8250dc85e8e6661aa96251b7edd2"
+  integrity sha512-X8y9a5XpO+WoaFLMIiDe8XwRLQjqwzg6KWBG1/SfK8aR4ljdgcy4SOPHqWzp/IGt4a5hN2HtWXibsj4FP1gCmw==
   dependencies:
     postcss "^7.0.6"
     postcss-selector-parser "^6.0.2"
