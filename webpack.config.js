@@ -8,10 +8,11 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: "./index.ts",
+  entry: {
+    app: "./index.ts"
+  },
   output: {
     path: dist,
-    filename: "bundle.js"
   },
   devServer: {
     contentBase: dist,
@@ -27,6 +28,8 @@ module.exports = {
     new WasmPackPlugin({
       crateDirectory: path.resolve(__dirname, "crate"),
     }),
+    // Uncomment if you have problems with Edge and polyfill in index.html isn't enough
+    //
     // Have this example work in Edge which doesn't ship `TextEncoder` or
     // `TextDecoder` at this time.
     // new webpack.ProvidePlugin({

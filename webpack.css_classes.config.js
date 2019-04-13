@@ -34,7 +34,7 @@ module.exports = {
       },
       {
         test: /\.ts$/,
-        loader: 'ts-loader?configFile=tsconfig.ignore_index_ts.json',
+        loader: 'ts-loader?configFile=tsconfig.css_classes.json',
       }, {
         test: /\.css$/,
         use: [
