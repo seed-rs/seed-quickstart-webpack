@@ -27,6 +27,8 @@ module.exports = {
     }),
     new WasmPackPlugin({
       crateDirectory: path.resolve(__dirname, "crate"),
+      // it fails with "index out of bounds" in `development` mode at the time of writing
+      forceMode: "production",
     }),
     // Uncomment if you have problems with Edge and polyfill in index.html isn't enough
     //

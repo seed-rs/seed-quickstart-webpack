@@ -74,72 +74,78 @@ pub fn update(msg: Msg, model: &mut Model) -> Update<Msg> {
 
 // View
 
-pub fn view(model: &Model) -> El<Msg> {
-    div![
+pub fn view(model: &Model) -> Vec<El<Msg>> {
+    vec![div![
+        // dots at the top
         class![C.bg_custom],
         div![
             class![
-                "h-screen",
-                "w-screen",
-                "flex",
-                "flex-wrap",
-                "justify-center",
-                "content-center"
+                C.h_screen,
+                C.w_screen,
+                C.flex,
+                C.flex_wrap,
+                C.justify_center,
+                C.content_center
             ],
             img![attrs! {At::Src => "static/images/quickstart.png";}],
+            // button container
             div![
-                class!["flex", "flex-wrap", "justify-center", "content-center"],
+                class![C.flex, C.flex_wrap, C.justify_center, C.content_center],
+                // button `clicks`
                 button![
                     class![
-                        "mb-8",
-                        "mx-8",
-                        "p-4",
-                        "rounded",
-                        "shadow-md",
-                        "bg-green-lighter",
-                        "hover:bg-green-light",
-                        "font-bold"
+                        C.mb_8,
+                        C.mx_8,
+                        C.p_4,
+                        C.rounded,
+                        C.shadow_md,
+                        C.bg_green_lighter,
+                        C.hover__bg_green_light,
+                        C.font_bold,
                     ],
                     simple_ev(Ev::Click, Msg::Increment),
                     format!("Clicks: {}", model.clicks)
                 ],
+                // button `random number`
                 button![
                     class![
-                        "mb-8",
-                        "p-4",
-                        "rounded",
-                        "shadow-md",
-                        "bg-blue-lighter",
-                        "hover:bg-blue-light",
-                        "font-bold"
+                        C.mb_8,
+                        C.p_4,
+                        C.rounded,
+                        C.shadow_md,
+                        C.bg_blue_lighter,
+                        C.hover__bg_blue_light,
+                        C.font_bold
                     ],
                     simple_ev(Ev::Click, Msg::NewRandomNumber),
                     format!("Random number from Typescript: {}", model.random_number)
                 ]
             ]
         ],
+        // label `press any key`
         div![
             class![
-                "mb-16",
-                "absolute",
-                "pin-x",
-                "pin-b",
-                "text-center",
-                "font-bold",
-                "text-blue-lighter"
+                C.mb_16,
+                C.absolute,
+                C.pin_x,
+                C.pin_b,
+                C.text_center,
+                C.font_bold,
+                C.text_blue_lighter
             ],
             "Press any key and look at the console log"
         ],
+        // time
         div![
             class![
-                "mb-6",
-                "absolute",
-                "pin-x",
-                "pin-b",
-                "text-center",
-                "font-bold",
-                "text-xl",
-                "text-green-light"
+                C.mb_6,
+                C.absolute,
+                C.pin_x,
+                C.pin_b,
+                C.text_center,
+                C.font_bold,
+                C.text_xl,
+                C.text_green_light
             ],
             format!(
                 "{}",
@@ -150,7 +156,7 @@ pub fn view(model: &Model) -> El<Msg> {
                 }
             )
         ]
-    ]
+    ]]
 }
 
 // Subscriptions
