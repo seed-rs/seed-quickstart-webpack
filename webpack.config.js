@@ -1,6 +1,5 @@
 const path = require("path");
 const dist = path.resolve(__dirname, "dist");
-const touch = require("touch");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WasmPackPlugin = require("@wasm-tool/wasm-pack-plugin");
