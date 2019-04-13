@@ -1,13 +1,26 @@
-const path = require('path')
+const postcssRustHelpers = require('./postcss_rust_helpers')
 
-module.exports = {
+module.exports = ({ file, options, env }) => {
+  // we want to filter out unused css classes in production mode
+  // NOTE: options.mode is set in webpack configs, in the postcss loader ctx
+  const usedCssClasses = options.mode === 'production'
+    ? postcssRustHelpers.getUsedCssClasses() : null
+
+ return {
   plugins: [
     require("tailwindcss")("./tailwind.js"),
     require("postcss-typed-css-classes")({
       output_filepath: "./crate/src/generated/css_classes.rs",
       generator: "rust",
-      filter: () => true
+      filter: (class_) => {
+        if (options.mode === 'production') {
+          return usedCssClasses.has(postcssRustHelpers.escapeClassName(class_))
+        } else {
+          return true
+        }
+      }
     }),
-    require("autoprefixer")
+      require("autoprefixer")
   ]
+ }
 };

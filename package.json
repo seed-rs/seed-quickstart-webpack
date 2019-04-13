@@ -12,7 +12,8 @@
     "test:node": "wasm-pack test ./crate --node",
     "test:chrome": "wasm-pack test ./crate --chrome",
     "test:firefox": "wasm-pack test ./crate --firefox",
-    "test:safari": "wasm-pack test ./crate --safari"
+    "test:safari": "wasm-pack test ./crate --safari",
+    "css": "node get_used_css_classes.js"
   },
   "devDependencies": {
     "@wasm-tool/wasm-pack-plugin": "0.2.7",
@@ -20,6 +21,7 @@
     "copy-webpack-plugin": "^5.0.2",
     "css-loader": "^2.1.1",
     "file-loader": "^3.0.1",
+    "find": "^0.3.0",
     "html-webpack-plugin": "^3.2.0",
     "no-emit-webpack-plugin": "^2.0.0",
     "postcss-loader": "^3.0.0",
@@ -27,11 +29,11 @@
     "style-loader": "^0.23.1",
     "tailwindcss": "^0.7.4",
     "text-encoding": "^0.7.0",
+    "touch": "^3.1.0",
     "ts-loader": "^5.3.3",
     "typescript": "^3.4.1",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.1"
-  },
-  "dependencies": {}
+  }
 }
