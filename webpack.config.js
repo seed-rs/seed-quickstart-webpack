@@ -1,6 +1,7 @@
 const path = require("path");
 const dist = path.resolve(__dirname, "dist");
 
+const WebpackBar = require('webpackbar');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WasmPackPlugin = require("@wasm-tool/wasm-pack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
@@ -18,18 +19,27 @@ module.exports = (env, argv) => {
       contentBase: dist,
       hot: true,
       host: '0.0.0.0',
-      port: 3000
+      port: 3000,
+      noInfo: true,
+      stats: 'errors-only',
+      // doesn't work?
+      overlay: {
+        warnings: true,
+        errors: true
+      }
     },
     plugins: [
+      new WebpackBar(),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        template: 'index.html'
+        template: 'index.html',
+        hash: true
       }),
       new WasmPackPlugin({
         crateDirectory: path.resolve(__dirname, "crate"),
-        // it fails with "index out of bounds" in `development` mode
-        // when there are many constants in view template
-        // (probably will be fixed in updated dependencies (webpack, wasm-pack, ..?))
+        // It fails with "index out of bounds" in `development` mode
+        // when there are many constants in view template.
+        // I don't know why (?)
         forceMode: "production",
       }),
       // Uncomment if you have problems with Edge and polyfill in index.html isn't enough

@@ -43,11 +43,14 @@ features = [
 ]
 
 [features]
-default = ["console_error_panic_hook"]
+default = ["wee_alloc"]
 
 [dev-dependencies]
 wasm-bindgen-test = "0.2.42"
 
 [profile.release]
+# Comment out both lines if you want faster reloading with dev server
+# (but **.wasm files will be bigger)
+# (see webpack.config.js - WasmPackPlugin settings)
 lto = true
 opt-level = 's'

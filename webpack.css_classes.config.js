@@ -1,6 +1,7 @@
 const path = require("path");
 const dist = path.resolve(__dirname, "dist");
 
+const WebpackBar = require('webpackbar');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = (env, argv) => {
@@ -8,15 +9,10 @@ module.exports = (env, argv) => {
     entry: "./index.css_classes.ts",
     output: {
       path: dist,
-      filename: "bundle.js"
-    },
-    devServer: {
-      contentBase: dist,
-      hot: true,
-      host: '0.0.0.0',
-      port: 3000
+      filename: "css_classes.js"
     },
     plugins: [
+      new WebpackBar(),
       new CleanWebpackPlugin()
     ],
     module: {

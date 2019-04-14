@@ -11,4 +11,5 @@ findFiles.eachfile(/\.wasm$/, './dist', file => {
     const wasmModule = binaryen.readBinary(fs.readFileSync(file))
     wasmModule.optimize()
     fs.writeFileSync(file, wasmModule.emitBinary())
+    console.log(`File: '${file}' optimized.`)
 })
