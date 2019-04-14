@@ -43,14 +43,16 @@ features = [
 ]
 
 [features]
-default = ["wee_alloc"]
+default = ["console_error_panic_hook"]
 
 [dev-dependencies]
 wasm-bindgen-test = "0.2.42"
 
 [profile.release]
-# Comment out both lines if you want faster reloading with dev server
-# (but **.wasm files will be bigger)
-# (see webpack.config.js - WasmPackPlugin settings)
+# Comment out both lines if you want faster reloading with dev server,
+# but remember that **.wasm files will be bigger.
+# See webpack.config.js - WasmPackPlugin settings the reason.
+# (Note: It isn't possible to create a new custom profile without these settings now,
+# see https://github.com/rust-lang/rfcs/pull/2678)
 lto = true
 opt-level = 's'
