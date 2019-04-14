@@ -7,7 +7,7 @@ module.exports = {
     getUsedCssClasses: function() {
         const usedCssClasses = new Set;
         // search in Rust files
-        const files = findFiles.fileSync(/rs$/, './crate/src');
+        const files = findFiles.fileSync(/\.rs$/, './crate/src');
         files.forEach(filePath => {
             const fileContent = fs.readFileSync(filePath, 'utf8')
             // example of a used class in Rust code is `C.mb_16`

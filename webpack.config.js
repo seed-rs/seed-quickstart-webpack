@@ -6,14 +6,6 @@ const WasmPackPlugin = require("@wasm-tool/wasm-pack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-const wasmPackPlugin = new WasmPackPlugin({
-  crateDirectory: path.resolve(__dirname, "crate"),
-  // it fails with "index out of bounds" in `development` mode
-  // when there are many constants in view template
-  // (probably will be fixed in updated dependencies (webpack, wasm-pack, ..?))
-  forceMode: "production",
-})
-
 module.exports = (env, argv) => {
   return {
     entry: {
@@ -33,7 +25,13 @@ module.exports = (env, argv) => {
       new HtmlWebpackPlugin({
         template: 'index.html'
       }),
-      wasmPackPlugin,
+      new WasmPackPlugin({
+        crateDirectory: path.resolve(__dirname, "crate"),
+        // it fails with "index out of bounds" in `development` mode
+        // when there are many constants in view template
+        // (probably will be fixed in updated dependencies (webpack, wasm-pack, ..?))
+        forceMode: "production",
+      }),
       // Uncomment if you have problems with Edge and polyfill in index.html isn't enough
       //
       // Have this example work in Edge which doesn't ship `TextEncoder` or
