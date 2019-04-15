@@ -5,16 +5,16 @@
   "repository": "",
   "license": "MIT",
   "scripts": {
-    "start": "yarn generate:css_classes && webpack-dev-server -d",
-    "build": "yarn generate:css_classes && webpack --mode=development",
-    "build:release": "yarn generate:css_classes && webpack --mode=production && yarn optimize_wasm",
+    "start": "yarn generate:css_classes && webpack-dev-server --config configs/webpack.config.js -d",
+    "build": "yarn generate:css_classes && webpack --config configs/webpack.config --mode=development",
+    "build:release": "yarn generate:css_classes && webpack --config configs/webpack.config --mode=production && yarn optimize_wasm",
     "test": "yarn test:node",
     "test:node": "wasm-pack test ./crate --node",
     "test:chrome": "wasm-pack test ./crate --chrome",
     "test:firefox": "wasm-pack test ./crate --firefox",
     "test:safari": "wasm-pack test ./crate --safari",
-    "optimize_wasm": "node optimize_wasm.js",
-    "generate:css_classes": "webpack --config webpack.css_classes.config --mode=development"
+    "optimize_wasm": "node scripts/optimize_wasm.js",
+    "generate:css_classes": "webpack --config configs/webpack.css_classes.config --mode=development"
   },
   "devDependencies": {
     "@wasm-tool/wasm-pack-plugin": "0.2.7",

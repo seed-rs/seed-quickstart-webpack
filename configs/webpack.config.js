@@ -1,5 +1,5 @@
 const path = require("path");
-const dist = path.resolve(__dirname, "dist");
+const dist = path.resolve(__dirname, "../dist");
 
 const WebpackBar = require('webpackbar');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -10,7 +10,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = (env, argv) => {
   return {
     entry: {
-      app: "./index.ts"
+      app: path.resolve(__dirname, "../entries/index.ts"),
     },
     output: {
       path: dist,
@@ -22,7 +22,7 @@ module.exports = (env, argv) => {
       port: 3000,
       noInfo: true,
       stats: 'errors-only',
-      // doesn't work?
+      // doesn't work? (no errors in html when webpack compilation fails)
       overlay: {
         warnings: true,
         errors: true
@@ -32,14 +32,13 @@ module.exports = (env, argv) => {
       new WebpackBar(),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        template: 'index.html',
+        template: path.resolve(__dirname, "../entries/index.html"),
         hash: true
       }),
       new WasmPackPlugin({
-        crateDirectory: path.resolve(__dirname, "crate"),
+        crateDirectory: path.resolve(__dirname, "../crate"),
         // It fails with "index out of bounds" in `development` mode
-        // when there are many constants in view template.
-        // I don't know why (?)
+        // when there are many constants in view template (?)
         forceMode: "production",
       }),
       // Uncomment if you have problems with Edge and polyfill in index.html isn't enough
@@ -76,7 +75,7 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.ts$/,
-          loader: 'ts-loader',
+          loader: 'ts-loader?configFile=configs/tsconfig.json',
         }, {
           test: /\.css$/,
           use: [
@@ -86,7 +85,8 @@ module.exports = (env, argv) => {
               loader: 'postcss-loader',
               options: {
                 config: {
-                  ctx: { mode: argv.mode }
+                  ctx: { mode: argv.mode },
+                  path: __dirname
                 }
               }
             }

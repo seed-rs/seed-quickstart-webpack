@@ -1,14 +1,13 @@
 const path = require("path");
-const dist = path.resolve(__dirname, "dist");
 
 const WebpackBar = require('webpackbar');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = (env, argv) => {
   return {
-    entry: "./index.css_classes.ts",
+    entry: path.resolve(__dirname, "../entries/index.css_classes.ts"),
     output: {
-      path: dist,
+      path: path.resolve(__dirname, "../dist"),
       filename: "css_classes.js"
     },
     plugins: [
@@ -31,7 +30,7 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.ts$/,
-          loader: 'ts-loader?configFile=tsconfig.css_classes.json',
+          loader: 'ts-loader?configFile=configs/tsconfig.css_classes.json',
         }, {
           test: /\.css$/,
           use: [
@@ -41,7 +40,8 @@ module.exports = (env, argv) => {
               loader: 'postcss-loader',
               options: {
                 config: {
-                  ctx: { mode: argv.mode }
+                  ctx: { mode: argv.mode },
+                  path: __dirname
                 }
               }
             }
