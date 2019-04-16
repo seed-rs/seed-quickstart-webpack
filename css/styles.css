@@ -61,6 +61,7 @@
   * @import "utilities/skew-transforms";
   */
 
+/* Example of custom class */
 .bg-custom {
   background: url("../static/images/decoration.png") no-repeat fixed center top;
 }

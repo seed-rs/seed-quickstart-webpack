@@ -2,8 +2,14 @@ const path = require('path')
 const findFiles = require('find');
 const fs = require('fs');
 
+// Helpers are used by configs/postcss.config.js
+
 module.exports = {
-    // returns Set of class names
+    /**
+     * Search in Rust files for C.class_name
+     *
+     * @returns usedCssClasses Set of class names
+     */
     getUsedCssClasses: function() {
         const usedCssClasses = new Set;
         // search in Rust files
@@ -21,7 +27,13 @@ module.exports = {
         })
         return usedCssClasses
     },
-    // returns string
+    /**
+     * Transform css class name into indentifier that can be used as Rust struct field name
+     * (see https://github.com/MartinKavik/postcss-typed-css-classes/blob/master/generators/rust_generator.js)
+     *
+     * @param {string} name
+     * @returns string Escaped class name
+     */
     escapeClassName: function (name) {
         name = name.replace(/-/g, '_')
         name = name.replace(/:/g, '__')

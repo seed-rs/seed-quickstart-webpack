@@ -10,38 +10,47 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = (env, argv) => {
   return {
     entry: {
+      // bundle root with name app.js
       app: path.resolve(__dirname, "../entries/index.ts"),
     },
     output: {
+      // TravicCI or you can deploy your site from this folder (after `yarn build:release`)
       path: dist,
     },
     devServer: {
       contentBase: dist,
       hot: true,
+      // you can connect to dev server from devices in your network (e.g. 192.168.0.3:3000)
       host: '0.0.0.0',
       port: 3000,
       noInfo: true,
       stats: 'errors-only',
-      // doesn't work? (no errors in html when webpack compilation fails)
+      // doesn't work? (we want to show errors in html when webpack compilation fails)
       overlay: {
         warnings: true,
         errors: true
       }
     },
     plugins: [
+      // show compilation progress bar in console
       new WebpackBar(),
+      // clean dist folder before compilation
       new CleanWebpackPlugin(),
+      // add scripts, css, ... to html template
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, "../entries/index.html"),
         hash: true
       }),
+      // compile Rust
       new WasmPackPlugin({
         crateDirectory: path.resolve(__dirname, "../crate"),
         // It fails with "index out of bounds" in `development` mode
         // when there are many constants in view template (?)
         forceMode: "production",
       }),
-      // Uncomment if you have problems with Edge and polyfill in index.html isn't enough
+
+
+      // Uncomment when you have problems with Edge (= when small polyfill in index.html doesn't work)
       //
       // Have this example work in Edge which doesn't ship `TextEncoder` or
       // `TextDecoder` at this time.
@@ -49,6 +58,8 @@ module.exports = (env, argv) => {
       //   TextDecoder: ['text-encoding', 'TextDecoder'],
       //   TextEncoder: ['text-encoding', 'TextEncoder']
       // }),
+
+      // you can find files from folder ../static on url http://my-site.com/static/
       new CopyWebpackPlugin([
         {
           from: 'static',
@@ -56,6 +67,7 @@ module.exports = (env, argv) => {
         }
       ])
     ],
+    // webpack try to guess how to resolve imports in this order:
     resolve: {
       extensions: [ ".ts", ".js", '.wasm']
     },
@@ -67,6 +79,8 @@ module.exports = (env, argv) => {
             {
               loader: 'file-loader',
               options: {
+                // don't copy files to dist, we do it through CopyWebpackPlugin (see above)
+                // - we only want to resolve urls to these files
                 emitFile: false,
                 name: '[path][name].[ext]'
               },
@@ -80,13 +94,19 @@ module.exports = (env, argv) => {
           test: /\.css$/,
           use: [
             'style-loader',
-            { loader: 'css-loader', options: { importLoaders: 1 } },
+            { loader: 'css-loader', options: {
+                // https://github.com/webpack-contrib/css-loader/issues/228
+                importLoaders: 1
+              }
+            },
             {
               loader: 'postcss-loader',
               options: {
                 config: {
-                  ctx: { mode: argv.mode },
-                  path: __dirname
+                  // path to postcss.config.js
+                  path: __dirname,
+                  // send mode into postcss.config.js (see more info in that file)
+                  ctx: { mode: argv.mode }
                 }
               }
             }

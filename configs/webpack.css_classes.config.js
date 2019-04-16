@@ -3,6 +3,10 @@ const path = require("path");
 const WebpackBar = require('webpackbar');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+// Webpack should generate `css_classes.rust` with this config
+// It's used in command `yarn generate:css_classes`
+// See `webpack.config.js` for more info about individual settings
+
 module.exports = (env, argv) => {
   return {
     entry: path.resolve(__dirname, "../entries/index.css_classes.ts"),

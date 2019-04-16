@@ -7,6 +7,9 @@ const findFiles = require('find')
 // https://www.npmjs.com/package/binaryen#module-optimization
 binaryen.setShrinkLevel(2)
 
+/**
+ * Load, optimize and save all .wasm files in folder `dist`
+ */
 findFiles.eachfile(/\.wasm$/, './dist', file => {
     const wasmModule = binaryen.readBinary(fs.readFileSync(file))
     wasmModule.optimize()
