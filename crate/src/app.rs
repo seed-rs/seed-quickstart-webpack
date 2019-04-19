@@ -26,22 +26,22 @@ impl Default for Model {
     }
 }
 
-// Update
-
 #[derive(Clone)]
 pub enum Msg {
+    OnCustomEvent(rust_apis::CustomEventId, wasm_bindgen::JsValue), // don't modify
     Increment,
     NewRandomNumber,
     KeyPressed(web_sys::KeyboardEvent),
-    OnCustomEvent(rust_apis::CustomEventId, wasm_bindgen::JsValue), // don't modify
 }
+
+// Update
 
 pub fn update(msg: Msg, model: &mut Model) -> UpdateReturn {
     match msg {
         Msg::Increment => model.clicks += 1,
         Msg::NewRandomNumber => model.random_number = ts_apis::helpers::get_random_number(0, 100),
         Msg::KeyPressed(ev) => log!(ev.key()),
-        Msg::OnCustomEvent(custom_event_id, jsValue) => match custom_event_id {
+        Msg::OnCustomEvent(custom_event_id, js_value) => match custom_event_id {
             rust_apis::CustomEventId::NoOp => (),
             // --- system handler - don't modify ---
             rust_apis::CustomEventId::OnRequestAnimationFrame => {
@@ -50,7 +50,7 @@ pub fn update(msg: Msg, model: &mut Model) -> UpdateReturn {
             }
             // --- // ---
             rust_apis::CustomEventId::OnClockTick => {
-                model.clock_time = jsValue.as_string();
+                model.clock_time = js_value.as_string();
             }
         },
     }

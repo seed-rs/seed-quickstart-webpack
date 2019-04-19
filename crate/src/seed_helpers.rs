@@ -21,10 +21,12 @@ pub fn register_custom_events(state: seed::App<app::Msg, app::Model>) {
             ));
         }) as Box<dyn Fn(web_sys::CustomEvent)>);
 
-        window.add_event_listener_with_callback(
-            index.to_string().as_str(),
-            callback.as_ref().unchecked_ref(),
-        );
+        window
+            .add_event_listener_with_callback(
+                index.to_string().as_str(),
+                callback.as_ref().unchecked_ref(),
+            )
+            .unwrap();
         callback.forget();
     }
 }
@@ -45,6 +47,7 @@ pub fn update_wrapper_with_raf(msg: app::Msg, model: &mut app::Model) -> Update<
 }
 
 // return type for wrapped update function
+#[allow(dead_code)]
 pub enum UpdateReturn {
     Skip,
     ForceRenderNow,
