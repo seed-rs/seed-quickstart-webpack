@@ -1,8 +1,8 @@
 use crate::app;
 use crate::rust_apis;
-use seed;
+use crate::ts_apis;
+use seed::prelude::*;
 use strum::IntoEnumIterator;
-use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
 use web_sys;
 
@@ -27,4 +27,26 @@ pub fn register_custom_events(state: seed::App<app::Msg, app::Model>) {
         );
         callback.forget();
     }
+}
+
+// wrappper for standard Seed updated that uses request animation frame
+pub fn update_wrapper_with_raf(msg: app::Msg, model: &mut app::Model) -> Update<app::Msg> {
+    match app::update(msg, model) {
+        UpdateReturn::Skip => Skip.into(),
+        UpdateReturn::ForceRenderNow => Render.into(),
+        UpdateReturn::Render => {
+            if !model.should_render_next_frame {
+                model.should_render_next_frame = true;
+                ts_apis::seed_helpers::callRequestAnimationFrame();
+            }
+            Skip.into()
+        }
+    }
+}
+
+// return type for wrapped update function
+pub enum UpdateReturn {
+    Skip,
+    ForceRenderNow,
+    Render,
 }

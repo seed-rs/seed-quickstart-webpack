@@ -10,10 +10,14 @@ use wasm_bindgen::prelude::*;
 pub fn run() -> Result<(), JsValue> {
     set_panic_hook();
 
-    let state = seed::App::build(app::Model::default(), app::update, app::view)
-        .window_events(app::window_events)
-        .finish()
-        .run();
+    let state = seed::App::build(
+        app::Model::default(),
+        seed_helpers::update_wrapper_with_raf,
+        app::view,
+    )
+    .window_events(app::window_events)
+    .finish()
+    .run();
 
     seed_helpers::register_custom_events(state);
 
@@ -24,6 +28,6 @@ pub fn run() -> Result<(), JsValue> {
 #[derive(Clone, EnumIter)]
 pub enum CustomEventId {
     NoOp,
+    OnRequestAnimationFrame, // system event - don't modify
     OnClockTick,
-    OnRequestAnimationFrame,
 }

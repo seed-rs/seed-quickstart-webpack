@@ -1,15 +1,10 @@
 use crate::generated::css_classes::C;
 use crate::rust_apis;
+use crate::seed_helpers::UpdateReturn;
 use crate::ts_apis;
 use seed::prelude::*;
 use seed::*;
-//use wasm_bindgen::JsCast;
 use web_sys;
-
-// @TODO refactor / move to another file
-pub type CustomEventDetail = JsValue;
-pub type MsgConstructor<Msg> = fn(CustomEventDetail) -> Msg;
-pub type CustomEvents<Msg, Model> = fn(&Model) -> Vec<(&str, MsgConstructor<Msg>)>;
 
 // Model
 
@@ -38,36 +33,28 @@ pub enum Msg {
     Increment,
     NewRandomNumber,
     KeyPressed(web_sys::KeyboardEvent),
-    OnCustomEvent(rust_apis::CustomEventId, wasm_bindgen::JsValue),
+    OnCustomEvent(rust_apis::CustomEventId, wasm_bindgen::JsValue), // don't modify
 }
-// @TODO refactor into two functions
-pub fn update(msg: Msg, model: &mut Model) -> Update<Msg> {
-    let mut should_render = true;
-    let mut force_render_now = false;
+
+pub fn update(msg: Msg, model: &mut Model) -> UpdateReturn {
     match msg {
         Msg::Increment => model.clicks += 1,
         Msg::NewRandomNumber => model.random_number = ts_apis::helpers::get_random_number(0, 100),
         Msg::KeyPressed(ev) => log!(ev.key()),
         Msg::OnCustomEvent(custom_event_id, jsValue) => match custom_event_id {
             rust_apis::CustomEventId::NoOp => (),
+            // --- system handler - don't modify ---
             rust_apis::CustomEventId::OnRequestAnimationFrame => {
                 model.should_render_next_frame = false;
-                force_render_now = true;
+                return UpdateReturn::ForceRenderNow;
             }
+            // --- // ---
             rust_apis::CustomEventId::OnClockTick => {
                 model.clock_time = jsValue.as_string();
             }
         },
     }
-    if force_render_now {
-        Render.into()
-    } else {
-        if should_render && !model.should_render_next_frame {
-            model.should_render_next_frame = true;
-            ts_apis::seed_helpers::callRequestAnimationFrame();
-        }
-        Skip.into()
-    }
+    UpdateReturn::Render
 }
 
 // View
