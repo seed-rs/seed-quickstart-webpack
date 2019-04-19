@@ -1,13 +1,27 @@
 # Seed Quickstart Webpack
 
 > I want to write fast, reliable and efficient web apps. Quickly.  
-> And I like documentation.
+> And I like documentation and WebAssembly.
 
-The core is Rust framework [Seed](https://seed-rs.org).
+Main parts:
+- **[Seed](https://seed-rs.org)** - [Rust](https://www.rust-lang.org/) framework, inspired by [Elm](https://elm-lang.org/) 
+- **[Tailwind CSS](https://tailwindcss.com/)** - CSS framework. All CSS classes are typed for safe use in Rust code. Unused classes are automatically deleted for much smaller bundle size.
+- **[Typescript](https://www.typescriptlang.org/)** - When you need to go to the dark world of Javascript. You can generate Typescript types from Rust code for safer communication.
+- **[Webpack](https://webpack.js.org/)** - It needs a little bit of magic to setup, but it's flexible and fast enough. Also it has many  useful loaders and plugins and dev-server that is accessible from mobile devices.
 
-**LIVE DEMO**: [seed-quickstart-webpack.netlify.com](https://seed-quickstart-webpack.netlify.com)
+[**LIVE DEMO**: seed-quickstart-webpack.netlify.com](https://seed-quickstart-webpack.netlify.com)
+  - Automatically deployed to [Netlify](https://www.netlify.com/) from `master` branch by [Travis CI](https://travis-ci.org/)
+  - Compressed app size is about **90 KB** (look at _Developer Tools_ on demo page)
 
-@TODO gif with auto-reload
+# Basic workflow
+![](readme_video.gif)
+_Recorded in [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/)_
+1. Start dev-server with `yarn start`.
+1. Open `127.0.0.1:3000` in my browser. Or something like `192.168.0.5:3000` on my phone.
+1. Change code & save it.
+1. Check changes in browsers.
+1. Run tests on NodeJS with `yarn test`. Or for specific browser e.g. `yarn test:firefox`.
+1. If I haven't configured `.travis.yml`, I have to run `yarn build:release` and upload `/dist` folder into my server.
 
 # I need to install:
 
