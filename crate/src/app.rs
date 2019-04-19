@@ -1,14 +1,15 @@
 use crate::generated::css_classes::C;
+use crate::rust_apis;
 use crate::ts_apis;
 use seed::prelude::*;
 use seed::*;
-use wasm_bindgen::JsCast;
+//use wasm_bindgen::JsCast;
 use web_sys;
 
 // @TODO refactor / move to another file
 pub type CustomEventDetail = JsValue;
-pub type MsConstructor<Ms> = fn(CustomEventDetail) -> Ms;
-pub type CustomEvents<Ms, Mdl> = fn(&Mdl) -> Vec<(&str, MsConstructor<Ms>)>;
+pub type MsgConstructor<Msg> = fn(CustomEventDetail) -> Msg;
+pub type CustomEvents<Msg, Model> = fn(&Model) -> Vec<(&str, MsgConstructor<Msg>)>;
 
 // Model
 
@@ -36,17 +37,9 @@ impl Default for Model {
 pub enum Msg {
     Increment,
     NewRandomNumber,
-    ClockTick(CustomEventDetail),
     KeyPressed(web_sys::KeyboardEvent),
-    RequestAnimationFrame(CustomEventDetail),
+    OnCustomEvent(rust_apis::CustomEventId, wasm_bindgen::JsValue),
 }
-
-fn request_animation_frame(f: &Closure<Fn()>) {
-    window()
-        .request_animation_frame(f.as_ref().unchecked_ref())
-        .expect("should register `requestAnimationFrame` OK");
-}
-
 // @TODO refactor into two functions
 pub fn update(msg: Msg, model: &mut Model) -> Update<Msg> {
     let mut should_render = true;
@@ -54,12 +47,17 @@ pub fn update(msg: Msg, model: &mut Model) -> Update<Msg> {
     match msg {
         Msg::Increment => model.clicks += 1,
         Msg::NewRandomNumber => model.random_number = ts_apis::helpers::get_random_number(0, 100),
-        Msg::ClockTick(detail) => model.clock_time = detail.as_string(),
         Msg::KeyPressed(ev) => log!(ev.key()),
-        Msg::RequestAnimationFrame(_) => {
-            model.should_render_next_frame = false;
-            force_render_now = true;
-        }
+        Msg::OnCustomEvent(custom_event_id, jsValue) => match custom_event_id {
+            rust_apis::CustomEventId::NoOp => (),
+            rust_apis::CustomEventId::OnRequestAnimationFrame => {
+                model.should_render_next_frame = false;
+                force_render_now = true;
+            }
+            rust_apis::CustomEventId::OnClockTick => {
+                model.clock_time = jsValue.as_string();
+            }
+        },
     }
     if force_render_now {
         Render.into()
@@ -163,12 +161,4 @@ pub fn view(model: &Model) -> Vec<El<Msg>> {
 
 pub fn window_events(_model: &Model) -> Vec<dom_types::Listener<Msg>> {
     vec![keyboard_ev("keydown", |ev| Msg::KeyPressed(ev))]
-}
-
-// @TODO refactor
-pub fn custom_events(_model: &Model) -> Vec<(&str, MsConstructor<Msg>)> {
-    vec![
-        ("on_clock_tick", Msg::ClockTick),
-        ("on_request_animation_frame", Msg::RequestAnimationFrame),
-    ]
 }

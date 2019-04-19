@@ -1,10 +1,11 @@
 use crate::app;
-use crate::register_custom_events;
+use crate::seed_helpers;
 use crate::set_panic_hook;
 use seed;
 use wasm_bindgen::prelude::*;
 
 // Called by our TS entry point to run the application.
+// This function is called from /entries/index.ts
 #[wasm_bindgen]
 pub fn run() -> Result<(), JsValue> {
     set_panic_hook();
@@ -14,7 +15,15 @@ pub fn run() -> Result<(), JsValue> {
         .finish()
         .run();
 
-    register_custom_events(app::custom_events, state);
+    seed_helpers::register_custom_events(state);
 
     Ok(())
+}
+
+#[wasm_bindgen]
+#[derive(Clone, EnumIter)]
+pub enum CustomEventId {
+    NoOp,
+    OnClockTick,
+    OnRequestAnimationFrame,
 }

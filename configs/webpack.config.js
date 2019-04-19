@@ -25,7 +25,7 @@ module.exports = (env, argv) => {
       port: 3000,
       noInfo: true,
       stats: 'errors-only',
-      // doesn't work? (we want to show errors in html when webpack compilation fails)
+      // Note: it doesn't work for Rust files (probably because Rust isn't compiled by loader but plugin)
       overlay: {
         warnings: true,
         errors: true
@@ -69,7 +69,10 @@ module.exports = (env, argv) => {
     ],
     // webpack try to guess how to resolve imports in this order:
     resolve: {
-      extensions: [ ".ts", ".js", '.wasm']
+      extensions: [ ".ts", ".js", '.wasm'],
+      alias : {
+        crate: path.resolve(__dirname, "../crate")
+      }
     },
     module: {
       rules: [

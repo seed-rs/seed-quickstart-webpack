@@ -1,3 +1,4 @@
+import { createCustomEvent, customEventIdEnum } from './seed_helpers'
 
 // Example of triggering an event in Typescript and handling in Rust (see `../app.rs`)
 // startClock is called from /entries/index.ts
@@ -11,6 +12,7 @@ export const startClock = () => {
 };
 
 const dispatchOnClockTickEvent = () => {
-    const event = new CustomEvent('on_clock_tick', { detail: (new Date()).toLocaleTimeString() });
+    const time = (new Date()).toLocaleTimeString();
+    const event = createCustomEvent(customEventIdEnum().OnClockTick, time)
     window.dispatchEvent(event);
 }
