@@ -1,9 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "..",
-    "paths": {
-      "crate/*": ["../crate/*"]
-    },
     "target": "es5",
     "module": "esNext",
     "lib": ["dom", "es2015"],

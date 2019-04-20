@@ -4,7 +4,7 @@ use crate::set_panic_hook;
 use seed;
 use wasm_bindgen::prelude::*;
 
-// Called by our TS entry point to run the application.
+// Called by /entries/index.ts to run the application.
 // This function is called from /entries/index.ts
 #[wasm_bindgen]
 pub fn run() -> Result<(), JsValue> {
