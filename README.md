@@ -1,7 +1,6 @@
 # Seed Quickstart with Webpack
 
 [![Build Status](https://travis-ci.org/MartinKavik/seed-quickstart-webpack.svg?branch=master)](https://travis-ci.org/MartinKavik/seed-quickstart-webpack)
-
 [![Netlify Status](https://api.netlify.com/api/v1/badges/bd3326db-a516-4144-85cc-bf396f00ee7a/deploy-status)](https://app.netlify.com/sites/seed-quickstart-webpack/deploys)
 
 <!-- prettier-ignore -->
@@ -58,7 +57,6 @@ _(Recorded in [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/))_
 - **`yarn build`** and **`yarn build:release`**
 
   - Bundle app and save it into `/dist`.
-  - _Note:_ Make sure that last two lines in `/crate/Cargo.toml` are uncommented when I want to run `yarn build:release` (more info in that file)
 
   Build pipeline:
 
@@ -70,7 +68,6 @@ _(Recorded in [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/))_
   - Compile Rust:
     - `/crate/` will be built into `/create/pkg/`
     - Typescript files included in Rust code (see `/crate/src/ts_apis.rs`) will be copied to `/crate/pkg/snippets/[id]/src/ts/`
-    - _Note_: Release mode is forced now, because of bug in debug mode - app will crash after start.
   - Bundle assets (css, images, ts, js...) and uglify/minify them in the release mode. (See `/configs/webpack.config.js` and `/configs/tsconfig.json`)
   - Compile template `/entries/index.html` (i.e. Add bundle link into template and save result into `/dist/`)
   - Copy files from `/static/` into `/dist/static/`
@@ -79,7 +76,6 @@ _(Recorded in [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/))_
 * **`yarn start`**
 
   - Build project and start developer server on `127.0.0.1:3000`.
-  - _Note:_ Make sure that last two lines in `/crate/Cargo.toml` are commented out (more info in that file)
   - Server auto-reloads browser tabs on changes.
   - It doesn't destroy state if I change only styles (hot reload).
   - I can connect mobile devices to dev server:

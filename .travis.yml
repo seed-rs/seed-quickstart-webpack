@@ -14,9 +14,13 @@ cache:
       - crate/target
       - $HOME/.cargo
 
+# https://levans.fr/rust_travis_cache.html
+before_cache:
+  - rm -rf $HOME/.cargo/registry
+
 script:
   - yarn
-  - yarn build
+  - yarn build:release
   - yarn test:node
 
 env:
@@ -24,7 +28,6 @@ env:
 
 before_deploy:
   - yarn global add netlify-cli
-  - yarn build:release
 
 deploy:
   provider: script

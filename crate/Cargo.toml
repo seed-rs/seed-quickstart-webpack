@@ -50,11 +50,12 @@ default = ["console_error_panic_hook"]
 [dev-dependencies]
 wasm-bindgen-test = "0.2.42"
 
+[profile.dev]
+# there is a bug (probably somewehere in a compilation pipeline) -
+# with `opt-level = 0` it fails with `RuntimeError: index out of bounds`
+# on `i32.store offset=68` in wasm module
+opt-level = 1
+
 [profile.release]
-# Comment out both lines if you want faster reloading when you develop with dev server,
-# but remember that **.wasm files will be bigger.
-# See webpack.config.js - WasmPackPlugin settings for the reason.
-# (Note: It isn't possible to create a new custom profile without these settings now,
-# see https://github.com/rust-lang/rfcs/pull/2678)
 lto = true
 opt-level = 's'

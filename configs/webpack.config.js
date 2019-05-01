@@ -44,9 +44,6 @@ module.exports = (env, argv) => {
       // compile Rust
       new WasmPackPlugin({
         crateDirectory: path.resolve(__dirname, "../crate"),
-        // It fails with "index out of bounds" in `development` mode
-        // when there are many constants in view template (?)
-        forceMode: "production",
       }),
 
 
