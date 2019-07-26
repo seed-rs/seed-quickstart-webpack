@@ -26,7 +26,7 @@ Main parts:
 _(Recorded in [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/))_
 
 1. Start dev-server with `yarn start`.
-1. Open `127.0.0.1:3000` in my browser. Or something like `192.168.0.5:3000` on my phone.
+1. Open `127.0.0.1:8000` in my browser. Or something like `192.168.0.5:8000` on my phone.
 1. Change code & save it.
 1. Check changes in browsers.
 1. Run tests on NodeJS with `yarn test`. Or for specific browser e.g. `yarn test:firefox`.
@@ -44,13 +44,12 @@ _(Recorded in [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/))_
 1. Choose name for my app. E.g. "iamgroot".
 1. `/package.json` - Change `author` and `name` set to "iamgroot".
 1. `/crate/Cargo.toml` - Change `authors` and `description`, `name` set to "iamgroot".
-1. _[Optional]_ `/crate/Cargo.toml` - Comment out last two lines (see comments in the file for more info)
 1. `/entries/index.ts` - Change word "appname" to "iamgroot" everywhere.
 1. `/entries/index.html` - Change `title`.
-1. Modify `/README.md` and `/LICENCE`.
+1. Modify `/README.md`, `/LICENCE` and `/CHANGELOG.md`.
 1. Run command `yarn` in the project root.
-1. _[Optional]_ Push new app into my repository. (GitHub [guide](https://help.github.com/en/articles/adding-an-existing-project-to-github-using-the-command-line))
-1. _[Optional]_ Setup auto-deploy into [Netlify](https://www.netlify.com) through [Travis CI](https://travis-ci.org). (See chapter [Continous integration](#continous-integration))
+1. _[Optional]_ Push new app into my repository. (GitHub [guide](https://help.github.com/en/articles/adding-an-existing-project-to-github-using-the-command-line)).
+1. _[Optional]_ Setup auto-deploy into [Netlify](https://www.netlify.com) through [Travis CI](https://travis-ci.org). (See chapter [Continous integration](#continous-integration)).
 
 # Commands
 
@@ -60,28 +59,28 @@ _(Recorded in [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/))_
 
   Build pipeline:
 
-  - Remove previous build from `/dist/`
-  - Generate styles from `/css/tailwind.js` and `/css/styles.css` (see `/configs/postcss.config.js`)
-  - Generate `/crate/src/generated/css_classes.rs` from styles
-  - _[only release]_ Filter out unused CSS classes from styles
-  - Process styles with [autoprefixer](https://github.com/postcss/autoprefixer)
+  - Remove previous build from `/dist/`.
+  - Generate styles from `/css/styles.css` (see `/configs/postcss.config.js`).
+  - Generate `/crate/src/generated/css_classes.rs` from styles.
+  - _[only release]_ Filter out unused CSS classes from styles.
+  - Process styles with [autoprefixer](https://github.com/postcss/autoprefixer).
   - Compile Rust:
-    - `/crate/` will be built into `/create/pkg/`
-    - Typescript files included in Rust code (see `/crate/src/ts_apis.rs`) will be copied to `/crate/pkg/snippets/[id]/src/ts/`
-  - Bundle assets (css, images, ts, js...) and uglify/minify them in the release mode. (See `/configs/webpack.config.js` and `/configs/tsconfig.json`)
-  - Compile template `/entries/index.html` (i.e. Add bundle link into template and save result into `/dist/`)
-  - Copy files from `/static/` into `/dist/static/`
-  - _[only release]_ Optimize `/dist/[name].wasm` for size (see `/scripts/optimize_wasm.js`)
+    - `/crate/` will be built into `/create/pkg/`.
+    - Typescript files included in Rust code (see `/crate/src/ts_apis.rs`) will be copied to `/crate/pkg/snippets/[id]/src/ts/`.
+  - Bundle assets (css, images, ts, js...) and _[only release]_ uglify/minify them. (See `/configs/webpack.config.js` and `/configs/tsconfig.json`)
+  - Compile template `/entries/index.html` (i.e. Add bundle link into template and save result into `/dist/`).
+  - Copy files from `/static/` into `/dist/static/`.
+  - _[only release]_ Optimize `/dist/[name].wasm` for size (see `/scripts/optimize_wasm.js`).
 
 * **`yarn start`**
 
-  - Build project and start developer server on `127.0.0.1:3000`.
+  - Build project and start developer server on `127.0.0.1:8000`.
   - Server auto-reloads browser tabs on changes.
   - It doesn't destroy state if I change only styles (hot reload).
   - I can connect mobile devices to dev server:
     1. _Note:_ Devices and server have to be connected to the same network.
     1. [Find out](https://www.whatismybrowser.com/detect/what-is-my-local-ip-address) local IP of the device where the dev server is running.
-    1. Connect mobile device with that IP and server port. E.g.: `192.168.1.5:3000`
+    1. Connect mobile device with that IP and server port. E.g.: `192.168.1.5:8000`.
 
 * **`yarn test`**
 
@@ -108,25 +107,24 @@ _(Recorded in [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/))_
   - **`Cargo.toml`** - I can optimize build speed / size here.
   - **`pkg/`** - Folder is created after crate compilation by [wasm-pack](https://rustwasm.github.io/wasm-pack/).
     - **`.gitignore`** - Ignore all.
-    - **`[app_name].d.ts`** - Generated Typescript types from Rust code for `[app_name].js`.
-    - **`[app_name].js`** - Provides exported functions from Rust and loads WASM. Have to be imported only once and in async mode because of side-effects.
-    - **`[app_name]_bg.d.ts`** - Types for `[app_name]_bg.wasm`.
-    - **`[app_name]_bg.wasm`** - Compiled Rust code.
+    - **`index.d.ts`** - Generated Typescript types from Rust code for `index.js`.
+    - **`index.js`** - Provides exported functions from Rust and loads WASM. Have to be imported only once and in async mode because of side-effects.
+    - **`index_bg.d.ts`** - Types for `index_bg.wasm`.
+    - **`index_bg.wasm`** - Compiled Rust code.
     - **`package.json`** - Settings generated from `Cargo.tom`.
     - **`snippets/`** - Typescript files included in Rust code.
-      - **`[app_name]-[id]/`** - Directory tree is mirrored from `/crate/`.
+      - **`index-[id]/`** - Directory tree is mirrored from `/crate/`.
         - **`src/`**
           - **`ts/`**
             - **`helpers.ts`**
             - **`seed_helpers.ts`**
   - **`src/`** - Contains the most important Rust and Typescript souce code.
-    - **`app.rs`** - Main app parts - `Model`, `Msg`, `update`, `view`, `window_events`
+    - **`app.rs`** - Main app parts - `Model`, `Msg`, `update`, ...
     - **`generated/`** - Contains generated Rust files (except `mod.rs`)
       - **`mod.rs`** - Just exports generated modules.
       - **`css_classes.rs`** - Rust struct that contains all CSS classes with comments.
     - **`lib.rs`** - Main crate file.
-    - **`rust_apis.rs`** - Rust interfaces exported to the Typescript world. See `/crate/pkg/[app_name].d.ts`.
-    - **`seed_helpers.rs`** - Custom _Seed_ features - Handler for [CustomEvents](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) and injected synchronization with browser's [animation frames](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) in the render loop.
+    - **`rust_apis.rs`** - Rust interfaces exported to the Typescript world. See `/crate/pkg/index.d.ts`.
     - **`ts/`** - Typescript files.
       - **`clock.ts`** - Generates `CustomEvents` with time for demo app. I can **delete** it.
       - **`helpers.ts`** - Generates random numbers for demo app. I can **delete** it.
@@ -138,14 +136,15 @@ _(Recorded in [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/))_
     - **`test.rs`** - Super simple example test.
 - **`css/`** - Foundations for styles. See [Tailwind's docs](https://tailwindcss.com/docs/configuration).
   - **`styles.css`**
-  - **`tailwind.js`**
 - **`dist/`** - Contains bundled app waiting for deploy after `yarn build:release`.
   - **`...`**
 - **`entries`** - Webpack's entries.
   - **`index.css_classes.ts`** - Used when command `yarn generate:css_classes` is executed.
   - **`index.html`** - Template used by `HtmlWebpackPlugin`.
   - **`index.ts`** - Main entry.
+- **`CHANGELOG`** - Quickstart changelog.
 - **`LICENSE`** - MIT license.
+- **`netlify.toml`** - Contains redirect to `index.html` for better SPA support.
 - **`node_modules/`** - NodeJS dependencies.
   - **`...`**
 - **`package.json`** - Quickstart settings.
@@ -181,6 +180,7 @@ _(Recorded in [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/))_
 1. Switch to tab `Current` and click `Activate repository`.
 1. _[Optional]_ Add badge [build | passing] to project README (Repository detail > Click on badge next to the rep. name > `IMAGE URL` change to `MARKDOWN`)
 1. _[Optional]_ Modify `/.travis.yml`. (If it isn't working, check Repository detail > `More options` > `Requests`)
+1. _[Optional]_ Adjust `/netlify.toml` to suit your needs. [Netlify docs](https://www.netlify.com/docs/netlify-toml-reference/).
 
 # Browser and platform support
 
@@ -194,12 +194,12 @@ There isn't integrated compilation from Wasm to Js, so IE is not supported. (How
 
 # Used in projects
 
-- One in development in private repository for now
+- One in development in private repository for now.
 - _[I can create PR or Issue]_
 
 # Contributing
 
-- Better documentation, fixed typos, updated dependencies, ... - create Issue or PR
-- Ideas, bugs, questions, ... - create Issue
+- Better documentation, fixed typos, updated dependencies, ... - create Issue or PR.
+- Ideas, bugs, questions, ... - create Issue.
 
 _Note_: Please squash commits and rebase before creating PR. Thanks!
