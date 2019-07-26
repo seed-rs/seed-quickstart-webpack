@@ -1,18 +1,17 @@
-import { createCustomEvent, customEventIdEnum } from './seed_helpers'
+import { triggerUpdate } from "./seed_helpers";
 
 // Example of triggering an event in Typescript and handling in Rust (see `../app.rs`)
 // startClock is called from /entries/index.ts
 
 export const startClock = () => {
-    dispatchOnClockTickEvent();
+  const triggerTickEvent = () => {
+    triggerUpdate("OnClockTick", new Date().toLocaleTimeString());
+  };
+  triggerTickEvent();
 
-    setInterval(() => {
-        dispatchOnClockTickEvent();
-    }, 1000);
+  setInterval(() => {
+    triggerTickEvent();
+  }, 1000);
+
+  triggerUpdate("ClockEnabled");
 };
-
-const dispatchOnClockTickEvent = () => {
-    const time = (new Date()).toLocaleTimeString();
-    const event = createCustomEvent(customEventIdEnum().OnClockTick, time)
-    window.dispatchEvent(event);
-}

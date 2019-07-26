@@ -1,12 +1,12 @@
 use crate::generated::css_classes::C;
-use crate::rust_apis;
-use crate::seed_helpers::UpdateReturn;
 use crate::ts_apis;
-use seed::prelude::*;
+use seed::{events::Listener, prelude::*};
 use seed::*;
-use web_sys;
+use serde::Deserialize;
 
-// Model
+// ------ ------
+//     Model
+// ------ ------
 
 pub struct Model {
     pub clicks: i32,
@@ -26,40 +26,58 @@ impl Default for Model {
     }
 }
 
-#[derive(Clone)]
-pub enum Msg {
-    OnCustomEvent(rust_apis::CustomEventId, wasm_bindgen::JsValue), // don't modify
-    Increment,
-    NewRandomNumber,
-    KeyPressed(web_sys::KeyboardEvent),
+// ------ ------
+//     Init
+// ------ ------
+
+pub fn init(_: Url, _: &mut impl Orders<Msg>) -> Model {
+    Model::default()
 }
 
-// Update
+pub fn window_events(_model: &Model) -> Vec<Listener<Msg>> {
+    vec![
+        keyboard_ev("keydown", |ev| Msg::KeyPressed(ev.key())),
+        // `trigger_update_handler` processes JS event
+        // and forwards it to `update` function.
+        trigger_update_handler()
+    ]
+}
 
-pub fn update(msg: Msg, model: &mut Model) -> UpdateReturn {
+// ------ ------
+//    Update
+// ------ ------
+
+// We trigger `OnClockTick` only from JS land
+#[allow(dead_code)]
+// `Deserialize` is required for receiving messages from JS land
+// (see `trigger_update_handler`)
+#[derive(Clone, Deserialize)]
+pub enum Msg {
+    Increment,
+    NewRandomNumber,
+    KeyPressed(String),
+    OnClockTick(String)
+}
+
+pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
     match msg {
         Msg::Increment => model.clicks += 1,
         Msg::NewRandomNumber => model.random_number = ts_apis::helpers::get_random_number(0, 100),
-        Msg::KeyPressed(ev) => log!(ev.key()),
-        Msg::OnCustomEvent(custom_event_id, js_value) => match custom_event_id {
-            rust_apis::CustomEventId::NoOp => (),
-            // --- system handler - don't modify ---
-            rust_apis::CustomEventId::OnRequestAnimationFrame => {
-                model.should_render_next_frame = false;
-                return UpdateReturn::ForceRenderNow;
-            }
-            // --- // ---
-            rust_apis::CustomEventId::OnClockTick => {
-                model.clock_time = js_value.as_string();
-            }
-        },
+        Msg::KeyPressed(key) => {
+            log!(key);
+            orders.skip();
+        }
+        Msg::OnClockTick(time) => {
+            model.clock_time = Some(time);
+        }
     }
-    UpdateReturn::Render
 }
 
-// View
+// ------ ------
+//     View
+// ------ ------
 
-pub fn view(model: &Model) -> Vec<El<Msg>> {
+pub fn view(model: &Model) -> impl View<Msg> {
     vec![div![
         // dots at the top
         class![C.bg_custom],
@@ -142,10 +160,4 @@ pub fn view(model: &Model) -> Vec<El<Msg>> {
             )
         ]
     ]]
-}
-
-// Subscriptions
-
-pub fn window_events(_model: &Model) -> Vec<dom_types::Listener<Msg>> {
-    vec![keyboard_ev("keydown", |ev| Msg::KeyPressed(ev))]
 }

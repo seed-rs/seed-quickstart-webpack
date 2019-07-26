@@ -1,5 +1,4 @@
 use crate::app;
-use crate::seed_helpers;
 use crate::set_panic_hook;
 use seed;
 use wasm_bindgen::prelude::*;
@@ -10,24 +9,14 @@ use wasm_bindgen::prelude::*;
 pub fn run() -> Result<(), JsValue> {
     set_panic_hook();
 
-    let state = seed::App::build(
-        app::Model::default(),
-        seed_helpers::update_wrapper_with_raf,
+    seed::App::build(
+        app::init,
+        app::update,
         app::view,
     )
     .window_events(app::window_events)
     .finish()
     .run();
 
-    seed_helpers::register_custom_events(state);
-
     Ok(())
-}
-
-#[wasm_bindgen]
-#[derive(Clone, EnumIter)]
-pub enum CustomEventId {
-    NoOp,
-    OnRequestAnimationFrame, // system event - don't modify
-    OnClockTick,
 }
