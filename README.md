@@ -17,7 +17,7 @@ Main parts:
 [**LIVE DEMO**: seed-quickstart-webpack.netlify.com](https://seed-quickstart-webpack.netlify.com)
 
 - Automatically deployed to [Netlify](https://www.netlify.com/) from `master` branch by [Travis CI](https://travis-ci.org/).
-- Compressed app size is about 90 KB (look at _Developer Tools_ on demo page).
+- Compressed app size with assets is about 105 KB (look at _Developer Tools_ on demo page).
 
 # Basic workflow
 

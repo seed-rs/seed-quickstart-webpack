@@ -12,6 +12,4 @@ export const startClock = () => {
   setInterval(() => {
     triggerTickEvent();
   }, 1000);
-
-  triggerUpdate("ClockEnabled");
 };
