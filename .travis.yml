@@ -23,9 +23,6 @@ script:
   - yarn build:release
   - yarn test:node
 
-env:
-  - CI=true
-
 before_deploy:
   - yarn global add netlify-cli
 
