@@ -84,8 +84,8 @@ pub fn view(model: &Model) -> Vec<El<Msg>> {
                         C.p_4,
                         C.rounded,
                         C.shadow_md,
-                        C.bg_green_lighter,
-                        C.hover__bg_green_light,
+                        C.bg_green_200,
+                        C.hover__bg_green_400,
                         C.font_bold,
                     ],
                     simple_ev(Ev::Click, Msg::Increment),
@@ -98,8 +98,8 @@ pub fn view(model: &Model) -> Vec<El<Msg>> {
                         C.p_4,
                         C.rounded,
                         C.shadow_md,
-                        C.bg_blue_lighter,
-                        C.hover__bg_blue_light,
+                        C.bg_blue_200,
+                        C.hover__bg_blue_400,
                         C.font_bold
                     ],
                     simple_ev(Ev::Click, Msg::NewRandomNumber),
@@ -112,11 +112,11 @@ pub fn view(model: &Model) -> Vec<El<Msg>> {
             class![
                 C.mb_16,
                 C.absolute,
-                C.pin_x,
-                C.pin_b,
+                C.inset_x_0,
+                C.bottom_0,
                 C.text_center,
                 C.font_bold,
-                C.text_blue_lighter
+                C.text_blue_200
             ],
             "Press any key and look at the console log"
         ],
@@ -125,12 +125,12 @@ pub fn view(model: &Model) -> Vec<El<Msg>> {
             class![
                 C.mb_6,
                 C.absolute,
-                C.pin_x,
-                C.pin_b,
+                C.inset_x_0,
+                C.bottom_0,
                 C.text_center,
                 C.font_bold,
                 C.text_xl,
-                C.text_green_light
+                C.text_green_400
             ],
             format!(
                 "{}",
