@@ -7,6 +7,15 @@
 > I want to write fast, reliable and efficient web apps. Quickly.  \
 And I like documentation and WebAssembly.
 
+---
+
+**UPDATE** - A new version is in development in repository [MartinKavik/kavik.cz](https://github.com/MartinKavik/kavik.cz). See its `Readme` for more info. 
+
+Once ready, I'll move current `master` into branch `older` and rewrite this `Readme`. New "killer" feature will be prerendering, so you will be able to write static sites in Seed for super fast first render and better SEO - see [kavik.cz](https://kavik.cz/) for demo. And there will be more useful starting example - content of `kavik.cz` - basic routing, favicons, social media metas, nice fonts, responsive HTML with TailwindCSS, Handlebars for more readable HTML, etc.
+I also want to write a template generator for this quickstart so you you will be able to create a new apps faster and more comfortably.  
+
+---
+
 Main parts:
 
 - **[Seed](https://seed-rs.org)** - [Rust](https://www.rust-lang.org/) framework, inspired by [Elm](https://elm-lang.org/).
@@ -194,7 +203,7 @@ There isn't integrated compilation from Wasm to Js, so IE is not supported. (How
 
 # Used in projects
 
-- One in development in private repository for now.
+- [MartinKavik/kavik.cz](https://github.com/MartinKavik/kavik.cz)
 - _[I can create PR or Issue]_
 
 # Contributing
@@ -203,3 +212,7 @@ There isn't integrated compilation from Wasm to Js, so IE is not supported. (How
 - Ideas, bugs, questions, ... - create Issue.
 
 _Note_: Please squash commits and rebase before creating PR. Thanks!
+
+# Other Seed projects
+
+- [MartinKavik/awesome-seed-rs](https://github.com/MartinKavik/awesome-seed-rs)
