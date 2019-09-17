@@ -12,7 +12,7 @@ And I like documentation and WebAssembly.
 **UPDATE** - A new version is in development in repository [MartinKavik/kavik.cz](https://github.com/MartinKavik/kavik.cz). See its `Readme` for more info. 
 
 Once ready, I'll move current `master` into branch `older` and rewrite this `Readme`. New "killer" feature will be prerendering, so you will be able to write static sites in Seed for super fast first render and better SEO - see [kavik.cz](https://kavik.cz/) for demo. And there will be more useful starting example - content of `kavik.cz` - basic routing, favicons, social media metas, nice fonts, responsive HTML with TailwindCSS, Handlebars for more readable HTML, etc.
-I also want to write a template generator for this quickstart so you you will be able to create a new apps faster and more comfortably.  
+I also want to write a template generator for this quickstart so you will be able to create new apps faster and more comfortably.  
 
 ---
 
