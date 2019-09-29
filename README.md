@@ -1,8 +1,5 @@
 # Seed Quickstart with Webpack
 
-[![Build Status](https://travis-ci.org/MartinKavik/seed-quickstart-webpack.svg?branch=master)](https://travis-ci.org/MartinKavik/seed-quickstart-webpack)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/bd3326db-a516-4144-85cc-bf396f00ee7a/deploy-status)](https://app.netlify.com/sites/seed-quickstart-webpack/deploys)
-
 <!-- prettier-ignore -->
 > I want to write fast, reliable and efficient web apps. Quickly.  \
 And I like documentation and WebAssembly.
@@ -13,8 +10,6 @@ Main parts:
 - **[Tailwind CSS](https://tailwindcss.com/)** - CSS framework. All CSS classes (not only Tailwind's(!)) are typed for safe use in Rust code. Unused classes are automatically deleted for much smaller bundle size.
 - **[Typescript](https://www.typescriptlang.org/)** - When I need to go to the dark world of Javascript. I can generate Typescript types from Rust code for safer communication.
 - **[Webpack](https://webpack.js.org/)** - It needs a little bit of magic to setup, but it's flexible and fast enough. Also it has many useful loaders and plugins and dev-server that is accessible from mobile devices.
-
-[**LIVE DEMO**: seed-quickstart-webpack.netlify.com](https://seed-quickstart-webpack.netlify.com)
 
 - Automatically deployed to [Netlify](https://www.netlify.com/) from `master` branch by [Travis CI](https://travis-ci.org/).
 - Compressed app size with assets is about 105 KB (look at _Developer Tools_ on demo page).
