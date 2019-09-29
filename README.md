@@ -9,210 +9,229 @@ And I like Rust and documentation.
 
 ---
 
-**UPDATE** - A new version is in development! See branch `older` for the previous one. 
+[**LIVE DEMO**: seed-quickstart-webpack.netlify.com](https://seed-quickstart-webpack.netlify.com)
 
-Once ready, I'll move current `master` into branch `older` and rewrite this `Readme`. New "killer" feature will be prerendering, so you will be able to write static sites in Seed for super fast first render and better SEO - see [kavik.cz](https://kavik.cz/) for demo. And there will be more useful starting example - content of `kavik.cz` - basic routing, favicons, social media metas, nice fonts, responsive HTML with TailwindCSS, Handlebars for more readable HTML, etc.
-I also want to write a template generator for this quickstart so you will be able to create new apps faster and more comfortably.  
+Main components:
+
+- **Seed** - Rust framework, inspired by Elm. [Seed's Awesome list](https://github.com/MartinKavik/awesome-seed-rs).
+- **[Tailwind CSS](https://tailwindcss.com/)** - CSS framework. All CSS classes in your project are typed for safe use in Rust code. Unused classes are automatically deleted for much smaller bundle size.
+- **[Webpack](https://webpack.js.org/)** - Bundler. Auto-reload on code change, dev-server accessible from mobile phones, prerendering for static websites... and many more useful features are prepared for you in this quickstart.
+- **Production-ready starter project** - Example project is based on the website with several pages, favicons, nice fonts, meta tags for social media, buttons for scrolling to top, header which is hidden on scrolling, etc. It can be prerendered, but it also contains loading screen.
+  For more complex project (based on another quickstart) see [seed-rs-realworld](https://github.com/MartinKavik/seed-rs-realworld).
+- **Production-ready configuration** - Project is linted, compiled, prerendered and deployed in CI pipeline (see `.travis.yml` and `netlify.toml`). Linters are very strict.
 
 ---
 
-Main parts:
+# Zero to Hero
 
-- **[Seed](https://seed-rs.org)** - [Rust](https://www.rust-lang.org/) framework, inspired by [Elm](https://elm-lang.org/).
-- **[Tailwind CSS](https://tailwindcss.com/)** - CSS framework. All CSS classes (not only Tailwind's(!)) are typed for safe use in Rust code. Unused classes are automatically deleted for much smaller bundle size.
-- **[Typescript](https://www.typescriptlang.org/)** - When I need to go to the dark world of Javascript. I can generate Typescript types from Rust code for safer communication.
-- **[Webpack](https://webpack.js.org/)** - It needs a little bit of magic to setup, but it's flexible and fast enough. Also it has many useful loaders and plugins and dev-server that is accessible from mobile devices.
+> How to create your new app, modify it and deploy it - step by step guide.
 
-[**LIVE DEMO**: seed-quickstart-webpack.netlify.com](https://seed-quickstart-webpack.netlify.com)
+## 1. Create a new project
 
-- Automatically deployed to [Netlify](https://www.netlify.com/) from `master` branch by [Travis CI](https://travis-ci.org/).
-- Compressed app size with assets is about 105 KB (look at _Developer Tools_ on demo page).
+I want to show you how to create, build and host your website for free, so we will need a public GitHub repository.
 
-# Basic workflow
+1. The simplest way how to do it is to click on the green button **Use this template** on the GitHub [profile](https://github.com/MartinKavik/seed-quickstart-webpack) of this quickstart.
 
-![](readme_video.gif)
+1. Clone your repository somewhere to your local machine. I use [GitKraken](https://www.gitkraken.com/), but you are probably better developer than me - use your favorite terminal.
 
-_(Recorded in [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/))_
+## 2. Install / check required tools
 
-1. Start dev-server with `yarn start`.
-1. Open `127.0.0.1:8000` in my browser. Or something like `192.168.0.5:8000` on my phone.
-1. Change code & save it.
-1. Check changes in browsers.
-1. Run tests on NodeJS with `yarn test`. Or for specific browser e.g. `yarn test:firefox`.
-1. If I haven't configured `.travis.yml`, I have to run `yarn build:release` and upload `/dist` folder into my server.
+1. Make sure you have basic tools installed:
 
-# I need to install
+   - [Yarn](https://yarnpkg.com/lang/en/docs/install) - run `$ yarn -v` in terminal. It should output something like `1.17.3`
+   - [Node.js](https://nodejs.org) - `$ node -v` => `v10.16.3`
+   - [Rust](https://www.rust-lang.org/tools/install) - `$ rustc -V` => `rustc 1.38.0 (625451e37 2019-09-23)`
 
-1. [Rust](https://rust-lang.org/tools/install)
-1. [NodeJs](https://nodejs.org/en/download/)
-1. [Yarn](https://yarnpkg.com/lang/en/docs/install)
+1. These tools are required by some commands:
 
-# How to create my new app
+   - [cargo-make](https://sagiegurari.github.io/cargo-make/)
 
-1. Clone or download this repo.
-1. Choose name for my app. E.g. "iamgroot".
-1. `/package.json` - Change `author` and `name` set to "iamgroot".
-1. `/crate/Cargo.toml` - Change `authors` and `description`, `name` set to "iamgroot".
-1. `/entries/index.ts` - Change word "appname" to "iamgroot" everywhere.
-1. `/entries/index.html` - Change `title`.
-1. Modify `/README.md`, `/LICENCE` and `/CHANGELOG.md`.
-1. Run command `yarn` in the project root.
-1. _[Optional]_ Push new app into my repository. (GitHub [guide](https://help.github.com/en/articles/adding-an-existing-project-to-github-using-the-command-line)).
-1. _[Optional]_ Setup auto-deploy into [Netlify](https://www.netlify.com) through [Travis CI](https://travis-ci.org). (See chapter [Continous integration](#continous-integration)).
+     - Check: `$ cargo make -V` => `cargo-make 0.22.1`
+     - Install: `$ cargo install --force cargo-make`
 
-# Commands
+   - [nightly rustfmt](https://github.com/rust-lang/rustfmt#on-the-nightly-toolchain)
+     - Check: `$ cargo +nightly fmt -- -V` => `rustfmt 1.4.8-nightly (afb1ee1c 2019-09-08)`
+     - Install:
+       1. `$ rustup toolchain install nightly`
+       2. `$ rustup component add rustfmt --toolchain nightly`
 
-- **`yarn build`** and **`yarn build:release`**
+## 3. Prepare your project for work
 
-  - Bundle app and save it into `/dist`.
+1. Open terminal in your project and go to directory `crate` - `$ cd crate`
+1. Install Webpack and other dependencies - `$ yarn`
+1. Try to start dev-server - `$ yarn start` - and then open [localhost:8000](http://localhost:8000) in a browser.
+1. Stop server (try `Ctrl+c`).
+1. Try to lint your project - `$ cargo make verify_only` - you shouldn't see any errors.
+1. Modify files like `LICENCE` and `README.md` as you wish and push changes into GitHub.
 
-  Build pipeline:
+## 4. Write your website
 
-  - Remove previous build from `/dist/`.
-  - Generate styles from `/css/styles.css` (see `/configs/postcss.config.js`).
-  - Generate `/crate/src/generated/css_classes.rs` from styles.
-  - _[only release]_ Filter out unused CSS classes from styles.
-  - Process styles with [autoprefixer](https://github.com/postcss/autoprefixer).
-  - Compile Rust:
-    - `/crate/` will be built into `/create/pkg/`.
-    - Typescript files included in Rust code (see `/crate/src/ts_apis.rs`) will be copied to `/crate/pkg/snippets/[id]/src/ts/`.
-  - Bundle assets (css, images, ts, js...) and _[only release]_ uglify/minify them. (See `/configs/webpack.config.js` and `/configs/tsconfig.json`)
-  - Compile template `/entries/index.html` (i.e. Add bundle link into template and save result into `/dist/`).
-  - Copy files from `/static/` into `/dist/static/`.
-  - _[only release]_ Optimize `/dist/[name].wasm` for size (see `/scripts/optimize_wasm.js`).
+1. Open project in your favorite IDE. I use [IntelliJ](https://www.jetbrains.com/idea/download) or [VS Code](https://code.visualstudio.com/).
+1. Run `$ yarn start` in terminal. I use `bash` integrated into IDE (it's installed with Git on Windows).
+   - _Note_: Yarn commands can be run from project root or from directory `crate`, but Cargo commands can be run only from `crate`.
+1. Open [localhost:8000](http://localhost:8000) in a browser.
+1. You can open it also in your mobile phone:
+   1. Make sure your dev-server aka computer is in the same network as your phone.
+   1. Find out your local IP address. Use e.g. this online tool: https://www.whatismybrowser.com/detect/what-is-my-local-ip-address.
+   1. Open URL with found IP and default port (e.g. `192.168.1.5:8000`) on your phone.
 
-* **`yarn start`**
+_Note_: You don't have to follow all steps below - reuse starter project code as you need.
 
-  - Build project and start developer server on `127.0.0.1:8000`.
-  - Server auto-reloads browser tabs on changes.
-  - It doesn't destroy state if I change only styles (hot reload).
-  - I can connect mobile devices to dev server:
-    1. _Note:_ Devices and server have to be connected to the same network.
-    1. [Find out](https://www.whatismybrowser.com/detect/what-is-my-local-ip-address) local IP of the device where the dev server is running.
-    1. Connect mobile device with that IP and server port. E.g.: `192.168.1.5:8000`.
+### Header
 
-* **`yarn test`**
+1. Open `/crate/src/page/partial/header.rs` in your IDE.
+1. Delete function `header_visibility`.
+1. Write a new body for function `view`.
 
-  - Run tests in NodeJs.
+### Footer
 
-* **`yarn test:{browser}`**
+1. Open `/crate/src/page/partial/footer.rs` in your IDE.
+1. Write a new body for function `view`.
 
-  - Run tests in headless browser.
-  - `{browser}` should be `firefox`, `chrome` or `safari`.
+### 404
 
-# Project file structure
+1. Open `/crate/src/page/not_found.rs` in your IDE.
+1. Write a new body for function `view`.
 
-- **`.gitignore`** - Don't commit temporary files and folders. Keep `.keep` files.
-- **`.travis.yml`** - Build, test and deploy master branch into Netlify.
-- **`configs/`** - Build and compile settings.
-  - **`postcss.config.js`** - Generate, filter and modify styles.
-  - **`tsconfig.base.json`** - Strict Typescript compiler settings.
-  - **`tsconfig.css_classes.json`** - Used when command `yarn generate:css_classes` is executed.
-  - **`tsconfig.json`** - Main Typescript config.
-  - **`webpack.config.js`** - Main Webpack config.
-  - **`webpack.css_classes.config.js`** - Used when command `yarn generate:css_classes` is executed.
-- **`crate/`** - Rust crate.
-  - **`Cargo.lock`** - Dependency locks.
-  - **`Cargo.toml`** - I can optimize build speed / size here.
-  - **`pkg/`** - Folder is created after crate compilation by [wasm-pack](https://rustwasm.github.io/wasm-pack/).
-    - **`.gitignore`** - Ignore all.
-    - **`index.d.ts`** - Generated Typescript types from Rust code for `index.js`.
-    - **`index.js`** - Provides exported functions from Rust and loads WASM. Have to be imported only once and in async mode because of side-effects.
-    - **`index_bg.d.ts`** - Types for `index_bg.wasm`.
-    - **`index_bg.wasm`** - Compiled Rust code.
-    - **`package.json`** - Settings generated from `Cargo.tom`.
-    - **`snippets/`** - Typescript files included in Rust code.
-      - **`index-[id]/`** - Directory tree is mirrored from `/crate/`.
-        - **`src/`**
-          - **`ts/`**
-            - **`helpers.ts`**
-            - **`seed_helpers.ts`**
-  - **`src/`** - Contains the most important Rust and Typescript souce code.
-    - **`app.rs`** - Main app parts - `Model`, `Msg`, `update`, ...
-    - **`generated/`** - Contains generated Rust files (except `mod.rs`)
-      - **`mod.rs`** - Just exports generated modules.
-      - **`css_classes.rs`** - Rust struct that contains all CSS classes with comments.
-    - **`lib.rs`** - Main crate file.
-    - **`rust_apis.rs`** - Rust interfaces exported to the Typescript world. See `/crate/pkg/index.d.ts`.
-    - **`ts/`** - Typescript files.
-      - **`clock.ts`** - Generates `CustomEvents` with time for demo app. I can **delete** it.
-      - **`helpers.ts`** - Generates random numbers for demo app. I can **delete** it.
-      - **`seed_helpers.ts`** - Same as `/crate/src/seed_helpers.ts`.
-    - **`ts_apis.rs`** - Typescript interfaces imported into the Rust world. Remeber that imported TS files are copied into `crate/pkg/snippets/...` so there can be problems with dependencies. See that file for more information.
-  - **`target/`** - Compiled Rust and metadata.
-    - \*\*`...`
-  - **`tests/`** - Rust tests. Executed with `yarn test` or `yarn test:[browser]`.
-    - **`test.rs`** - Super simple example test.
-- **`css/`** - Foundations for styles. See [Tailwind's docs](https://tailwindcss.com/docs/configuration).
-  - **`styles.css`**
-- **`dist/`** - Contains bundled app waiting for deploy after `yarn build:release`.
-  - **`...`**
-- **`entries`** - Webpack's entries.
-  - **`index.css_classes.ts`** - Used when command `yarn generate:css_classes` is executed.
-  - **`index.html`** - Template used by `HtmlWebpackPlugin`.
-  - **`index.ts`** - Main entry.
-- **`CHANGELOG`** - Quickstart changelog.
-- **`LICENSE`** - MIT license.
-- **`netlify.toml`** - Contains redirect to `index.html` for better SPA support.
-- **`node_modules/`** - NodeJS dependencies.
-  - **`...`**
-- **`package.json`** - Quickstart settings.
-- **`README.md`** - Quickstart docs.
-- **`readme_video.gif`** - Video in `/README.md`. I can **delete** it.
-- **`scripts/`** - Quickstart helpers.
-  - **`optimize_wasm.js`** - Optimize `*.wasm` files in `/dist/` with `wasm-opt` from library [Binaryen](https://github.com/WebAssembly/binaryen)
-  - **`postcss_rust_helpers.js`** - Helps with filtering used CSS classes.
-- **`static/`** - This folder will be copied into `/dist/`
-  - **`images/`** - Images for demo app. I can **delete** it.
-    - **`decoration.png`**
-    - **`quickstart.png`**
-  - **`text-polyfill.min.js`** - Polyfill for `TextDecoder` and `TextEncoder`. (See [caniuse.com](https://caniuse.com/#feat=textencoder))
-- **`yarn.lock`** - Dependency locks.
+### Home page
 
-# Continous integration
+1. Open `/crate/src/page/home.rs` in your IDE.
+1. Write a new body for function `view`.
 
-> How to setup Travis CI pipeline with deploy into Netlify for free
+### About page
 
-1. I've done all steps from chapter [How to create my new app](#how-to-create-my-new-app).
-1. My app is in a _public_ GitHub repository.
+1. Open `/crate/src/page/about.rs` in your IDE.
+1. Write a new body for function `view`.
+
+### App core
+
+1. Open `/crate/src/lib.rs` in your IDE.
+1. Change `TITLE_SUFFIX` value.
+1. Delete `MAIL_TO_KAVIK` and `MAIL_TO_HELLWEB`.
+1. Write a new body for function `view`.
+
+### Favicons
+
+1. Delete or replace files in `/favicons`.
+1. Open `/entries/templates/favicons.hbs` in your IDE.
+1. Delete content or update it.
+   - _Note_: Templates are written in [Handlebars](https://handlebarsjs.com/).
+
+### Loading page
+
+1. Open `/entries/templates/loading_page.hbs` in your IDE.
+1. Delete content or update it.
+
+### Social media & basic settings
+
+1. Open `/entries/templates/social_media.hbs` in your IDE.
+1. Delete content or update it.
+
+### Basic HTML
+
+1. Open `/entries/index.hbs` in your IDE.
+1. Update content.
+
+### Fonts
+
+1. Delete or replace files and directories in `/static/fonts`.
+1. Open `/css/fonts.css` in your IDE.
+1. Delete content or update it.
+
+### Images & other files
+
+1. Delete or replace files in `/static/images`.
+1. Delete `/static/Martin_Kavik_resume.pdf`.
+
+### TailwindCSS
+
+1. Open `/configs/tailwind.config.js` in your IDE.
+1. Update content or replace it with the default one:
+
+```js
+module.exports = {
+  theme: {},
+  variants: {},
+  plugins: []
+};
+```
+
+### Custom CSS
+
+1. Open `/css/custom.css` in your IDE.
+1. Delete content or update it.
+
+## 5. Prepare your project for deploy
+
+How to format, lint and test your project.
+And how to setup Travis CI pipeline with deploy into Netlify.
+
+### Formatter & Linter
+
+1. Format: `$ cargo make fmt` (it overwrites files) or only `$ cargo make fmt_check`
+1. You can modify format settings in:
+   - `/crate/rustfmt.toml`
+   - `/crate/Makefile.toml` - tasks `fmt` and `fmt_check`
+1. Lint: `$ cargo make clippy`
+1. You can modify linter settings in:
+   - `/crate/Makefile.toml` - task `clippy`
+
+### Testing
+
+1. Run `$ cargo make test_h firefox` for headless testing in Firefox.
+   - There are more similar commands - see `/crate/Makefile.toml`
+   - _Note_: There is only one test in this project (`crate/tests/test.rs`), see [seed-rs-realworld](https://github.com/MartinKavik/seed-rs-realworld) for more examples.
+1. If you want to test prerendered website:
+   1. `$ yarn build:prerender`
+   1. `$ serve:dist`
+   1. Open [localhost:8000](http://localhost:8000) in a browser.
+   1. _Tip_: Test it always also in production environment because e.g. routing is a little bit different among servers.
+1. **Always** run `$ cargo make verify` before push to make sure CI pipeline will accept your code.
+   - It'll format your code, lint it and start headless tests in Firefox.
+   - You can change its behaviour in `/crate/Makefile.tom` - task `verify` (similar task `verify_only` is used in CI).
+
+### Netlify
+
 1. Create a new [Netlify](https://www.netlify.com/) site.
-1. _[Optional]_ Change site name or forward it to your domain.
+1. _[Optional]_ Change site name or/and use your own domain.
 1. _[Optional]_ Turn on HTTPS.
-1. _[Optional]_ Turn on prerendering for better SEO. (Site detail > `Settings` > `Build & deploy` > `Prerendering`)
-1. _[Optional]_ Add badge _[netlify | Success]_ to project README (Site detail > `Settings` > `General` > `Status badges`).
+1. _[Optional]_ Add badge to project's README (Site detail > `Settings` > `General` > `Status badges`).
 1. Note somewhere **Site id** (Site detail > `Settings` > `General` > _API ID_)
-1. Create and note somewhere **Access token** (Click on my avatar > `User settings` > `Applications` > `New access token` > Name it for instance `TravisCI`)
-1. Sync my [TravisCI](https://travis-ci.org/) account with my GitHub one.
-1. Find repository with app in [my list](https://travis-ci.org/account/repositories) and click on `Settings`.
+1. Create and note somewhere **Access token** (Click on your avatar > `User settings` > `Applications` > `New access token` > Name it for instance `TravisCI`)
+1. _[Optional]_ Adjust `/netlify.toml` to suit your needs. [Netlify docs](https://www.netlify.com/docs/netlify-toml-reference/).
+
+### Travis CI
+
+1. Sync your [TravisCI](https://travis-ci.org/) account with your GitHub one.
+1. Find repository with your app in [your list](https://travis-ci.org/account/repositories) and click on `Settings`.
 1. Add _Environment Variable_ `NETLIFY_SITE_ID` and set it's value to **Site id**.
 1. Add _Environment Variable_ `NETLIFY_ACCESS_TOKEN` and set it's value to **Access token**.
 1. Switch to tab `Current` and click `Activate repository`.
-1. _[Optional]_ Add badge [build | passing] to project README (Repository detail > Click on badge next to the rep. name > `IMAGE URL` change to `MARKDOWN`)
-1. _[Optional]_ Modify `/.travis.yml`. (If it isn't working, check Repository detail > `More options` > `Requests`)
-1. _[Optional]_ Adjust `/netlify.toml` to suit your needs. [Netlify docs](https://www.netlify.com/docs/netlify-toml-reference/).
+1. _[Optional]_ Add badge to project's README (Repository detail > Click on badge next to the rep. name > `IMAGE URL` change to `MARKDOWN`)
+1. _[Optional]_ Modify `/.travis.yml`.
+   - Replace `yarn build:prerender` with `yarn build:release` if you don't want to prerender pages.
+   - _Tip:_ If jobs don't want to start after push, check Repository detail > `More options` > `Requests`.
 
-# Browser and platform support
+## 6. Add your project to Awesome list
 
-Quickstart has been tested in:
+1. Create PR or issue in [awesome-seed-rs](https://github.com/MartinKavik/awesome-seed-rs).
 
-- `Firefox`, `Chrome` and `Edge` on Windows 10 (desktop PC)
-- `Firefox`, `Chrome` and `Safari` on iOS (iPhone SE)
-- _[I can create PR or Issue]_
-
-There isn't integrated compilation from Wasm to Js, so IE is not supported. (However It should be possible with [wasm2js](https://github.com/WebAssembly/binaryen).)
+---
 
 # Used in projects
 
 - [MartinKavik/kavik.cz](https://github.com/MartinKavik/kavik.cz)
-- _[I can create PR or Issue]_
+- _[create PR or Issue]_
 
 # Contributing
 
-- Better documentation, fixed typos, updated dependencies, ... - create Issue or PR.
+- Improved documentation, fixed typos, updated dependencies, ... - create Issue or PR.
 - Ideas, bugs, questions, ... - create Issue.
 
 _Note_: Please squash commits and rebase before creating PR. Thanks!
 
-# Other Seed projects
+---
+
+## Other Seed projects
 
 - [MartinKavik/awesome-seed-rs](https://github.com/MartinKavik/awesome-seed-rs)
