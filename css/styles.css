@@ -1,10 +1,18 @@
-@tailwind base;
+@import "tailwindcss/base";
 
-@tailwind components;
+@import "fonts.css";
 
-@tailwind utilities;
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-/* Example of custom class */
-.bg-custom {
-  background: url("../static/images/decoration.png") no-repeat fixed center top;
-}
+@import "custom.css"
+
+
+
+
+
+
+
+
+
+

@@ -3,12 +3,12 @@ const binaryen = require("binaryen");
 const fs = require("fs");
 const findFiles = require('find')
 
-// optimize for size
+// Optimize for size.
 // https://www.npmjs.com/package/binaryen#module-optimization
 binaryen.setShrinkLevel(2)
 
 /**
- * Load, optimize and save all .wasm files in folder `dist`
+ * Load, optimize and save all .wasm files in folder `dist`.
  */
 findFiles.eachfile(/\.wasm$/, './dist', file => {
     const wasmModule = binaryen.readBinary(fs.readFileSync(file))

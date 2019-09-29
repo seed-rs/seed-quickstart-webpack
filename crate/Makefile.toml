@@ -1,0 +1,74 @@
+# ---- GENERAL ----
+
+[tasks.verify]
+description = "Format, lint with Clippy and run tests"
+dependencies = ["fmt", "clippy", "test_h_firefox"]
+
+[tasks.verify_only]
+description = "Like `verify`, but fails if the code isn't formatted. Primarily for CI."
+dependencies = ["fmt_check", "clippy", "test_h_firefox"]
+
+# ---- TEST ----
+
+[tasks.test]
+description = "Run tests. Ex: 'cargo make test firefox'. Test envs: [chrome, firefox, safari]"
+clear = true
+install_crate = { crate_name = "wasm-pack", binary = "wasm-pack", test_arg = "-V" }
+command = "wasm-pack"
+args = ["test", "--${@}"]
+
+[tasks.test_release]
+extend = "test"
+description = "Run tests in release mode. Ex: 'cargo make test_release firefox'. Test envs: [chrome, firefox, safari]"
+args = ["test", "--${@}", "--release"]
+
+[tasks.test_h]
+description = "Run headless tests. Ex: 'cargo make test_h firefox'. Test envs: [chrome, firefox, safari]"
+extend = "test"
+args = ["test", "--headless", "--${@}"]
+
+[tasks.test_h_firefox]
+description = "Run headless tests with Firefox."
+extend = "test"
+args = ["test", "--headless", "--firefox"]
+
+[tasks.test_h_release]
+extend = "test_h"
+description = "Run headless tests in release mode. Ex: 'cargo make test_h firefox'. Test envs: [chrome, firefox, safari]"
+args = ["test", "--headless", "--${@}", "--release"]
+
+[tasks.test_one]
+description = "Run a single test in Firefox. Ex 'cargo make test_one my_test'"
+clear = true
+install_crate = { crate_name = "wasm-pack", binary = "wasm-pack", test_arg = "-V" }
+command = "wasm-pack"
+args = ["test", "--firefox", "--", "--lib", "${@}"]
+
+[tasks.test_one_h]
+description = "Run a single test in headless Firefox. Ex 'cargo make test_one_h my_test'"
+clear = true
+install_crate = { crate_name = "wasm-pack", binary = "wasm-pack", test_arg = "-V" }
+command = "wasm-pack"
+args = ["test", "--firefox", "--headless", "--", "--lib", "${@}"]
+
+# ---- LINT ----
+
+[tasks.fmt]
+description = "Format with nightly rustfmt"
+toolchain = "nightly"
+command = "cargo"
+args = ["fmt", "--all"]
+
+[tasks.fmt_check]
+extend = "fmt"
+description = "Check format with nightly rustfmt"
+args = ["fmt", "--all", "--", "--check"]
+
+[tasks.clippy]
+description = "Lint with Clippy"
+clear = true
+install_crate = { rustup_component_name = "clippy", binary = "cargo-clippy", test_arg = "--help" }
+command = "cargo"
+args = ["clippy", "--all-features", "--", "--deny", "warnings", "--deny", "clippy::pedantic", "--deny", "clippy::nursery"]
+
+

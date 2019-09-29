@@ -3,9 +3,9 @@ const path = require("path");
 const WebpackBar = require("webpackbar");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
-// Webpack should generate `css_classes.rust` with this config
-// It's used in command `yarn generate:css_classes`
-// See `webpack.config.js` for more info about individual settings
+// Webpack generates `css_classes.rs` with this config.
+// This config is used in command `yarn generate:css_classes`.
+// See `webpack.config.js` for more info about individual settings.
 
 module.exports = (env, argv) => {
   return {
@@ -18,7 +18,7 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
-          test: /\.(png|jpg|gif)$/,
+          test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/,
           use: [
             {
               loader: "file-loader",
@@ -37,7 +37,7 @@ module.exports = (env, argv) => {
           test: /\.css$/,
           use: [
             "style-loader",
-            { loader: "css-loader", options: { importLoaders: 1 } },
+            "css-loader",
             {
               loader: "postcss-loader",
               options: {

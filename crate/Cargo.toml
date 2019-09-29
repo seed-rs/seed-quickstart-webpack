@@ -1,10 +1,10 @@
 [package]
 version = "0.1.0"
-name = "appname"
-repository = ""
-authors = ["Your Name <email@address.com>"]
-description = "My awesome project"
-categories = ["wasm", "rust", "typescript", "tailwindcss", "seed"]
+name = "kavik_cz"
+repository = "https://github.com/MartinKavik/kavik.cz"
+authors = ["Martin Kavík <martin@kavik.cz>"]
+description = "Personal website kavik.cz"
+categories = ["wasm", "rust", "tailwindcss", "seed", "personal", "website"]
 license = "MIT"
 readme = "./README.md"
 edition = "2018"
@@ -12,41 +12,20 @@ edition = "2018"
 [lib]
 crate-type = ["cdylib"]
 
+[dev-dependencies]
+wasm-bindgen-test = "^0.2.50" # sync with `wasm-bindgen`
+
 [dependencies]
+wasm-bindgen = "^0.2.50" # sync with `wasm-bindgen-test`
 seed = { git = "https://github.com/David-OConnor/seed", branch="master" }
-cfg-if = "0.1.9"
-wasm-bindgen = "0.2.48"
-
-# For serialization, eg sending requests to a server. Otherwise, not required.
-serde = { version = "^1.0.97", features = ['derive'] }
-
-# The `console_error_panic_hook` crate provides better debugging of panics by
-# logging them with `console.error`. This is great for development, but requires
-# all the `std::fmt` and `std::panicking` infrastructure, so isn't great for
-# code size when deploying.
-console_error_panic_hook = { version ="0.1.6", optional = true }
-
-# `wee_alloc` is a tiny allocator for wasm that is only ~1K in code size
-# compared to the default allocator's ~10K. It is slower than the default
-# allocator, however.
-wee_alloc = { version = "0.4.4", optional = true }
+fixed-vec-deque = "0.1.8"
 
 [dependencies.web-sys]
-version = "^0.3.25"
+version = "^0.3.28"
 features = [
-  "Document",
-  "Element",
-  "HtmlElement",
-  "Node",
-  "Window",
-  "CustomEvent"
+  "ScrollToOptions",
+  "Navigator",
 ]
-
-[features]
-default = ["console_error_panic_hook"]
-
-[dev-dependencies]
-wasm-bindgen-test = "0.2.48"
 
 [profile.release]
 lto = true

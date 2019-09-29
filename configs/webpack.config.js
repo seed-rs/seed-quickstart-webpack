@@ -6,65 +6,72 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WasmPackPlugin = require("@wasm-tool/wasm-pack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const Critters = require('critters-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env, argv) => {
   return {
     entry: {
-      // bundle root with name app.js
+      // Bundle root with name `app.js`.
       app: path.resolve(__dirname, "../entries/index.ts")
     },
     output: {
-      // TravicCI or you can deploy your site from this folder (after `yarn build:release`)
-      path: dist
+      // You can deploy your site from this folder (after build with e.g. `yarn build:release`)
+      path: dist,
+      filename:'[name].[contenthash].js'
     },
     devServer: {
       contentBase: dist,
-      hot: true,
-      // you can connect to dev server from devices in your network (e.g. 192.168.0.3:3000)
+      // You can connect to dev server from devices in your network (e.g. 192.168.0.3:8000).
       host: "0.0.0.0",
       port: 8000,
       noInfo: true,
       stats: "errors-only",
-      // Note: it doesn't work for Rust files (probably because Rust isn't compiled by loader but plugin)
       overlay: {
         warnings: true,
         errors: true
-      }
+      },
+      historyApiFallback: true,
     },
     plugins: [
-      // show compilation progress bar in console
+      // Show compilation progress bar in console.
       new WebpackBar(),
-      // clean dist folder before compilation
+      // Clean `dist` folder before compilation.
       new CleanWebpackPlugin(),
-      // add scripts, css, ... to html template
-      new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, "../entries/index.html"),
-        hash: true
+      // Extract CSS styles into a file.
+      new MiniCssExtractPlugin({
+        filename:'[name].[contenthash].css'
       }),
-      // compile Rust
+      // Add scripts, css, ... to html template.
+      new HtmlWebpackPlugin({
+        template: path.resolve(__dirname, "../entries/index.hbs")
+      }),
+      // Inline the critical part of styles, preload remainder.
+      new Critters({
+        logLevel: "warn",
+        // https://github.com/GoogleChromeLabs/critters/issues/34
+        pruneSource: false,
+      }),
+      // Compile Rust.
       new WasmPackPlugin({
         crateDirectory: path.resolve(__dirname, "../crate"),
         outDir: path.resolve(__dirname, "../crate/pkg")
       }),
 
-      // Uncomment when you have problems with Edge (= when small polyfill in index.html doesn't work)
-      //
-      // Have this example work in Edge which doesn't ship `TextEncoder` or
-      // `TextDecoder` at this time.
-      // new webpack.ProvidePlugin({
-      //   TextDecoder: ['text-encoding', 'TextDecoder'],
-      //   TextEncoder: ['text-encoding', 'TextEncoder']
-      // }),
-
-      // you can find files from folder ../static on url http://my-site.com/static/
+      // You can find files from folder `../static` on url `http://my-site.com/static/`.
+      // And favicons in the root.
       new CopyWebpackPlugin([
         {
           from: "static",
           to: "static"
+        },
+        {
+          from: "favicons",
+          to: ""
         }
-      ])
+      ]),
     ],
-    // webpack try to guess how to resolve imports in this order:
+    // Webpack try to guess how to resolve imports in this order:
     resolve: {
       extensions: [".ts", ".js", ".wasm"],
       alias: {
@@ -74,13 +81,24 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
-          test: /\.(png|jpg|gif)$/,
+          test: /\.hbs$/,
+          use: [
+            {
+              loader: "handlebars-loader",
+              options: {
+                rootRelative: './templates/'
+              }
+            }
+          ]
+        },
+        {
+          test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/,
           use: [
             {
               loader: "file-loader",
               options: {
-                // don't copy files to dist, we do it through CopyWebpackPlugin (see above)
-                // - we only want to resolve urls to these files
+                // Don't copy files to `dist`, we do it through `CopyWebpackPlugin` (see above)
+                // - we only want to resolve urls to these files.
                 emitFile: false,
                 name: "[path][name].[ext]"
               }
@@ -94,21 +112,15 @@ module.exports = (env, argv) => {
         {
           test: /\.css$/,
           use: [
-            "style-loader",
-            {
-              loader: "css-loader",
-              options: {
-                // https://github.com/webpack-contrib/css-loader/issues/228
-                importLoaders: 1
-              }
-            },
+            MiniCssExtractPlugin.loader,
+            "css-loader",
             {
               loader: "postcss-loader",
               options: {
                 config: {
-                  // path to postcss.config.js
+                  // Path to postcss.config.js.
                   path: __dirname,
-                  // send mode into postcss.config.js (see more info in that file)
+                  // Pass mode into `postcss.config.js` (see more info in that file).
                   ctx: { mode: argv.mode }
                 }
               }

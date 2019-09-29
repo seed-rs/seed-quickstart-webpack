@@ -10,7 +10,8 @@ module.exports = ({ file, options, env }) => {
 
   return {
     plugins: [
-      require("tailwindcss"),
+      require("postcss-import"),
+      require("tailwindcss")('configs/tailwind.config.js'),
       require("postcss-typed-css-classes")({
         output_filepath: "crate/src/generated/css_classes.rs",
         generator: "rust",
