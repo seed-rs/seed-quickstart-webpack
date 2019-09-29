@@ -1,8 +1,12 @@
 # Change Log
 
-This project adheres to [Semantic Versioning](http://semver.org/).
-
 [UNRELEASED]
+
+[0.3.0]
+
+- Quickstart is now based on `https://github.com/MartinKavik/kavik.cz`
+- Rewritten `README.md`
+- Previous version moved into branch `older`
 
 [0.2.0]
 

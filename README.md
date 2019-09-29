@@ -62,7 +62,7 @@ I want to show you how to create, build and host your website for free, so we wi
 1. Try to start dev-server - `$ yarn start` - and then open [localhost:8000](http://localhost:8000) in a browser.
 1. Stop server (try `Ctrl+c`).
 1. Try to lint your project - `$ cargo make verify_only` - you shouldn't see any errors.
-1. Modify files like `LICENCE` and `README.md` as you wish and push changes into GitHub.
+1. Modify files like `LICENCE`, `README.md` and `/crate/Cargo.toml` as you wish and push changes into GitHub.
 
 ## 4. Write your website
 
