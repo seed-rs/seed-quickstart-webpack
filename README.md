@@ -32,7 +32,7 @@ I want to show you how to create, build and host your website for free, so we wi
 
 1. The simplest way how to do it is to click on the green button **Use this template** on the GitHub [profile](https://github.com/MartinKavik/seed-quickstart-webpack) of this quickstart.
 
-1. Clone your repository somewhere to your local machine. I use [GitKraken](https://www.gitkraken.com/), but you are probably better developer than me - use your favorite terminal.
+1. Clone your new repository to your local machine. I use [GitKraken](https://www.gitkraken.com/), but you are probably better developer than me - use your favorite terminal.
 
 ## 2. Install / check required tools
 
@@ -68,12 +68,12 @@ I want to show you how to create, build and host your website for free, so we wi
 
 1. Open project in your favorite IDE. I use [IntelliJ](https://www.jetbrains.com/idea/download) or [VS Code](https://code.visualstudio.com/).
 1. Run `$ yarn start` in terminal. I use `bash` integrated into IDE (it's installed with Git on Windows).
-   - _Note_: Yarn commands can be run from project root or from directory `crate`, but Cargo commands can be run only from `crate`.
+   - _Note_: Yarn commands can be run from project root or from directory `crate`, but Cargo commands can be run **only from `crate`**.
 1. Open [localhost:8000](http://localhost:8000) in a browser.
 1. You can open it also in your mobile phone:
    1. Make sure your dev-server aka computer is in the same network as your phone.
    1. Find out your local IP address. Use e.g. this online tool: https://www.whatismybrowser.com/detect/what-is-my-local-ip-address.
-   1. Open URL with found IP and default port (e.g. `192.168.1.5:8000`) on your phone.
+   1. Open URL with found IP address and default port (e.g. `192.168.1.5:8000`) on your phone.
 
 _Note_: You don't have to follow all steps below - reuse starter project code as you need.
 
@@ -164,6 +164,7 @@ module.exports = {
 ## 5. Prepare your project for deploy
 
 How to format, lint and test your project.
+
 And how to setup Travis CI pipeline with deploy into Netlify.
 
 ### Formatter & Linter
@@ -185,8 +186,8 @@ And how to setup Travis CI pipeline with deploy into Netlify.
    1. `$ yarn build:prerender`
    1. `$ serve:dist`
    1. Open [localhost:8000](http://localhost:8000) in a browser.
-   1. _Tip_: Test it always also in production environment because e.g. routing is a little bit different among servers.
-1. **Always** run `$ cargo make verify` before push to make sure CI pipeline will accept your code.
+   1. _Tip_: Always test it also in production environment because e.g. routing is a little bit different among servers.
+1. **Always run `$ cargo make verify`** before push to make sure CI pipeline will accept your code.
    - It'll format your code, lint it and start headless tests in Firefox.
    - You can change its behaviour in `/crate/Makefile.tom` - task `verify` (similar task `verify_only` is used in CI).
 
@@ -195,7 +196,7 @@ And how to setup Travis CI pipeline with deploy into Netlify.
 1. Create a new [Netlify](https://www.netlify.com/) site.
 1. _[Optional]_ Change site name or/and use your own domain.
 1. _[Optional]_ Turn on HTTPS.
-1. _[Optional]_ Add badge to project's README (Site detail > `Settings` > `General` > `Status badges`).
+1. _[Optional]_ Add badge to project's `/README.md` (Site detail > `Settings` > `General` > `Status badges`).
 1. Note somewhere **Site id** (Site detail > `Settings` > `General` > _API ID_)
 1. Create and note somewhere **Access token** (Click on your avatar > `User settings` > `Applications` > `New access token` > Name it for instance `TravisCI`)
 1. _[Optional]_ Adjust `/netlify.toml` to suit your needs. [Netlify docs](https://www.netlify.com/docs/netlify-toml-reference/).
@@ -207,7 +208,7 @@ And how to setup Travis CI pipeline with deploy into Netlify.
 1. Add _Environment Variable_ `NETLIFY_SITE_ID` and set it's value to **Site id**.
 1. Add _Environment Variable_ `NETLIFY_ACCESS_TOKEN` and set it's value to **Access token**.
 1. Switch to tab `Current` and click `Activate repository`.
-1. _[Optional]_ Add badge to project's README (Repository detail > Click on badge next to the rep. name > `IMAGE URL` change to `MARKDOWN`)
+1. _[Optional]_ Add badge to project's `/README.md` (Repository detail > Click on badge next to the rep. name > `IMAGE URL` change to `MARKDOWN`)
 1. _[Optional]_ Modify `/.travis.yml`.
    - Replace `yarn build:prerender` with `yarn build:release` if you don't want to prerender pages.
    - _Tip:_ If jobs don't want to start after push, check Repository detail > `More options` > `Requests`.
