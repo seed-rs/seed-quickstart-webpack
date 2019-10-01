@@ -16,6 +16,7 @@ Main components:
 - **Seed** - Rust framework, inspired by Elm. [Seed's Awesome list](https://github.com/MartinKavik/awesome-seed-rs).
 - **[Tailwind CSS](https://tailwindcss.com/)** - CSS framework. All CSS classes in your project are typed for safe use in Rust code. Unused classes are automatically deleted for much smaller bundle size.
 - **[Webpack](https://webpack.js.org/)** - Bundler. Auto-reload on code change, dev-server accessible from mobile phones, prerendering for static websites... and many more useful features are prepared for you in this quickstart.
+    - Why Webpack instead of Rust-only build pipeline? - [Wiki](https://github.com/MartinKavik/seed-quickstart-webpack/wiki/Why-Webpack)
 - **Production-ready starter project** - Example project is based on the website with several pages, favicons, nice fonts, meta tags for social media, buttons for scrolling to top, header which is hidden on scrolling, etc. It can be prerendered, but it also contains loading screen.
   For more complex project (based on another quickstart) see [seed-rs-realworld](https://github.com/MartinKavik/seed-rs-realworld).
 - **Production-ready configuration** - Project is linted, compiled, prerendered and deployed in CI pipeline (see `.travis.yml` and `netlify.toml`). Linters are very strict.
