@@ -42,6 +42,12 @@ I want to show you how to create, build and host your website for free, so we wi
    - [Yarn](https://yarnpkg.com/lang/en/docs/install) - run `$ yarn -v` in terminal. It should output something like `1.17.3`
    - [Node.js](https://nodejs.org) - `$ node -v` => `v10.16.3`
    - [Rust](https://www.rust-lang.org/tools/install) - `$ rustc -V` => `rustc 1.38.0 (625451e37 2019-09-23)`
+   - Rust target `wasm` - `$ rustup target list` => `.. wasm32-unknown-unknown (installed) ..`
+       - Install: `$ rustup target add wasm32-unknown-unknown`
+       
+1. Platform-specific tools like `ssl` and `pkg-config`:
+    - Follow recommendations in build errors (during the next chapter).
+    - _Note_: Don't hesitate to write a tutorial and create PR or write a Wiki page for your platform.
 
 1. These tools are required by some commands:
 
