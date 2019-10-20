@@ -1,10 +1,10 @@
 [package]
+name = "seed_rs_realworld"
 version = "0.1.0"
-name = "kavik_cz"
-repository = "https://github.com/MartinKavik/kavik.cz"
+repository = "https://github.com/MartinKavik/seed-rs-realworld"
 authors = ["Martin Kavík <martin@kavik.cz>"]
-description = "Personal website kavik.cz"
-categories = ["wasm", "rust", "tailwindcss", "seed", "personal", "website"]
+description = "Exemplary real world application built with Seed"
+categories = ["wasm", "rust", "seed", "realworld", "example"]
 license = "MIT"
 readme = "./README.md"
 edition = "2018"
@@ -13,20 +13,32 @@ edition = "2018"
 crate-type = ["cdylib"]
 
 [dev-dependencies]
-wasm-bindgen-test = "^0.2.50" # sync with `wasm-bindgen`
+wasm-bindgen-test = "0.2.45" # NOTE: keep in sync with wasm-bindgen version
 
 [dependencies]
-wasm-bindgen = "^0.2.50" # sync with `wasm-bindgen-test`
-seed = { git = "https://github.com/David-OConnor/seed", branch="master" }
-fixed-vec-deque = "0.1.8"
-
-[dependencies.web-sys]
-version = "^0.3.28"
-features = [
-  "ScrollToOptions",
-  "Navigator",
-]
+seed = { git = "https://github.com/David-OConnor/seed" }
+wasm-bindgen = "0.2.45"
+tool = "0.2.1"
+indexmap = { version = "1.0.2", features = [ "serde-1" ] }
+futures = "0.1.27"
+serde = "1.0.92"
+serde_json = "1.0.39"
+unicode-segmentation = "1.3.0"
+strum = "0.15.0"
+strum_macros = "0.15.0"
+chrono = "0.4"
+num-integer = "0.1.41"
+lazy_static = "1.3.0"
+shrinkwraprs = "0.2.1"
+newtype = "0.2.1"
+web-sys = { version = "0.3.25", features = [ "ScrollBehavior", "ScrollToOptions" ] }
+gloo-timers = { version = "0.1.0", features = [ "futures" ] }
 
 [profile.release]
 lto = true
 opt-level = 's'
+
+[patch.crates-io.gloo-timers]
+git = "https://github.com/MartinKavik/gloo"
+branch = "call_window_methods_directly"
+features = [ "futures" ]

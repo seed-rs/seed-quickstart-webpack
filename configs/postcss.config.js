@@ -11,20 +11,20 @@ module.exports = ({ file, options, env }) => {
   return {
     plugins: [
       require("postcss-import"),
-      require("tailwindcss")('configs/tailwind.config.js'),
-      require("postcss-typed-css-classes")({
-        output_filepath: "crate/src/generated/css_classes.rs",
-        generator: "rust",
-        filter: class_ => {
-          if (options.mode === "production") {
-            return usedCssClasses.has(
-              postcssRustHelpers.escapeClassName(class_)
-            );
-          } else {
-            return true;
-          }
-        }
-      }),
+//      require("tailwindcss")('configs/tailwind.config.js'),
+//      require("postcss-typed-css-classes")({
+//        output_filepath: "crate/src/generated/css_classes.rs",
+//        generator: "rust",
+//        filter: class_ => {
+//          if (options.mode === "production") {
+//            return usedCssClasses.has(
+//              postcssRustHelpers.escapeClassName(class_)
+//            );
+//          } else {
+//            return true;
+//          }
+//        }
+//      }),
       require("autoprefixer")
     ]
   };

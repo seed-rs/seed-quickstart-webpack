@@ -1,80 +1,61 @@
-// @TODO: uncomment once https://github.com/rust-lang/rust/issues/54726 stable
-//#![rustfmt::skip::macros(class)]
+#![allow(clippy::single_match, clippy::large_enum_variant)]
+#![allow(clippy::default_trait_access)] // because of problem with `strum_macros::EnumIter`
 
-#![allow(clippy::used_underscore_binding)]
-#![allow(clippy::non_ascii_literal)]
-#![allow(clippy::enum_glob_use)]
+#[macro_use]
+extern crate seed;
+use entity::{article, username};
+use helper::take;
+use seed::prelude::*;
+use std::convert::TryInto;
 
-mod generated;
+pub use route::Route;
+pub use session::Session;
+
+mod coder;
+mod entity;
+mod helper;
+mod loading;
+mod logger;
 mod page;
-
-use fixed_vec_deque::FixedVecDeque;
-use generated::css_classes::C;
-use seed::{events::Listener, prelude::*, *};
-use Visibility::*;
-
-const TITLE_SUFFIX: &str = "Kavik.cz";
-// https://mailtolink.me/
-const MAIL_TO_KAVIK: &str = "mailto:martin@kavik.cz?subject=Something%20for%20Martin&body=Hi!%0A%0AI%20am%20Groot.%20I%20like%20trains.";
-const MAIL_TO_HELLWEB: &str =
-    "mailto:martin@hellweb.app?subject=Hellweb%20-%20pain&body=Hi!%0A%0AI%20hate";
-const USER_AGENT_FOR_PRERENDERING: &str = "ReactSnap";
-const STATIC_PATH: &str = "static";
-const IMAGES_PATH: &str = "static/images";
-
-#[derive(Clone, Copy, Eq, PartialEq)]
-pub enum Visibility {
-    Visible,
-    Hidden,
-}
-
-impl Visibility {
-    pub fn toggle(&mut self) {
-        *self = match self {
-            Visible => Hidden,
-            Hidden => Visible,
-        }
-    }
-}
+mod request;
+mod route;
+mod session;
+mod storage;
 
 // ------ ------
 //     Model
 // ------ ------
 
-// We need at least 3 last values to detect scroll direction,
-// because neighboring ones are sometimes equal.
-type ScrollHistory = FixedVecDeque<[i32; 3]>;
-
-pub struct Model {
-    pub page: Page,
-    pub scroll_history: ScrollHistory,
-    pub menu_visibility: Visibility,
-    pub in_prerendering: bool,
+enum Model<'a> {
+    Redirect(Session),
+    NotFound(Session),
+    Home(page::home::Model),
+    Settings(page::settings::Model),
+    Login(page::login::Model),
+    Register(page::register::Model),
+    Profile(page::profile::Model<'a>, username::Username<'a>),
+    Article(page::article::Model),
+    ArticleEditor(page::article_editor::Model, Option<article::slug::Slug>),
 }
 
-#[derive(Clone, Copy, Eq, PartialEq)]
-pub enum Page {
-    Home,
-    About,
-    NotFound,
-}
-
-impl Page {
-    pub fn to_href(self) -> &'static str {
-        match self {
-            Self::Home => "/",
-            Self::About => "/about",
-            Self::NotFound => "/404",
-        }
+impl<'a> Default for Model<'a> {
+    fn default() -> Self {
+        Model::Redirect(Session::default())
     }
 }
 
-impl From<Url> for Page {
-    fn from(url: Url) -> Self {
-        match url.path.first().map(String::as_str) {
-            None | Some("") => Self::Home,
-            Some("about") => Self::About,
-            _ => Self::NotFound,
+impl<'a> From<Model<'a>> for Session {
+    fn from(model: Model<'a>) -> Self {
+        use Model::*;
+        match model {
+            Redirect(session) | NotFound(session) => session,
+            Home(model) => model.into(),
+            Settings(model) => model.into(),
+            Login(model) => model.into(),
+            Register(model) => model.into(),
+            Profile(model, _) => model.into(),
+            Article(model) => model.into(),
+            ArticleEditor(model, _) => model.into(),
         }
     }
 }
@@ -83,139 +64,283 @@ impl From<Url> for Page {
 //     Init
 // ------ ------
 
-pub fn init(url: Url, orders: &mut impl Orders<Msg>) -> Model {
-    // @TODO: Seed can't hydrate prerendered html (yet).
-    // https://github.com/David-OConnor/seed/issues/223
-    if let Some(mount_point_element) = document().get_element_by_id("app") {
-        mount_point_element.set_inner_html("");
-    }
-
-    orders.send_msg(Msg::UpdatePageTitle);
-
-    Model {
-        page: url.into(),
-        scroll_history: ScrollHistory::new(),
-        menu_visibility: Hidden,
-        in_prerendering: is_in_prerendering(),
-    }
-}
-
-fn is_in_prerendering() -> bool {
-    let user_agent =
-        window().navigator().user_agent().expect("cannot get user agent");
-
-    user_agent == USER_AGENT_FOR_PRERENDERING
+fn init(
+    _: Url,
+    _: &mut impl Orders<Msg<'static>, GMsg>,
+) -> Init<Model<'static>> {
+    let model = Model::Redirect(Session::new(storage::load_viewer()));
+    Init::new(model)
 }
 
 // ------ ------
-//    Routes
+//     Sink
 // ------ ------
 
-pub fn routes(url: Url) -> Option<Msg> {
-    // Urls which start with `static` are files => treat them as external links.
-    if url.path.starts_with(&[STATIC_PATH.into()]) {
-        return None;
+pub enum GMsg {
+    RoutePushed(Route<'static>),
+    SessionChanged(Session),
+}
+
+fn sink<'a>(
+    g_msg: GMsg,
+    model: &mut Model<'a>,
+    orders: &mut impl Orders<Msg<'static>, GMsg>,
+) {
+    if let GMsg::RoutePushed(ref route) = g_msg {
+        orders.send_msg(Msg::RouteChanged(Some(route.clone())));
     }
-    Some(Msg::RouteChanged(url))
+
+    match model {
+        Model::NotFound(_) | Model::Redirect(_) => {
+            if let GMsg::SessionChanged(session) = g_msg {
+                *model = Model::Redirect(session);
+                route::go_to(Route::Home, orders);
+            }
+        },
+        Model::Settings(model) => {
+            page::settings::sink(
+                g_msg,
+                model,
+                &mut orders.proxy(Msg::SettingsMsg),
+            );
+        },
+        Model::Home(model) => {
+            page::home::sink(g_msg, model);
+        },
+        Model::Login(model) => {
+            page::login::sink(g_msg, model, &mut orders.proxy(Msg::LoginMsg));
+        },
+        Model::Register(model) => {
+            page::register::sink(
+                g_msg,
+                model,
+                &mut orders.proxy(Msg::RegisterMsg),
+            );
+        },
+        Model::Profile(model, _) => {
+            page::profile::sink(
+                g_msg,
+                model,
+                &mut orders.proxy(Msg::ProfileMsg),
+            );
+        },
+        Model::Article(model) => {
+            page::article::sink(
+                g_msg,
+                model,
+                &mut orders.proxy(Msg::ArticleMsg),
+            );
+        },
+        Model::ArticleEditor(model, _) => {
+            page::article_editor::sink(
+                g_msg,
+                model,
+                &mut orders.proxy(Msg::ArticleEditorMsg),
+            );
+        },
+    }
 }
 
 // ------ ------
 //    Update
 // ------ ------
 
+#[allow(clippy::enum_variant_names)]
 #[derive(Clone)]
-pub enum Msg {
-    RouteChanged(Url),
-    UpdatePageTitle,
-    ScrollToTop,
-    Scrolled(i32),
-    ToggleMenu,
-    HideMenu,
+enum Msg<'a> {
+    RouteChanged(Option<Route<'a>>),
+    HomeMsg(page::home::Msg),
+    SettingsMsg(page::settings::Msg),
+    LoginMsg(page::login::Msg),
+    RegisterMsg(page::register::Msg),
+    ProfileMsg(page::profile::Msg),
+    ArticleMsg(page::article::Msg),
+    ArticleEditorMsg(page::article_editor::Msg),
 }
 
-pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
+fn update<'a>(
+    msg: Msg<'a>,
+    model: &mut Model<'a>,
+    orders: &mut impl Orders<Msg<'static>, GMsg>,
+) {
     match msg {
-        Msg::RouteChanged(url) => {
-            model.page = url.into();
-            orders.send_msg(Msg::UpdatePageTitle);
+        Msg::RouteChanged(route) => {
+            change_model_by_route(route, model, orders);
         },
-        Msg::UpdatePageTitle => {
-            let title = match model.page {
-                Page::Home => TITLE_SUFFIX.to_owned(),
-                Page::About => format!("About - {}", TITLE_SUFFIX),
-                Page::NotFound => format!("404 - {}", TITLE_SUFFIX),
-            };
-            document().set_title(&title);
+        Msg::HomeMsg(module_msg) => {
+            if let Model::Home(module_model) = model {
+                page::home::update(
+                    module_msg,
+                    module_model,
+                    &mut orders.proxy(Msg::HomeMsg),
+                );
+            }
         },
-        Msg::ScrollToTop => window().scroll_to_with_scroll_to_options(
-            web_sys::ScrollToOptions::new().top(0.),
-        ),
-        Msg::Scrolled(position) => {
-            *model.scroll_history.push_back() = position;
+        Msg::SettingsMsg(module_msg) => {
+            if let Model::Settings(module_model) = model {
+                page::settings::update(
+                    module_msg,
+                    module_model,
+                    &mut orders.proxy(Msg::SettingsMsg),
+                );
+            }
         },
-        Msg::ToggleMenu => model.menu_visibility.toggle(),
-        Msg::HideMenu => {
-            model.menu_visibility = Hidden;
+        Msg::LoginMsg(module_msg) => {
+            if let Model::Login(module_model) = model {
+                page::login::update(
+                    module_msg,
+                    module_model,
+                    &mut orders.proxy(Msg::LoginMsg),
+                );
+            }
+        },
+        Msg::RegisterMsg(module_msg) => {
+            if let Model::Register(module_model) = model {
+                page::register::update(
+                    module_msg,
+                    module_model,
+                    &mut orders.proxy(Msg::RegisterMsg),
+                );
+            }
+        },
+        Msg::ProfileMsg(module_msg) => {
+            if let Model::Profile(module_model, _) = model {
+                page::profile::update(
+                    module_msg,
+                    module_model,
+                    &mut orders.proxy(Msg::ProfileMsg),
+                );
+            }
+        },
+        Msg::ArticleMsg(module_msg) => {
+            if let Model::Article(module_model) = model {
+                page::article::update(
+                    module_msg,
+                    module_model,
+                    &mut orders.proxy(Msg::ArticleMsg),
+                );
+            }
+        },
+        Msg::ArticleEditorMsg(module_msg) => {
+            if let Model::ArticleEditor(module_model, _) = model {
+                page::article_editor::update(
+                    module_msg,
+                    module_model,
+                    &mut orders.proxy(Msg::ArticleEditorMsg),
+                );
+            }
         },
     }
+}
+
+fn change_model_by_route<'a>(
+    route: Option<Route<'a>>,
+    model: &mut Model<'a>,
+    orders: &mut impl Orders<Msg<'static>, GMsg>,
+) {
+    let mut session = || Session::from(take(model));
+    match route {
+        None => *model = Model::NotFound(session()),
+        Some(route) => match route {
+            Route::Root => route::go_to(Route::Home, orders),
+            Route::Logout => {
+                storage::delete_app_data();
+                orders.send_g_msg(GMsg::SessionChanged(Session::Guest));
+                route::go_to(Route::Home, orders)
+            },
+            Route::NewArticle => {
+                *model = Model::ArticleEditor(
+                    page::article_editor::init_new(session()),
+                    None,
+                );
+            },
+            Route::EditArticle(slug) => {
+                *model = Model::ArticleEditor(
+                    page::article_editor::init_edit(
+                        session(),
+                        slug.clone(),
+                        &mut orders.proxy(Msg::ArticleEditorMsg),
+                    ),
+                    Some(slug),
+                );
+            },
+            Route::Settings => {
+                *model = Model::Settings(page::settings::init(
+                    session(),
+                    &mut orders.proxy(Msg::SettingsMsg),
+                ));
+            },
+            Route::Home => {
+                *model = Model::Home(page::home::init(
+                    session(),
+                    &mut orders.proxy(Msg::HomeMsg),
+                ));
+            },
+            Route::Login => {
+                *model = Model::Login(page::login::init(session()));
+            },
+            Route::Register => {
+                *model = Model::Register(page::register::init(session()));
+            },
+            Route::Profile(username) => {
+                *model = Model::Profile(
+                    page::profile::init(
+                        session(),
+                        username.to_static(),
+                        &mut orders.proxy(Msg::ProfileMsg),
+                    ),
+                    username.into_owned(),
+                );
+            },
+            Route::Article(slug) => {
+                *model = Model::Article(page::article::init(
+                    session(),
+                    &slug,
+                    &mut orders.proxy(Msg::ArticleMsg),
+                ));
+            },
+        },
+    };
 }
 
 // ------ ------
 //     View
 // ------ ------
 
-// Notes:
-// - \u{00A0} is the non-breaking space
-//   - https://codepoints.net/U+00A0
-//
-// - "▶\u{fe0e}" - \u{fe0e} is the variation selector, it prevents ▶ to change to emoji in some browsers
-//   - https://codepoints.net/U+FE0E
-
-pub fn view(model: &Model) -> impl View<Msg> {
-    // @TODO: Setup `prerendered` properly once https://github.com/David-OConnor/seed/issues/223 is resolved
-    let prerendered = true;
-    div![
-        class![
-            C.fade_in => !prerendered,
-            C.min_h_screen,
-            C.flex,
-            C.flex_col,
-        ],
-        match model.page {
-            Page::Home => page::home::view().els(),
-            Page::About => page::about::view().els(),
-            Page::NotFound => page::not_found::view().els(),
+fn view(model: &Model) -> impl View<Msg<'static>> {
+    use page::Page;
+    match model {
+        Model::Redirect(session) => {
+            Page::Other.view(page::blank::view(), session.viewer())
         },
-        page::partial::header::view(model).els(),
-        page::partial::footer::view().els(),
-    ]
-}
-
-pub fn image_src(image: &str) -> String {
-    format!("{}/{}", IMAGES_PATH, image)
-}
-
-pub fn asset_path(asset: &str) -> String {
-    format!("{}/{}", STATIC_PATH, asset)
-}
-
-// ------ ------
-// Window Events
-// ------ ------
-
-pub fn window_events(_: &Model) -> Vec<Listener<Msg>> {
-    vec![raw_ev(Ev::Scroll, |_| {
-        // Some browsers use `document.body.scrollTop`
-        // and other ones `document.documentElement.scrollTop`.
-        let mut position = body().scroll_top();
-        if position == 0 {
-            position = document()
-                .document_element()
-                .expect("cannot get document element")
-                .scroll_top()
-        }
-        Msg::Scrolled(position)
-    })]
+        Model::NotFound(session) => {
+            Page::Other.view(page::not_found::view(), session.viewer())
+        },
+        Model::Settings(model) => Page::Settings
+            .view(page::settings::view(model), model.session().viewer())
+            .map_message(Msg::SettingsMsg),
+        Model::Home(model) => Page::Home
+            .view(page::home::view(model), model.session().viewer())
+            .map_message(Msg::HomeMsg),
+        Model::Login(model) => Page::Login
+            .view(page::login::view(model), model.session().viewer())
+            .map_message(Msg::LoginMsg),
+        Model::Register(model) => Page::Register
+            .view(page::register::view(model), model.session().viewer())
+            .map_message(Msg::RegisterMsg),
+        Model::Profile(model, username) => Page::Profile(username)
+            .view(page::profile::view(model), model.session().viewer())
+            .map_message(Msg::ProfileMsg),
+        Model::Article(model) => Page::Other
+            .view(page::article::view(model), model.session().viewer())
+            .map_message(Msg::ArticleMsg),
+        Model::ArticleEditor(model, None) => Page::NewArticle
+            .view(page::article_editor::view(model), model.session().viewer())
+            .map_message(Msg::ArticleEditorMsg),
+        Model::ArticleEditor(model, Some(_)) => Page::Other
+            .view(page::article_editor::view(model), model.session().viewer())
+            .map_message(Msg::ArticleEditorMsg),
+    }
 }
 
 // ------ ------
@@ -223,14 +348,10 @@ pub fn window_events(_: &Model) -> Vec<Listener<Msg>> {
 // ------ ------
 
 #[wasm_bindgen(start)]
-pub fn run() {
-    log!("Starting app...");
-
-    App::build(init, update, view)
-        .routes(routes)
-        .window_events(window_events)
+pub fn start() {
+    seed::App::build(init, update, view)
+        .routes(|url| Some(Msg::RouteChanged(url.try_into().ok())))
+        .sink(sink)
         .finish()
         .run();
-
-    log!("App started.");
 }
