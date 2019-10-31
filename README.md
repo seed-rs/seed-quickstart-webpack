@@ -51,6 +51,11 @@ I want to show you how to create, build and host your website for free, so we wi
 
 1. These tools are required by some commands:
 
+   - [wasm-pack](https://rustwasm.github.io/wasm-pack/)
+
+     - Check: `$ wasm-pack -V` => `wasm-pack 0.8.1`
+     - Install: `$ cargo install --force wasm-pack`
+
    - [cargo-make](https://sagiegurari.github.io/cargo-make/)
 
      - Check: `$ cargo make -V` => `cargo-make 0.22.1`
