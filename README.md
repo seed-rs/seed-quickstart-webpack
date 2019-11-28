@@ -1,7 +1,6 @@
 # Seed Quickstart with Webpack
 
-[![Build Status](https://travis-ci.org/MartinKavik/seed-quickstart-webpack.svg?branch=master)](https://travis-ci.org/MartinKavik/seed-quickstart-webpack)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/bd3326db-a516-4144-85cc-bf396f00ee7a/deploy-status)](https://app.netlify.com/sites/seed-quickstart-webpack/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/745c7b1d-5894-4f58-be28-e730a11e1ff4/deploy-status)](https://app.netlify.com/sites/quickstart-webpack/deploys)
 
 <!-- prettier-ignore -->
 > I want to write fast, reliable and efficient web apps. Quickly.  \
@@ -9,17 +8,17 @@ And I like Rust and documentation.
 
 ---
 
-[**LIVE DEMO**: seed-quickstart-webpack.netlify.com](https://seed-quickstart-webpack.netlify.com)
+[**LIVE DEMO**: quickstart-webpack.netlify.com](https://quickstart-webpack.netlify.com/)
 
 Main components:
 
-- **Seed** - Rust framework, inspired by Elm. [Seed's Awesome list](https://github.com/MartinKavik/awesome-seed-rs).
+- **Seed** - Rust framework, inspired by Elm. [Seed's Awesome list](https://github.com/seed-rs/awesome-seed-rs).
 - **[Tailwind CSS](https://tailwindcss.com/)** - CSS framework. All CSS classes in your project are typed for safe use in Rust code. Unused classes are automatically deleted for much smaller bundle size.
 - **[Webpack](https://webpack.js.org/)** - Bundler. Auto-reload on code change, dev-server accessible from mobile phones, prerendering for static websites... and many more useful features are prepared for you in this quickstart.
-    - Why Webpack instead of Rust-only build pipeline? - [Wiki](https://github.com/MartinKavik/seed-quickstart-webpack/wiki/Why-Webpack)
+    - Why Webpack instead of Rust-only build pipeline? - [Wiki](https://github.com/seed-rs/seed-quickstart-webpack/wiki/Why-Webpack)
 - **Production-ready starter project** - Example project is based on the website with several pages, favicons, nice fonts, meta tags for social media, buttons for scrolling to top, header which is hidden on scrolling, etc. It can be prerendered, but it also contains loading screen.
-  For more complex project (based on another quickstart) see [seed-rs-realworld](https://github.com/MartinKavik/seed-rs-realworld).
-- **Production-ready configuration** - Project is linted, compiled, prerendered and deployed in CI pipeline (see `.travis.yml` and `netlify.toml`). Linters are very strict.
+  For more complex project (based on another quickstart) see [seed-rs-realworld](https://github.com/seed-rs/seed-rs-realworld).
+- **Production-ready configuration** - Project is linted, compiled, prerendered and deployed in CI pipeline (see `.github/workflows/main.yml` and `netlify.toml`). Linters are very strict.
 
 ---
 
@@ -31,7 +30,7 @@ Main components:
 
 I want to show you how to create, build and host your website for free, so we will need a public GitHub repository.
 
-1. The simplest way how to do it is to click on the green button **Use this template** on the GitHub [profile](https://github.com/MartinKavik/seed-quickstart-webpack) of this quickstart.
+1. The simplest way how to do it is to click on the green button **Use this template** on the GitHub [profile](https://github.com/seed-rs/seed-quickstart-webpack) of this quickstart.
 
 1. Clone your new repository to your local machine. I use [GitKraken](https://www.gitkraken.com/), but you are probably better developer than me - use your favorite terminal.
 
@@ -177,7 +176,7 @@ module.exports = {
 
 How to format, lint and test your project.
 
-And how to setup Travis CI pipeline with deploy into Netlify.
+And how to setup Github Actions with deploy into Netlify.
 
 ### Formatter & Linter
 
@@ -193,7 +192,7 @@ And how to setup Travis CI pipeline with deploy into Netlify.
 
 1. Run `$ cargo make test_h firefox` for headless testing in Firefox.
    - There are more similar commands - see `/crate/Makefile.toml`
-   - _Note_: There is only one test in this project (`crate/tests/test.rs`), see [seed-rs-realworld](https://github.com/MartinKavik/seed-rs-realworld) for more examples.
+   - _Note_: There is only one test in this project (`crate/tests/test.rs`), see [seed-rs-realworld](https://github.com/seed-rs/seed-rs-realworld) for more examples.
 1. If you want to test prerendered website:
    1. `$ yarn build:prerender`
    1. `$ serve:dist`
@@ -210,8 +209,22 @@ And how to setup Travis CI pipeline with deploy into Netlify.
 1. _[Optional]_ Turn on HTTPS.
 1. _[Optional]_ Add badge to project's `/README.md` (Site detail > `Settings` > `General` > `Status badges`).
 1. Note somewhere **Site id** (Site detail > `Settings` > `General` > _API ID_)
-1. Create and note somewhere **Access token** (Click on your avatar > `User settings` > `Applications` > `New access token` > Name it for instance `TravisCI`)
+1. Create and note somewhere **Access token** (Click on your avatar > `User settings` > `Applications` > `New access token` > Name it for instance `GitHub`)
 1. _[Optional]_ Adjust `/netlify.toml` to suit your needs. [Netlify docs](https://www.netlify.com/docs/netlify-toml-reference/).
+
+### Github Actions
+
+1. Open your GitHub repository in your favorite browser.
+1. Click on `Settings` and then on `Secrets`.
+1. Add _secret_ `NETLIFY_SITE_ID` and set it's value to **Site id**.
+1. Add _secret_ `NETLIFY_ACCESS_TOKEN` and set it's value to **Access token**.
+1. Click on `Actions` in the side menu and make sure that `Actions` are enabled.
+1. _[Optional]_ Modify `/.github/workflows/main.yml`.
+   - Replace `yarn build:prerender` with `yarn build:release` if you don't want to prerender pages.
+1. _[Optional]_ Push your code and switch to tab `Actions` to check that everything works.
+
+<details>
+<summary>Travis CI (this guide and related config file are not maintained)</summary>
 
 ### Travis CI
 
@@ -224,15 +237,18 @@ And how to setup Travis CI pipeline with deploy into Netlify.
 1. _[Optional]_ Modify `/.travis.yml`.
    - Replace `yarn build:prerender` with `yarn build:release` if you don't want to prerender pages.
    - _Tip:_ If jobs don't want to start after push, check Repository detail > `More options` > `Requests`.
+   
+</details>
 
 ## 6. Add your project to Awesome list
 
-1. Create PR or issue in [awesome-seed-rs](https://github.com/MartinKavik/awesome-seed-rs).
+1. Create PR or issue in [awesome-seed-rs](https://github.com/seed-rs/awesome-seed-rs).
 
 ---
 
 # Used in projects
 
+- [seed-rs/seed-rs.org](https://github.com/seed-rs/seed-rs.org)
 - [MartinKavik/kavik.cz](https://github.com/MartinKavik/kavik.cz)
 - _[create PR or Issue]_
 
@@ -247,4 +263,4 @@ _Note_: Please squash commits and rebase before creating PR. Thanks!
 
 ## Other Seed projects
 
-- [MartinKavik/awesome-seed-rs](https://github.com/MartinKavik/awesome-seed-rs)
+- [seed-rs/awesome-seed-rs](https://github.com/seed-rs/awesome-seed-rs)
