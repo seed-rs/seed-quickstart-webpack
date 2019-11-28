@@ -223,10 +223,10 @@ And how to setup Github Actions with deploy into Netlify.
    - Replace `yarn build:prerender` with `yarn build:release` if you don't want to prerender pages.
 1. _[Optional]_ Push your code and switch to tab `Actions` to check that everything works.
 
-<details>
-<summary>Travis CI (this guide and related config file are not maintained)</summary>
-
 ### Travis CI
+
+<details>
+<summary>Content (this guide and related config file are not maintained)</summary>
 
 1. Sync your [TravisCI](https://travis-ci.org/) account with your GitHub one.
 1. Find repository with your app in [your list](https://travis-ci.org/account/repositories) and click on `Settings`.

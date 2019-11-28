@@ -2,6 +2,11 @@
 
 [UNRELEASED]
 
+[0.3.1]
+
+- `Travis CI` replaced with `Github Actions`
+- `Seed` updated to `0.4.2` + refactored `crate/src/lib.rs`
+
 [0.3.0]
 
 - Quickstart is now based on `https://github.com/MartinKavik/kavik.cz`
