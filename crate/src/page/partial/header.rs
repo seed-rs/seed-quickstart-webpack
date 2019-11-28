@@ -22,6 +22,7 @@ fn header_visibility(
     }
 }
 
+#[allow(clippy::too_many_lines)]
 pub fn view(model: &Model) -> impl View<Msg> {
     let show_header =
         header_visibility(model.menu_visibility, &model.scroll_history)

@@ -83,20 +83,20 @@ impl From<Url> for Page {
 //     Init
 // ------ ------
 
-pub fn init(url: Url, orders: &mut impl Orders<Msg>) -> Model {
-    // @TODO: Seed can't hydrate prerendered html (yet).
-    // https://github.com/David-OConnor/seed/issues/223
-    if let Some(mount_point_element) = document().get_element_by_id("app") {
-        mount_point_element.set_inner_html("");
-    }
-
+pub fn init(url: Url, orders: &mut impl Orders<Msg>) -> Init<Model> {
     orders.send_msg(Msg::UpdatePageTitle);
 
-    Model {
+    let model = Model {
         page: url.into(),
         scroll_history: ScrollHistory::new(),
         menu_visibility: Hidden,
         in_prerendering: is_in_prerendering(),
+    };
+
+    Init {
+        model,
+        url_handling: UrlHandling::None,
+        mount_type: MountType::Takeover,
     }
 }
 
@@ -229,8 +229,7 @@ pub fn run() {
     App::build(init, update, view)
         .routes(routes)
         .window_events(window_events)
-        .finish()
-        .run();
+        .build_and_start();
 
     log!("App started.");
 }
