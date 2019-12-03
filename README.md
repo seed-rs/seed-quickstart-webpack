@@ -8,7 +8,7 @@ And I like Rust and documentation.
 
 ---
 
-[**LIVE DEMO**: quickstart-webpack.netlify.com](https://quickstart-webpack.netlify.com/)
+[**LIVE DEMO**: quickstart-webpack.seed-rs.org](https://quickstart-webpack.seed-rs.org)
 
 Main components:
 
