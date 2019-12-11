@@ -5,7 +5,7 @@
 [0.4.0]
 
 - `Seed` updated to `0.5.0` + refactored `crate/src/lib.rs`.
-- All Rust nad JS dependencies updated.
+- All Rust and JS dependencies updated.
 - GHA workflow `main.yml` - `on: [push]` changed to `on: [push, pull_request]`.
 
 [0.3.1]
