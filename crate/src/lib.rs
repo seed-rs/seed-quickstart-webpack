@@ -4,6 +4,7 @@
 #![allow(clippy::used_underscore_binding)]
 #![allow(clippy::non_ascii_literal)]
 #![allow(clippy::enum_glob_use)]
+#![allow(clippy::must_use_candidate)]
 
 mod generated;
 mod page;
