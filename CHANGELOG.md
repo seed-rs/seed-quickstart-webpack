@@ -2,6 +2,8 @@
 
 [UNRELEASED]
 
+- Ignore `clippy` lint rule `must_use_candidate`.
+
 [0.4.0]
 
 - `Seed` updated to `0.5.0` + refactored `crate/src/lib.rs`.
