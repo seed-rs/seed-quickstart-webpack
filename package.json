@@ -1,7 +1,7 @@
 {
   "author": "Martin Kavík <martin@kavik.cz>",
   "name": "seed-quickstart-webpack",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "repository": "https://github.com/MartinKavik/seed-quickstart-webpack",
   "license": "MIT",
   "scripts": {
@@ -21,7 +21,7 @@
     "port": 8000
   },
   "devDependencies": {
-    "@wasm-tool/wasm-pack-plugin": "1.1.0",
+    "@wasm-tool/wasm-pack-plugin": "1.0.1",
     "binaryen": "^90.0.0",
     "clean-webpack-plugin": "^3.0.0",
     "concurrently": "^5.0.2",
