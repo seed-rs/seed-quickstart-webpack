@@ -13,15 +13,15 @@ edition = "2018"
 crate-type = ["cdylib"]
 
 [dev-dependencies]
-wasm-bindgen-test = "^0.3.5"
+wasm-bindgen-test = "^0.3.8"
 
 [dependencies]
-wasm-bindgen = "^0.2.55"
-seed = "0.5.0"
+wasm-bindgen = "^0.2.58"
+seed = "0.5.1"
 fixed-vec-deque = "0.1.8"
 
 [dependencies.web-sys]
-version = "^0.3.32"
+version = "^0.3.35"
 features = [
   "ScrollToOptions",
   "Navigator",
