@@ -11,7 +11,7 @@ mod page;
 
 use fixed_vec_deque::FixedVecDeque;
 use generated::css_classes::C;
-use seed::{events::Listener, prelude::*, *};
+use seed::{prelude::*, *};
 use Visibility::*;
 
 const TITLE_SUFFIX: &str = "Kavik.cz";
