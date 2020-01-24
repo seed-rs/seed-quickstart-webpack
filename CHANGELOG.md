@@ -3,9 +3,11 @@
 [UNRELEASED]
 
 - Ignore `clippy` lint rule `must_use_candidate`.
-- Optimized build (WASM file size changed from 584 to 356 KB).
+- Optimized build (WASM file size changed from 584 to 349 KB).
 - `Seed` updated to `0.5.1` + updated `crate/src/lib.rs`.
 - Updated all Rust dependencies.
+- Updated all JS dependencies.
+
 
 [0.4.0]
 
