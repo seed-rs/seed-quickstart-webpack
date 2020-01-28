@@ -32,6 +32,9 @@ I want to show you how to create, build and host your website for free, so we wi
 
 1. The simplest way how to do it is to click on the green button **Use this template** on the GitHub [profile](https://github.com/seed-rs/seed-quickstart-webpack) of this quickstart.
 
+1. Make sure Git doesn't automatically convert your newlines to CLRF because linters don't like it.
+    - Run `$ git config --global core.autocrlf` in your terminal and it should return `input` or `false`. See [Git docs](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration) for more info.
+
 1. Clone your new repository to your local machine. I use [GitKraken](https://www.gitkraken.com/), but you are probably better developer than me - use your favorite terminal.
 
 ## 2. Install / check required tools
