@@ -130,8 +130,8 @@ pub fn routes(url: Url) -> Option<Msg> {
 // Window Events
 // ------ ------
 
-pub fn window_events(_: &Model) -> Vec<Listener<Msg>> {
-    vec![raw_ev(Ev::Scroll, |_| {
+pub fn window_events(_: &Model) -> Vec<EventHandler<Msg>> {
+    vec![ev(Ev::Scroll, |_| {
         // Some browsers use `document.body.scrollTop`
         // and other ones `document.documentElement.scrollTop`.
         let mut position = body().scroll_top();
@@ -149,7 +149,6 @@ pub fn window_events(_: &Model) -> Vec<Listener<Msg>> {
 //    Update
 // ------ ------
 
-#[derive(Clone)]
 pub enum Msg {
     RouteChanged(Url),
     UpdatePageTitle,
@@ -198,11 +197,9 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
 //   - https://codepoints.net/U+FE0E
 
 pub fn view(model: &Model) -> impl View<Msg> {
-    // @TODO: Setup `prerendered` properly once https://github.com/David-OConnor/seed/issues/223 is resolved
-    let prerendered = true;
     div![
         class![
-            C.fade_in => !prerendered,
+            C.fade_in => !model.in_prerendering,
             C.min_h_screen,
             C.flex,
             C.flex_col,

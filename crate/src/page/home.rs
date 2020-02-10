@@ -1570,7 +1570,7 @@ pub fn view() -> impl View<Msg> {
                             C.lg__mb_48,
                             C.lg__text_50,
                         ],
-                        simple_ev(Ev::Click, Msg::ScrollToTop),
+                        ev(Ev::Click, |_| Msg::ScrollToTop),
                         span![
                             class![
                                 C.font_semibold
