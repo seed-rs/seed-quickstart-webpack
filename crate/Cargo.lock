@@ -44,6 +44,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "counter_component_interface"
+version = "0.1.0"
+dependencies = [
+ "wasm-bindgen 0.2.58 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
 name = "dbg"
 version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -204,6 +211,7 @@ dependencies = [
 name = "kavik_cz"
 version = "0.1.0"
 dependencies = [
+ "counter_component_interface 0.1.0",
  "fixed-vec-deque 0.1.8 (registry+https://github.com/rust-lang/crates.io-index)",
  "seed 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "wasm-bindgen 0.2.58 (registry+https://github.com/rust-lang/crates.io-index)",

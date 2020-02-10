@@ -55,6 +55,12 @@ module.exports = (env, argv) => {
         outDir: path.resolve(__dirname, "../crate/pkg")
       }),
 
+      // Compile Counter component.
+      new WasmPackPlugin({
+        crateDirectory: path.resolve(__dirname, "../components/counter"),
+        outDir: path.resolve(__dirname, "../components/counter/pkg")
+      }),
+
       // You can find files from folder `../static` on url `http://my-site.com/static/`.
       // And favicons in the root.
       new CopyWebpackPlugin([

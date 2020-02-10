@@ -13,6 +13,7 @@ use fixed_vec_deque::FixedVecDeque;
 use generated::css_classes::C;
 use seed::{prelude::*, *};
 use Visibility::*;
+use counter_component_interface;
 
 const TITLE_SUFFIX: &str = "Kavik.cz";
 // https://mailtolink.me/
@@ -22,6 +23,17 @@ const MAIL_TO_HELLWEB: &str =
 const USER_AGENT_FOR_PRERENDERING: &str = "ReactSnap";
 const STATIC_PATH: &str = "static";
 const IMAGES_PATH: &str = "static/images";
+
+// ------ ------
+//    Extern
+// ------ ------
+
+#[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_namespace = counter)]
+    fn new_counter() -> counter_component_interface::Id;
+}
+
 
 // ------ ------
 // Before Mount
@@ -59,6 +71,8 @@ pub struct Model {
     pub scroll_history: ScrollHistory,
     pub menu_visibility: Visibility,
     pub in_prerendering: bool,
+    counter_a: counter_component_interface::Id,
+    counter_b: counter_component_interface::Id,
 }
 
 // ------ Page ------
@@ -102,6 +116,8 @@ fn after_mount(url: Url, orders: &mut impl Orders<Msg>) -> AfterMount<Model> {
         scroll_history: ScrollHistory::new(),
         menu_visibility: Hidden,
         in_prerendering: is_in_prerendering(),
+        counter_a: new_counter(),
+        counter_b: new_counter(),
     };
 
     AfterMount::new(model).url_handling(UrlHandling::None)
@@ -156,6 +172,7 @@ pub enum Msg {
     Scrolled(i32),
     ToggleMenu,
     HideMenu,
+    NoOp,
 }
 
 pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
@@ -182,6 +199,7 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
         Msg::HideMenu => {
             model.menu_visibility = Hidden;
         },
+        Msg::NoOp => (),
     }
 }
 
@@ -205,7 +223,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
             C.flex_col,
         ],
         match model.page {
-            Page::Home => page::home::view().els(),
+            Page::Home => page::home::view(model).els(),
             Page::About => page::about::view().els(),
             Page::NotFound => page::not_found::view().els(),
         },

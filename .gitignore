@@ -9,3 +9,5 @@ crate/wasm-pack.log
 crate/src/generated/**
 !crate/src/generated/mod.rs
 !**/.keep
+
+components/counter/target
