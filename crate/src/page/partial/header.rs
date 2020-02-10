@@ -169,8 +169,8 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                 attrs! {
                                     At::Href => Page::Home.to_href()
                                 },
-                                simple_ev(Ev::Click, Msg::ScrollToTop),
-                                simple_ev(Ev::Click, Msg::HideMenu),
+                                ev(Ev::Click, |_| Msg::ScrollToTop),
+                                ev(Ev::Click, |_| Msg::HideMenu),
                                 "Home & Projects"
                             ]
                         ],
@@ -202,8 +202,8 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                 attrs! {
                                     At::Href => Page::About.to_href()
                                 },
-                                simple_ev(Ev::Click, Msg::ScrollToTop),
-                                simple_ev(Ev::Click, Msg::HideMenu),
+                                ev(Ev::Click, |_| Msg::ScrollToTop),
+                                ev(Ev::Click, |_| Msg::HideMenu),
                                 "About"
                             ]
                         ],
@@ -225,7 +225,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                 attrs! {
                                     At::Href => asset_path("Martin_Kavik_resume.pdf")
                                 },
-                                simple_ev(Ev::Click, Msg::HideMenu),
+                                ev(Ev::Click, |_| Msg::HideMenu),
                                 "Resume",
                                 span![class![C.text_gray_5,], ".pdf"]
                             ]
@@ -248,7 +248,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                 attrs! {
                                     At::Href => "https://github.com/MartinKavik"
                                 },
-                                simple_ev(Ev::Click, Msg::HideMenu),
+                                ev(Ev::Click, |_| Msg::HideMenu),
                                 "GitHub",
                                 img![
                                     class![
@@ -296,8 +296,8 @@ pub fn view(model: &Model) -> impl View<Msg> {
                         attrs! {
                             At::Href => Page::Home.to_href()
                         },
-                        simple_ev(Ev::Click, Msg::ScrollToTop),
-                        simple_ev(Ev::Click, Msg::HideMenu),
+                        ev(Ev::Click, |_| Msg::ScrollToTop),
+                        ev(Ev::Click, |_| Msg::HideMenu),
                         img![
                             class![
                                 C.h_6,
@@ -341,8 +341,8 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                 attrs! {
                                     At::Href => Page::Home.to_href()
                                 },
-                                simple_ev(Ev::Click, Msg::ScrollToTop),
-                                simple_ev(Ev::Click, Msg::HideMenu),
+                                ev(Ev::Click, |_| Msg::ScrollToTop),
+                                ev(Ev::Click, |_| Msg::HideMenu),
                                 "Home & Projects"
                             ]
                         ],
@@ -365,8 +365,8 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                 attrs! {
                                     At::Href => Page::About.to_href()
                                 },
-                                simple_ev(Ev::Click, Msg::ScrollToTop),
-                                simple_ev(Ev::Click, Msg::HideMenu),
+                                ev(Ev::Click, |_| Msg::ScrollToTop),
+                                ev(Ev::Click, |_| Msg::HideMenu),
                                 "About"
                             ]
                         ],
@@ -441,7 +441,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                             // md__
                             C.md__hidden,
                         ],
-                        simple_ev(Ev::Click, Msg::ToggleMenu),
+                        ev(Ev::Click, |_| Msg::ToggleMenu),
                         img![
                             id!("hamburger"),
                             class![

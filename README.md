@@ -55,7 +55,7 @@ I want to show you how to create, build and host your website for free, so we wi
 
    - [wasm-pack](https://rustwasm.github.io/wasm-pack/)
 
-     - Check: `$ wasm-pack -V` => `wasm-pack 0.8.1`
+     - Check: `$ wasm-pack -V` => `wasm-pack 0.9.1`
      - Install: `$ cargo install --force wasm-pack`
 
    - [cargo-make](https://sagiegurari.github.io/cargo-make/)

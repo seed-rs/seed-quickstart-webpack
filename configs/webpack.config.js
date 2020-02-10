@@ -11,6 +11,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env, argv) => {
   return {
+    performance: {
+        // Don't break compilation because of WASM file bigger than 244 KB.
+        hints: false
+    },
     entry: {
       // Bundle root with name `app.js`.
       app: path.resolve(__dirname, "../entries/index.ts")

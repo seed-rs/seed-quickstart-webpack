@@ -71,7 +71,7 @@ pub fn view() -> impl View<Msg> {
             ],
             div![
                 class![C.cursor_pointer, C.h_full, C.flex, C.items_center,],
-                simple_ev(Ev::Click, Msg::ScrollToTop),
+                ev(Ev::Click, |_| Msg::ScrollToTop),
                 img![
                     class![
                         C.mt_1, C.w_12, // sm__
