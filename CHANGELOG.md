@@ -2,9 +2,11 @@
 
 [UNRELEASED]
 
+[0.5.0]
+
 - `Seed` updated to `0.6.0`.
-- Delete unnecessary `optimize-wasm.js` script.
 - [BREAKING] `wasm-pack` > `0.9.0` required.
+- Deleted unnecessary `optimize-wasm.js` script.
 - Minor `lib.rs` changes - removed `Clone` constraint on `Msg` and `prerendered` variable is replaced with a `Model`'s property.
 - Added `wasm_bindgen_test_configure!(run_in_browser);` into `test.rs`.
 - Disabled performance hints in `webpack.config.js`.
