@@ -6,7 +6,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WasmPackPlugin = require("@wasm-tool/wasm-pack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const Critters = require('critters-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env, argv) => {
@@ -49,12 +48,6 @@ module.exports = (env, argv) => {
       // Add scripts, css, ... to html template.
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, "../entries/index.hbs")
-      }),
-      // Inline the critical part of styles, preload remainder.
-      new Critters({
-        logLevel: "warn",
-        // https://github.com/GoogleChromeLabs/critters/issues/34
-        pruneSource: false,
       }),
       // Compile Rust.
       new WasmPackPlugin({
