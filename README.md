@@ -8,6 +8,10 @@ And I like Rust and documentation.
 
 ---
 
+**!!! New Rust-only quickstart in development! => [Seeder](https://github.com/MartinKavik/seeder) !!!**
+
+---
+
 [**LIVE DEMO**: quickstart-webpack.seed-rs.org](https://quickstart-webpack.seed-rs.org)
 
 Main components:
