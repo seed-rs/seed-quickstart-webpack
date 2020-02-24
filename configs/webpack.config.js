@@ -19,6 +19,8 @@ module.exports = (env, argv) => {
       app: path.resolve(__dirname, "../entries/index.ts")
     },
     output: {
+      // Uncomment and modify it if your app should work on a non-root URL path. (Also edit `index.hbs`)
+      // publicPath: '/ui/',
       // You can deploy your site from this folder (after build with e.g. `yarn build:release`)
       path: dist,
       filename:'[name].[contenthash].js'
