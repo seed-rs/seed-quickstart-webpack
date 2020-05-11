@@ -6,6 +6,7 @@
 - Added and commented `base href` in `index.hbs` and `publicPath` in `webpack.config.js` to support non-root deploys.
 - Updated all JS dependencies.
 - App adapted to Seed 0.7.0.
+- Disable unnecessary error message on the overlay.
 
 [0.5.0]
 
