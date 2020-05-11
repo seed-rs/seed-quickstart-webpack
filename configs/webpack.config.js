@@ -33,7 +33,9 @@ module.exports = (env, argv) => {
       noInfo: true,
       stats: "errors-only",
       overlay: {
-        warnings: true,
+        // Commented to prevent error:
+        // `./crate/pkg/index_bg.js 382:14-53   Critical dependency: the request of a dependency is an expression`
+        // warnings: true,
         errors: true
       },
       historyApiFallback: true,
