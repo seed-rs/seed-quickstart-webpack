@@ -23,12 +23,38 @@ const USER_AGENT_FOR_PRERENDERING: &str = "ReactSnap";
 const STATIC_PATH: &str = "static";
 const IMAGES_PATH: &str = "static/images";
 
+const ABOUT: &str = "about";
+
 // ------ ------
-// Before Mount
+//     Init
 // ------ ------
 
-fn before_mount(_: Url) -> BeforeMount {
-    BeforeMount::new().mount_type(MountType::Takeover)
+fn init(url: Url, orders: &mut impl Orders<Msg>) -> Model {
+    orders
+        .subscribe(Msg::UrlChanged)
+        .subscribe(|subs::UrlRequested(url, request)| {
+            // Urls which start with `static` are files => treat them as external links.
+            if url.path().starts_with(&[STATIC_PATH.into()]) {
+                request.handled();
+            }
+        })
+        .stream(streams::window_event(Ev::Scroll, |_| Msg::Scrolled))
+        .send_msg(Msg::UpdatePageTitle);
+
+    Model {
+        base_url: url.to_base_url(),
+        page: Page::init(url),
+        scroll_history: ScrollHistory::new(),
+        menu_visibility: Hidden,
+        in_prerendering: is_in_prerendering(),
+    }
+}
+
+fn is_in_prerendering() -> bool {
+    let user_agent =
+        window().navigator().user_agent().expect("cannot get user agent");
+
+    user_agent == USER_AGENT_FOR_PRERENDERING
 }
 
 // ------ ------
@@ -55,6 +81,7 @@ impl Visibility {
 type ScrollHistory = FixedVecDeque<[i32; 3]>;
 
 pub struct Model {
+    pub base_url: Url,
     pub page: Page,
     pub scroll_history: ScrollHistory,
     pub menu_visibility: Visibility,
@@ -71,78 +98,27 @@ pub enum Page {
 }
 
 impl Page {
-    pub fn to_href(self) -> &'static str {
-        match self {
-            Self::Home => "/",
-            Self::About => "/about",
-            Self::NotFound => "/404",
-        }
-    }
-}
-
-impl From<Url> for Page {
-    fn from(url: Url) -> Self {
-        match url.path.first().map(String::as_str) {
-            None | Some("") => Self::Home,
-            Some("about") => Self::About,
+    pub fn init(mut url: Url) -> Self {
+        match url.remaining_path_parts().as_slice() {
+            [] => Self::Home,
+            [ABOUT] => Self::About,
             _ => Self::NotFound,
         }
     }
 }
 
 // ------ ------
-//  After Mount
+//     Urls
 // ------ ------
 
-fn after_mount(url: Url, orders: &mut impl Orders<Msg>) -> AfterMount<Model> {
-    orders.send_msg(Msg::UpdatePageTitle);
-
-    let model = Model {
-        page: url.into(),
-        scroll_history: ScrollHistory::new(),
-        menu_visibility: Hidden,
-        in_prerendering: is_in_prerendering(),
-    };
-
-    AfterMount::new(model).url_handling(UrlHandling::None)
-}
-
-fn is_in_prerendering() -> bool {
-    let user_agent =
-        window().navigator().user_agent().expect("cannot get user agent");
-
-    user_agent == USER_AGENT_FOR_PRERENDERING
-}
-
-// ------ ------
-//    Routes
-// ------ ------
-
-pub fn routes(url: Url) -> Option<Msg> {
-    // Urls which start with `static` are files => treat them as external links.
-    if url.path.starts_with(&[STATIC_PATH.into()]) {
-        return None;
+struct_urls!();
+impl<'a> Urls<'a> {
+    pub fn home(self) -> Url {
+        self.base_url()
     }
-    Some(Msg::RouteChanged(url))
-}
-
-// ------ ------
-// Window Events
-// ------ ------
-
-pub fn window_events(_: &Model) -> Vec<EventHandler<Msg>> {
-    vec![ev(Ev::Scroll, |_| {
-        // Some browsers use `document.body.scrollTop`
-        // and other ones `document.documentElement.scrollTop`.
-        let mut position = body().scroll_top();
-        if position == 0 {
-            position = document()
-                .document_element()
-                .expect("cannot get document element")
-                .scroll_top()
-        }
-        Msg::Scrolled(position)
-    })]
+    pub fn about(self) -> Url {
+        self.base_url().add_path_part(ABOUT)
+    }
 }
 
 // ------ ------
@@ -150,18 +126,18 @@ pub fn window_events(_: &Model) -> Vec<EventHandler<Msg>> {
 // ------ ------
 
 pub enum Msg {
-    RouteChanged(Url),
+    UrlChanged(subs::UrlChanged),
     UpdatePageTitle,
     ScrollToTop,
-    Scrolled(i32),
+    Scrolled,
     ToggleMenu,
     HideMenu,
 }
 
 pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
     match msg {
-        Msg::RouteChanged(url) => {
-            model.page = url.into();
+        Msg::UrlChanged(subs::UrlChanged(url)) => {
+            model.page = Page::init(url);
             orders.send_msg(Msg::UpdatePageTitle);
         },
         Msg::UpdatePageTitle => {
@@ -175,7 +151,16 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
         Msg::ScrollToTop => window().scroll_to_with_scroll_to_options(
             web_sys::ScrollToOptions::new().top(0.),
         ),
-        Msg::Scrolled(position) => {
+        Msg::Scrolled => {
+            // Some browsers use `document.body.scrollTop`
+            // and other ones `document.documentElement.scrollTop`.
+            let mut position = body().scroll_top();
+            if position == 0 {
+                position = document()
+                    .document_element()
+                    .expect("get document element")
+                    .scroll_top()
+            }
             *model.scroll_history.push_back() = position;
         },
         Msg::ToggleMenu => model.menu_visibility.toggle(),
@@ -196,7 +181,7 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
 // - "▶\u{fe0e}" - \u{fe0e} is the variation selector, it prevents ▶ to change to emoji in some browsers
 //   - https://codepoints.net/U+FE0E
 
-pub fn view(model: &Model) -> impl View<Msg> {
+pub fn view(model: &Model) -> impl IntoNodes<Msg> {
     div![
         class![
             C.fade_in => !model.in_prerendering,
@@ -205,12 +190,12 @@ pub fn view(model: &Model) -> impl View<Msg> {
             C.flex_col,
         ],
         match model.page {
-            Page::Home => page::home::view().els(),
-            Page::About => page::about::view().els(),
-            Page::NotFound => page::not_found::view().els(),
+            Page::Home => page::home::view(&model.base_url),
+            Page::About => page::about::view(),
+            Page::NotFound => page::not_found::view(),
         },
-        page::partial::header::view(model).els(),
-        page::partial::footer::view().els(),
+        page::partial::header::view(model),
+        page::partial::footer::view(),
     ]
 }
 
@@ -230,12 +215,7 @@ pub fn asset_path(asset: &str) -> String {
 pub fn run() {
     log!("Starting app...");
 
-    App::builder(update, view)
-        .before_mount(before_mount)
-        .after_mount(after_mount)
-        .routes(routes)
-        .window_events(window_events)
-        .build_and_start();
+    App::start("app", init, update, view);
 
     log!("App started.");
 }

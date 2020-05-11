@@ -3,6 +3,7 @@ use crate::{
     generated::css_classes::C,
     image_src, Model, Msg, Page, ScrollHistory,
     Visibility::{self, *},
+    Urls,
 };
 use seed::{prelude::*, *};
 
@@ -23,7 +24,7 @@ fn header_visibility(
 }
 
 #[allow(clippy::too_many_lines)]
-pub fn view(model: &Model) -> impl View<Msg> {
+pub fn view(model: &Model) -> Vec<Node<Msg>> {
     let show_header =
         header_visibility(model.menu_visibility, &model.scroll_history)
             == Visible;
@@ -167,7 +168,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                     C.py_6,
                                 ],
                                 attrs! {
-                                    At::Href => Page::Home.to_href()
+                                    At::Href => Urls::new(&model.base_url).home()
                                 },
                                 ev(Ev::Click, |_| Msg::ScrollToTop),
                                 ev(Ev::Click, |_| Msg::HideMenu),
@@ -200,7 +201,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                     C.py_6,
                                 ],
                                 attrs! {
-                                    At::Href => Page::About.to_href()
+                                    At::Href => Urls::new(&model.base_url).about()
                                 },
                                 ev(Ev::Click, |_| Msg::ScrollToTop),
                                 ev(Ev::Click, |_| Msg::HideMenu),
@@ -294,7 +295,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                     // Logo
                     a![
                         attrs! {
-                            At::Href => Page::Home.to_href()
+                            At::Href => Urls::new(&model.base_url).home()
                         },
                         ev(Ev::Click, |_| Msg::ScrollToTop),
                         ev(Ev::Click, |_| Msg::HideMenu),
@@ -339,7 +340,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                     C.sm__outline_none,
                                 ],
                                 attrs! {
-                                    At::Href => Page::Home.to_href()
+                                    At::Href => Urls::new(&model.base_url).home()
                                 },
                                 ev(Ev::Click, |_| Msg::ScrollToTop),
                                 ev(Ev::Click, |_| Msg::HideMenu),
@@ -363,7 +364,7 @@ pub fn view(model: &Model) -> impl View<Msg> {
                                     C.sm__outline_none,
                                 ],
                                 attrs! {
-                                    At::Href => Page::About.to_href()
+                                    At::Href => Urls::new(&model.base_url).about()
                                 },
                                 ev(Ev::Click, |_| Msg::ScrollToTop),
                                 ev(Ev::Click, |_| Msg::HideMenu),

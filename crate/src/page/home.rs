@@ -1,11 +1,11 @@
 use crate::{
-    generated::css_classes::C, image_src, Msg, Page, MAIL_TO_HELLWEB,
+    generated::css_classes::C, image_src, Msg, MAIL_TO_HELLWEB, Urls,
     MAIL_TO_KAVIK,
 };
 use seed::{prelude::*, *};
 
 #[allow(clippy::too_many_lines)]
-pub fn view() -> impl View<Msg> {
+pub fn view(base_url: &Url) -> Node<Msg> {
     div![
         class![
             C.flex_grow,
@@ -1548,7 +1548,7 @@ pub fn view() -> impl View<Msg> {
                     // About your new developer
                     a![
                         attrs!{
-                            At::Href => Page::About.to_href()
+                            At::Href => Urls::new(base_url).about()
                         },
                         class![
                             C.block,
