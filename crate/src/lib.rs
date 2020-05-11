@@ -32,12 +32,6 @@ const ABOUT: &str = "about";
 fn init(url: Url, orders: &mut impl Orders<Msg>) -> Model {
     orders
         .subscribe(Msg::UrlChanged)
-        .subscribe(|subs::UrlRequested(url, request)| {
-            // Urls which start with `static` are files => treat them as external links.
-            if url.path().starts_with(&[STATIC_PATH.into()]) {
-                request.handled();
-            }
-        })
         .stream(streams::window_event(Ev::Scroll, |_| Msg::Scrolled))
         .send_msg(Msg::UpdatePageTitle);
 
