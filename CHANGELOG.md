@@ -2,6 +2,9 @@
 
 [UNRELEASED]
 
+- Updated all JS dependencies.
+- Added and commented `base href` in `index.hbs` and `publicPath` in `webpack.config.js` to support non-root deploys.
+
 [0.5.0]
 
 - `Seed` updated to `0.6.0`.
