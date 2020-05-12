@@ -19,8 +19,8 @@ module.exports = (env, argv) => {
       app: path.resolve(__dirname, "../entries/index.ts")
     },
     output: {
-      // Uncomment and modify it if your app should work on a non-root URL path. (Also edit `index.hbs`)
-      // publicPath: '/ui/',
+      // You can change it to e.g. `/ui/`, but also edit `historyApiFallback` below and `<base href..`> in `index.hbs`.
+      publicPath: '/',
       // You can deploy your site from this folder (after build with e.g. `yarn build:release`)
       path: dist,
       filename:'[name].[contenthash].js'
@@ -30,6 +30,10 @@ module.exports = (env, argv) => {
       // You can connect to dev server from devices in your network (e.g. 192.168.0.3:8000).
       host: "0.0.0.0",
       port: 8000,
+      // Route everything to index to support SPA. It should be the same like `publicPath` above.
+      historyApiFallback: {
+        index: '/'
+      },
       noInfo: true,
       stats: "errors-only",
       overlay: {
@@ -38,7 +42,6 @@ module.exports = (env, argv) => {
         // warnings: true,
         errors: true
       },
-      historyApiFallback: true,
     },
     plugins: [
       // Show compilation progress bar in console.

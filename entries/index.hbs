@@ -3,12 +3,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {{!-- Uncomment and modify it if your app should work on a non-root URL path. (Also edit `webpack.config.js`) --}}
-    {{!-- <base href="/ui/"> --}}
+    {{!-- 
+      You can change it to e.g. `/ui/`, 
+      but also edit values `publicPath` and `historyApiFallback` in`webpack.config.js`.
+    --}}
+    <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     {{> social_media}}
     {{> favicons}}
-    {{> head_scripts}}
   </head>
   <body class="fade-in font-body text-18 bg-gray-1 overflow-x-hidden w-screen relative sm:text-26 lg:text-45">
     <section id="app" class="overflow-x-hidden w-screen relative">
