@@ -6,12 +6,12 @@ use seed::{prelude::*, *};
 #[allow(clippy::too_many_lines)]
 pub fn view() -> Node<Msg> {
     div![
-        class![
+        C![
             C.flex_grow,
         ],
         // Photo section
         section![
-            class![
+            C![
                 C.w_screen,
                 C.h_690px,
                 C.bg_blue_10,
@@ -22,7 +22,7 @@ pub fn view() -> Node<Msg> {
             ],
             // Small photo background container
             div![
-                class![
+                C![
                     C.absolute,
                     C.top_0,
                     C.inset_x_0,
@@ -33,7 +33,7 @@ pub fn view() -> Node<Msg> {
                 ],
                 // Small photo background
                 div![
-                    class![
+                    C![
                         C.w_xs,
                         C.h_300px,
                         C.bg_gray_1,
@@ -42,7 +42,7 @@ pub fn view() -> Node<Msg> {
             ],
             // Large photo background
             div![
-                class![
+                C![
                     C.absolute,
                     C.top_0,
                     C.inset_x_0,
@@ -58,7 +58,7 @@ pub fn view() -> Node<Msg> {
             ],
             // Gear
             img![
-                class![
+                C![
                     C.absolute
                     C.left_full,
                     C._ml_40,
@@ -76,7 +76,7 @@ pub fn view() -> Node<Msg> {
         ],
         // Developer section
         section![
-            class![
+            C![
                 C.relative,
                 C._mt_260px,
                 C.rounded_tr_140px,
@@ -87,7 +87,7 @@ pub fn view() -> Node<Msg> {
                 C.lg__rounded_tr_330px,
             ],
             div![
-                class![
+                C![
                     C.relative,
                     C.mx_auto,
                     C.max_w_400,
@@ -97,7 +97,7 @@ pub fn view() -> Node<Msg> {
                 ],
                 // Right background
                 div![
-                    class![
+                    C![
                         C.absolute,
                         C.right_0,
                         C.inset_y_0,
@@ -111,7 +111,7 @@ pub fn view() -> Node<Msg> {
                 ],
                 // Extended background
                 div![
-                    class![
+                    C![
                         C.absolute,
                         C._right_50vw,
                         C.inset_y_0,
@@ -121,7 +121,7 @@ pub fn view() -> Node<Msg> {
                 ],
                 // I, developer
                 h2![
-                    class![
+                    C![
                         C.relative,
                         C.mb_16,
                         C.pt_32,
@@ -142,12 +142,12 @@ pub fn view() -> Node<Msg> {
                     "I, developer"
                 ],
                 ul![
-                    class![
+                    C![
                         C.relative,
                         C.text_gray_8,
                     ],
                     li![
-                        class![
+                        C![
                             C.w_76,
                             C.pl_2,
                             C.pr_5,
@@ -165,7 +165,7 @@ pub fn view() -> Node<Msg> {
                             C.lg__w_236,
                         ],
                         div![
-                            class![
+                            C![
                                 C.text_blue_6,
                                 C.mr_1,
                                 // sm__
@@ -178,7 +178,7 @@ pub fn view() -> Node<Msg> {
                         div![
                             "I was working as a ",
                             span![
-                                class![
+                                C![
                                     C.font_bold,
                                 ],
                                 "backend"
@@ -187,12 +187,12 @@ pub fn view() -> Node<Msg> {
                         ]
                     ],
                     li![
-                        class![
+                        C![
                             C.flex,
                             C.justify_end
                         ],
                         div![
-                            class![
+                            C![
                                 C.w_76,
                                 C.pl_2,
                                 C.pr_5,
@@ -210,7 +210,7 @@ pub fn view() -> Node<Msg> {
                                 C.lg__w_236,
                             ],
                             div![
-                                class![
+                                C![
                                     C.text_blue_6,
                                     C.mr_1,
                                     // sm__
@@ -223,14 +223,14 @@ pub fn view() -> Node<Msg> {
                             div![
                                 "I'm also coming back to ",
                                 span![
-                                    class![
+                                    C![
                                         C.font_bold,
                                     ],
                                     "frontend"
                                 ],
                                 " because it's finally possible to write reliable web apps. And I want to make more use of my ",
                                 span![
-                                    class![
+                                    C![
                                         C.font_bold,
                                     ],
                                     "artistic"
@@ -240,7 +240,7 @@ pub fn view() -> Node<Msg> {
                         ]
                     ],
                     li![
-                        class![
+                        C![
                             C.w_76,
                             C.pl_2,
                             C.pr_4,
@@ -259,7 +259,7 @@ pub fn view() -> Node<Msg> {
                             C.lg__w_236,
                         ],
                         div![
-                            class![
+                            C![
                                 C.text_blue_6,
                                 C.mr_1,
                                 // sm__
@@ -274,14 +274,14 @@ pub fn view() -> Node<Msg> {
                             br![],
                             "That's why I setup linters, formatters and CI pipelines as ",
                             span![
-                                class![
+                                C![
                                     C.font_bold,
                                 ],
                                 "strict"
                             ],
                             " as possible and I want to write in ",
                             span![
-                                class![
+                                C![
                                     C.font_bold,
                                 ],
                                 "Rust"
@@ -292,12 +292,12 @@ pub fn view() -> Node<Msg> {
                         ]
                     ],
                     li![
-                        class![
+                        C![
                             C.flex,
                             C.justify_end
                         ],
                         div![
-                            class![
+                            C![
                                 C.w_76,
                                 C.pl_2,
                                 C.pr_5,
@@ -315,7 +315,7 @@ pub fn view() -> Node<Msg> {
                                 C.lg__w_236,
                             ],
                             div![
-                                class![
+                                C![
                                     C.text_blue_6,
                                     C.mr_1,
                                     // sm__
@@ -331,7 +331,7 @@ pub fn view() -> Node<Msg> {
                                     attrs!{
                                         At::Href => "https://www.packtpub.com/"
                                     },
-                                    class![
+                                    C![
                                         C.underline,
                                         C.underline_yellow_7
                                     ],
@@ -344,7 +344,7 @@ pub fn view() -> Node<Msg> {
                                     attrs!{
                                         At::Href => "https://fsharpforfunandprofit.com/books/"
                                     },
-                                    class![
+                                    C![
                                         C.underline,
                                         C.underline_yellow_7
                                     ],
@@ -359,7 +359,7 @@ pub fn view() -> Node<Msg> {
         ],
         // Designer section
         section![
-            class![
+            C![
                 C.relative,
                 C._mt_260px,
                 C.h_1160px,
@@ -375,7 +375,7 @@ pub fn view() -> Node<Msg> {
             ],
             // Circles
             div![
-                class![
+                C![
                     C.absolute,
                     C.left_1of2,
                     C._mt_12,
@@ -393,7 +393,7 @@ pub fn view() -> Node<Msg> {
                     C.lg__h_2330px,
                 ],
                 div![
-                    class![
+                    C![
                         C.absolute,
                         C.left_0,
                         C.bottom_0,
@@ -411,7 +411,7 @@ pub fn view() -> Node<Msg> {
                     ]
                 ],
                 div![
-                    class![
+                    C![
                         C.absolute,
                         C.right_0,
                         C.top_0,
@@ -431,7 +431,7 @@ pub fn view() -> Node<Msg> {
             ],
             // I, designer
             div![
-                class![
+                C![
                     C.relative,
                     C.mt_32,
                     C.h_24,
@@ -447,7 +447,7 @@ pub fn view() -> Node<Msg> {
                     C.lg__h_56,
                 ],
                 h2![
-                    class![
+                    C![
                         C.text_center,
                         C.font_display,
                         C.font_semibold,
@@ -462,7 +462,7 @@ pub fn view() -> Node<Msg> {
                 ],
             ],
             ul![
-                class![
+                C![
                     C.relative,
                     C.mt_16,
                     C.max_w_md,
@@ -483,7 +483,7 @@ pub fn view() -> Node<Msg> {
                     C.lg__pr_12,
                 ],
                 li![
-                    class![
+                    C![
                         C.w_76,
                         C.flex,
                         C.flex_no_wrap
@@ -493,7 +493,7 @@ pub fn view() -> Node<Msg> {
                         C.lg__w_236,
                     ],
                     div![
-                        class![
+                        C![
                             C.text_yellow_4,
                             C.mr_1,
                             // sm__
@@ -506,7 +506,7 @@ pub fn view() -> Node<Msg> {
                     div![
                         "I've designed logos, my resume and this website in ",
                         span![
-                            class![
+                            C![
                                 C.font_bold,
                             ],
                             "Affinity Designer"
@@ -515,12 +515,12 @@ pub fn view() -> Node<Msg> {
                     ]
                 ],
                 li![
-                    class![
+                    C![
                         C.flex,
                         C.justify_end,
                     ],
                     div![
-                        class![
+                        C![
                             C.mt_16,
                             C.ml_5,
                             C.w_64,
@@ -536,7 +536,7 @@ pub fn view() -> Node<Msg> {
                             C.lg__w_236,
                         ],
                         div![
-                            class![
+                            C![
                                 C.text_yellow_4,
                                 C.mr_1,
                                 // sm__
@@ -549,7 +549,7 @@ pub fn view() -> Node<Msg> {
                         div![
                             "I'll use ",
                             span![
-                                class![
+                                C![
                                     C.font_bold,
                                 ],
                                 "Figma"
@@ -559,7 +559,7 @@ pub fn view() -> Node<Msg> {
                     ]
                 ],
                 li![
-                    class![
+                    C![
                         C.mt_16,
                         C.w_76,
                         C.flex,
@@ -572,7 +572,7 @@ pub fn view() -> Node<Msg> {
                         C.lg__w_236,
                     ],
                     div![
-                        class![
+                        C![
                             C.text_yellow_4,
                             C.mr_1,
                             // sm__
@@ -585,21 +585,21 @@ pub fn view() -> Node<Msg> {
                     div![
                         "I have some experience with ",
                         span![
-                            class![
+                            C![
                                 C.font_bold,
                             ],
                             "Adobe XD"
                         ],
                         ", ",
                         span![
-                            class![
+                            C![
                                 C.font_bold,
                             ],
                             "Krita"
                         ],
                         " and ",
                         span![
-                            class![
+                            C![
                                 C.font_bold,
                             ],
                             "Rhino3D"
@@ -608,12 +608,12 @@ pub fn view() -> Node<Msg> {
                     ]
                 ],
                 li![
-                    class![
+                    C![
                         C.flex,
                         C.justify_end,
                     ],
                     div![
-                        class![
+                        C![
                             C.mt_16,
                             C.ml_6,
                             C.w_76,
@@ -629,7 +629,7 @@ pub fn view() -> Node<Msg> {
                             C.lg__w_236,
                         ],
                         div![
-                            class![
+                            C![
                                 C.text_yellow_4,
                                 C.mr_1,
                                 // sm__
@@ -645,7 +645,7 @@ pub fn view() -> Node<Msg> {
                                 attrs!{
                                     At::Href => "https://refactoringui.com/"
                                 },
-                                class![
+                                C![
                                     C.underline,
                                     C.underline_yellow_7
                                 ],
@@ -656,7 +656,7 @@ pub fn view() -> Node<Msg> {
                                 attrs!{
                                     At::Href => "https://tailwindcss.com/"
                                 },
-                                class![
+                                C![
                                     C.underline,
                                     C.underline_yellow_7
                                 ],
@@ -670,7 +670,7 @@ pub fn view() -> Node<Msg> {
         ],
         // Human section
         section![
-            class![
+            C![
                 C.relative,
                 C._mt_260px,
                 C.h_1580px,
@@ -689,7 +689,7 @@ pub fn view() -> Node<Msg> {
             ],
             // I, human
             h2![
-                class![
+                C![
                     C.mt_24,
                     C.font_ordinary,
                     C.font_bold,
@@ -706,7 +706,7 @@ pub fn view() -> Node<Msg> {
             ],
             // Personal life
             div![
-                class![
+                C![
                     C.relative,
                     C.mt_20,
                     C.pt_3,
@@ -724,7 +724,7 @@ pub fn view() -> Node<Msg> {
                 ],
                 // Extended background
                 div![
-                    class![
+                    C![
                         C.absolute,
                         C.left_0,
                         C.inset_y_0,
@@ -735,7 +735,7 @@ pub fn view() -> Node<Msg> {
                 ],
                 // Content container
                 div![
-                    class![
+                    C![
                         C.w_xs,
                         C.relative,
                         // sm__
@@ -744,7 +744,7 @@ pub fn view() -> Node<Msg> {
                         C.lg__w_236,
                     ],
                     h3![
-                        class![
+                        C![
                             C.ml_8,
                             C.mt_8,
                             C.font_display,
@@ -761,7 +761,7 @@ pub fn view() -> Node<Msg> {
                         "Personal life"
                     ],
                     ul![
-                        class![
+                        C![
                             C.mt_8,
                             C.ml_1,
                             C.text_blue_1,
@@ -771,12 +771,12 @@ pub fn view() -> Node<Msg> {
                             C.lg__mt_24,
                         ],
                         li![
-                            class![
+                            C![
                                 C.flex,
                                 C.flex_no_wrap
                             ],
                             div![
-                                class![
+                                C![
                                     C.text_yellow_4,
                                     C.mr_1,
                                     // sm__
@@ -789,7 +789,7 @@ pub fn view() -> Node<Msg> {
                             div![
                                 "I'm INTJ. When I'm not ",
                                 span![
-                                    class![
+                                    C![
                                         C.font_bold,
                                     ],
                                     "creating"
@@ -798,7 +798,7 @@ pub fn view() -> Node<Msg> {
                             ]
                         ],
                         li![
-                            class![
+                            C![
                                 C.mt_10,
                                 C.flex,
                                 C.flex_no_wrap,
@@ -808,7 +808,7 @@ pub fn view() -> Node<Msg> {
                                 C.lg__mt_24,
                             ],
                             div![
-                                class![
+                                C![
                                     C.text_yellow_4,
                                     C.mr_1,
                                     // sm__
@@ -827,7 +827,7 @@ pub fn view() -> Node<Msg> {
             ],
             // Work life
             div![
-                class![
+                C![
                     C.relative,
                     C.mt_12,
                     C.pt_3,
@@ -845,7 +845,7 @@ pub fn view() -> Node<Msg> {
                 ],
                 // Extended background
                 div![
-                    class![
+                    C![
                         C.absolute,
                         C._right_50vw,
                         C.inset_y_0,
@@ -855,7 +855,7 @@ pub fn view() -> Node<Msg> {
                 ],
                 // Content container
                 div![
-                    class![
+                    C![
                         C.relative,
                         C.w_xs,
                         // sm__
@@ -864,7 +864,7 @@ pub fn view() -> Node<Msg> {
                         C.lg__w_236,
                     ],
                     h3![
-                        class![
+                        C![
                             C.mt_8,
                             C.mr_8,
                             C.text_right,
@@ -882,7 +882,7 @@ pub fn view() -> Node<Msg> {
                         "Work life"
                     ],
                     ul![
-                        class![
+                        C![
                             C.mt_8,
                             C.ml_1,
                             C.text_blue_1,
@@ -892,12 +892,12 @@ pub fn view() -> Node<Msg> {
                             C.lg__mt_24,
                         ],
                         li![
-                            class![
+                            C![
                                 C.flex,
                                 C.flex_no_wrap
                             ],
                             div![
-                                class![
+                                C![
                                     C.text_yellow_4,
                                     C.mr_1,
                                     // sm__
@@ -910,14 +910,14 @@ pub fn view() -> Node<Msg> {
                             div![
                                 "I'm ",
                                 span![
-                                    class![
+                                    C![
                                         C.font_bold,
                                     ],
                                     "more productive"
                                 ],
                                 " when I'm working ",
                                 span![
-                                    class![
+                                    C![
                                         C.font_bold,
                                     ],
                                     "remotely"
@@ -926,7 +926,7 @@ pub fn view() -> Node<Msg> {
                             ]
                         ],
                         li![
-                            class![
+                            C![
                                 C.mt_10,
                                 C.flex,
                                 C.flex_no_wrap,
@@ -936,7 +936,7 @@ pub fn view() -> Node<Msg> {
                                 C.lg__mt_24,
                             ],
                             div![
-                                class![
+                                C![
                                     C.text_yellow_4,
                                     C.mr_1,
                                     // sm__
@@ -949,7 +949,7 @@ pub fn view() -> Node<Msg> {
                             div![
                                 "I like to ",
                                 span![
-                                    class![
+                                    C![
                                         C.font_bold,
                                     ],
                                     "help"
@@ -958,7 +958,7 @@ pub fn view() -> Node<Msg> {
                             ]
                         ],
                         li![
-                            class![
+                            C![
                                 C.mt_10,
                                 C.flex,
                                 C.flex_no_wrap,
@@ -968,7 +968,7 @@ pub fn view() -> Node<Msg> {
                                 C.lg__mt_24,
                             ],
                             div![
-                                class![
+                                C![
                                     C.text_yellow_4,
                                     C.mr_1,
                                     // sm__
@@ -986,7 +986,7 @@ pub fn view() -> Node<Msg> {
                                     attrs!{
                                         At::Href => "https://medium.com/@jsonpify/you-dont-need-standup-9a74782517c1"
                                     },
-                                    class![
+                                    C![
                                         C.underline,
                                         C.underline_yellow_7
                                     ],
@@ -1001,7 +1001,7 @@ pub fn view() -> Node<Msg> {
         ],
         // Did you know section
         section![
-            class![
+            C![
                 C.relative,
                 C._mt_260px,
                 C.h_580px,
@@ -1019,7 +1019,7 @@ pub fn view() -> Node<Msg> {
                 C.lg__rounded_tr_330px,
             ],
             h2![
-                class![
+                C![
                     C.mt_32,
                     C.mb_16,
                     C.font_display,
@@ -1038,7 +1038,7 @@ pub fn view() -> Node<Msg> {
                 "Did you know..."
             ],
             ul![
-                class![
+                C![
                     C.ml_12,
                     C.w_xs,
                     C.text_gray_8,
@@ -1049,12 +1049,12 @@ pub fn view() -> Node<Msg> {
                     C.lg__w_236,
                 ],
                 li![
-                    class![
+                    C![
                         C.flex,
                         C.flex_no_wrap
                     ],
                     div![
-                        class![
+                        C![
                             C.text_blue_6,
                             C.mr_1,
                             // sm__
@@ -1069,7 +1069,7 @@ pub fn view() -> Node<Msg> {
                     ]
                 ],
                 li![
-                    class![
+                    C![
                         C.mt_10,
                         C.flex,
                         C.flex_no_wrap
@@ -1079,7 +1079,7 @@ pub fn view() -> Node<Msg> {
                         C.lg__mt_32
                     ],
                     div![
-                        class![
+                        C![
                             C.text_blue_6,
                             C.mr_1,
                             // sm__
@@ -1099,7 +1099,7 @@ pub fn view() -> Node<Msg> {
         ],
         // Want to meet section
         section![
-            class![
+            C![
                 C.relative,
                 C.h_690px,
                 C.bg_blue_10,
@@ -1114,7 +1114,7 @@ pub fn view() -> Node<Msg> {
                 C.lg__rounded_br_330px,
             ],
             div![
-                class![
+                C![
                     C.relative,
                     C._mt_6,
                     C.flex,
@@ -1125,7 +1125,7 @@ pub fn view() -> Node<Msg> {
                     C.lg___mt_20
                 ],
                 img![
-                    class![
+                    C![
                         C.relative,
                         C.block,
                         C.ml_10vw,
@@ -1143,7 +1143,7 @@ pub fn view() -> Node<Msg> {
                 ],
             ],
             ul![
-                class![
+                C![
                     C.mt_16,
                     C.w_xs,
                     C.text_blue_1,
@@ -1157,12 +1157,12 @@ pub fn view() -> Node<Msg> {
                     C.lg__pl_6
                 ],
                 li![
-                    class![
+                    C![
                         C.flex,
                         C.flex_no_wrap
                     ],
                     div![
-                        class![
+                        C![
                             C.text_yellow_4,
                             C.mr_1,
                             // sm__
@@ -1175,7 +1175,7 @@ pub fn view() -> Node<Msg> {
                     div![
                         "Want to meet somewhere in ",
                         span![
-                            class![
+                            C![
                                 C.font_bold
                             ],
                             "Prague"
@@ -1187,7 +1187,7 @@ pub fn view() -> Node<Msg> {
                             attrs!{
                                 At::Href => MAIL_TO_KAVIK,
                             },
-                            class![
+                            C![
                                 C.underline,
                                 C.underline_yellow_7,
                             ],
@@ -1199,7 +1199,7 @@ pub fn view() -> Node<Msg> {
         ],
         // Resume section
         section![
-            class![
+            C![
                 C.flex,
                 C.flex_col,
                 C.justify_center,
@@ -1210,7 +1210,7 @@ pub fn view() -> Node<Msg> {
                 attrs!{
                     At::Href => asset_path("Martin_Kavik_resume.pdf")
                 },
-                class![
+                C![
                     C.mt_24,
                     C.text_19,
                     C.text_gray_10,
@@ -1226,20 +1226,20 @@ pub fn view() -> Node<Msg> {
                 ],
                 "Download my\u{00A0}",
                 span![
-                    class![
+                    C![
                         C.font_semibold
                     ],
                     "Resume"
                 ],
                 span![
-                    class![
+                    C![
                         C.font_semibold,
                         C.text_gray_5
                     ],
                     ".pdf"
                 ],
                 img![
-                    class![
+                    C![
                         C._mt_1,
                         C.ml_1,
                         C.w_12,
@@ -1259,7 +1259,7 @@ pub fn view() -> Node<Msg> {
                 attrs!{
                     At::Href => "https://github.com/MartinKavik"
                 },
-                class![
+                C![
                     C.mt_16,
                     C.mb_20,
                     C.flex,
@@ -1279,14 +1279,14 @@ pub fn view() -> Node<Msg> {
                 ],
                 "Go to my\u{00A0}",
                 span![
-                    class![
+                    C![
                         C.font_semibold
                     ],
                     "GitHub"
                 ],
                 "\u{00A0}profile",
                 img![
-                    class![
+                    C![
                         C._mt_4,
                         C.w_4,
                         // sm__

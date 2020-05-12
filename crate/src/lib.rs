@@ -177,8 +177,8 @@ pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
 
 pub fn view(model: &Model) -> impl IntoNodes<Msg> {
     div![
-        class![
-            C.fade_in => !model.in_prerendering,
+        C![
+            IF!(not(model.in_prerendering) => C.fade_in),
             C.min_h_screen,
             C.flex,
             C.flex_col,
@@ -196,6 +196,7 @@ pub fn view(model: &Model) -> impl IntoNodes<Msg> {
 pub fn image_src(image: &str) -> String {
     format!("{}/{}", IMAGES_PATH, image)
 }
+
 
 pub fn asset_path(asset: &str) -> String {
     format!("{}/{}", STATIC_PATH, asset)

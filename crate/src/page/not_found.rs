@@ -3,7 +3,7 @@ use seed::{prelude::*, *};
 
 pub fn view() -> Node<Msg> {
     div![
-        class![
+        C![
             C.mt_16,
             C.flex_grow,
             C.flex,
@@ -14,7 +14,7 @@ pub fn view() -> Node<Msg> {
             C.sm__mt_24,
         ],
         h1![
-            class![
+            C![
                 C.font_display,
                 C.font_thin,
                 C.text_29,
@@ -28,7 +28,7 @@ pub fn view() -> Node<Msg> {
         ],
         // Sad mouth
         svg![
-            class![
+            C![
                 C.mt_5, C.w_16, // sm__
                 C.sm__mt_6, C.sm__w_20, // lg__
                 C.lg__mt_8, C.lg__w_24,
