@@ -7,12 +7,12 @@ use seed::{prelude::*, *};
 #[allow(clippy::too_many_lines)]
 pub fn view(base_url: &Url) -> Node<Msg> {
     div![
-        class![
+        C![
             C.flex_grow,
         ],
         // Main section
         section![
-            class![
+            C![
                 C.relative,
                 C.h_690px,
                 C.bg_gray_1,
@@ -23,7 +23,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
             ],
             // Left background
             div![
-                class![
+                C![
                     C.absolute,
                     C.left_0,
                     C.inset_y_0,
@@ -32,14 +32,14 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                 ]
             ],
             div![
-                class![
+                C![
                     C.relative,
                     C.flex,
                     C.justify_center,
                 ],
                 // Martin Kavík container
                 div![
-                    class![
+                    C![
                         C.h_360px,
                         C.rounded_bl_90px,
                         C.bg_gray_1,
@@ -51,7 +51,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                     ],
                     // Martin Kavík
                     div![
-                        class![
+                        C![
                             C.mt_40,
                             C.ml_12,
                             C.w_xs,
@@ -66,7 +66,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             C.lg__w_216,
                         ],
                         h1![
-                            class![
+                            C![
                                 C.inline,
                                 C.leading_tight,
                                 C.text_31,
@@ -81,14 +81,14 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                 "Martin "
                             ],
                             span![
-                                class![
+                                C![
                                     C.font_bold
                                 ],
                                 "Kavík"
                             ],
                         ],
                         span![
-                            class![
+                            C![
                                 C.text_21,
                                 C.text_gray_7,
                                 // sm__
@@ -109,7 +109,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
             ],
             // Gear
             img![
-                class![
+                C![
                     C.absolute
                     C.top_0,
                     C.left_full,
@@ -131,7 +131,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
         ],
         // Seed section
         section![
-            class![
+            C![
                 C.relative,
                 C._mt_48,
                 C.pt_px,
@@ -143,7 +143,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
             ],
             // Main list
             div![
-                class![
+                C![
                     C._ml_5,
                     C._mt_48,
                     C.max_w_lg,
@@ -159,7 +159,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                 ],
                 // Right background
                 div![
-                    class![
+                    C![
                         C.absolute,
                         C.right_0,
                         C.inset_y_0,
@@ -170,7 +170,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                 ],
                 // List
                 div![
-                    class![
+                    C![
                         C.relative,
                         C.pl_4,
                         C.rounded_bl_45px,
@@ -189,7 +189,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         C.lg__rounded_bl_140px,
                     ],
                     ul![
-                        class![
+                        C![
                             C.w_xs,
                             C.pl_2,
                             C.py_8,
@@ -201,16 +201,16 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             C.lg__pb_24,
                         ],
                         li![
-                            class![
+                            C![
                                 C.my_3,
                             ],
                             div![
-                                class![
+                                C![
                                     C.flex,
                                     C.flex_no_wrap,
                                 ],
                                 div![
-                                    class![
+                                    C![
                                         C.text_blue_6,
                                         C.mr_2,
                                         // lg__
@@ -223,16 +223,16 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             ]
                         ],
                         li![
-                            class![
+                            C![
                                 C.my_3,
                             ],
                             div![
-                                class![
+                                C![
                                     C.flex,
                                     C.flex_no_wrap,
                                 ],
                                 div![
-                                    class![
+                                    C![
                                         C.text_blue_6,
                                         C.mr_2,
                                         // lg__
@@ -244,16 +244,16 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             ]
                         ],
                         li![
-                            class![
+                            C![
                                 C.my_3,
                             ],
                             div![
-                                class![
+                                C![
                                     C.flex,
                                     C.flex_no_wrap,
                                 ],
                                 div![
-                                    class![
+                                    C![
                                         C.text_blue_6,
                                         C.mr_2,
                                         // lg__
@@ -265,16 +265,16 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             ]
                         ],
                         li![
-                            class![
+                            C![
                                 C.my_3,
                             ],
                             div![
-                                class![
+                                C![
                                     C.flex,
                                     C.flex_no_wrap,
                                 ],
                                 div![
-                                    class![
+                                    C![
                                         C.text_blue_6,
                                         C.mr_2,
                                         // lg__
@@ -288,7 +288,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                         attrs!{
                                             At::Href => MAIL_TO_KAVIK
                                         },
-                                        class![
+                                        C![
                                             C.underline,
                                             C.underline_yellow_7,
                                             C.font_semibold
@@ -302,14 +302,14 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                 ]
             ],
             div![
-                class![
+                C![
                     C.flex,
                     C.flex_col,
                     C.items_center
                 ],
                 // Section content container
                 div![
-                    class![
+                    C![
                         C.mt_20,
                         C.w_xs,
                         C.px_2,
@@ -322,7 +322,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                     ],
                     // Github projects
                     h2![
-                        class![
+                        C![
                             C.font_display,
                             C.text_23,
                             C.text_blue_3,
@@ -333,13 +333,13 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             C.lg__text_80,
                         ],
                         span![
-                            class![
+                            C![
                                 C.font_thin
                             ],
                             "TOP-5"
                         ],
                         span![
-                            class![
+                            C![
                                 C.font_normal
                             ],
                             " GITHUB PROJECTS"
@@ -347,7 +347,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                     ],
                     // Testimonial 1
                     div![
-                        class![
+                        C![
                             C.mt_20,
                             C.text_right,
                             // sm__
@@ -356,7 +356,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             C.lg__mt_64,
                         ],
                         div![
-                            class![
+                            C![
                                 C.font_display,
                                 C.italic,
                                 C.text_yellow_4
@@ -364,7 +364,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             "Awesome, awesome framework!"
                         ],
                         div![
-                            class![
+                            C![
                                 C.mt_2,
                                 C.mr_2,
                                 C.font_display,
@@ -383,7 +383,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                 attrs!{
                                     At::Href => "https://github.com/David-OConnor/seed/issues/193#issue-479188076"
                                 },
-                                class![
+                                C![
                                     C.underline,
                                     C.underline_blue_5,
                                 ],
@@ -393,7 +393,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                     ],
                     // Testimonial 2
                     div![
-                        class![
+                        C![
                             C.mt_8,
                             C.text_right,
                             // sm__
@@ -402,7 +402,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             C.lg__mt_16,
                         ],
                         div![
-                            class![
+                            C![
                                 C.mr_4,
                                 C.font_display,
                                 C.italic,
@@ -415,7 +415,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             "Martin makes it better."
                         ],
                         div![
-                            class![
+                            C![
                                 C.mt_2,
                                 C.mr_5,
                                 C.font_display,
@@ -434,7 +434,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                 attrs!{
                                     At::Href => "https://github.com/MartinKavik/seed-rs-realworld/issues/1#issuecomment-525413644"
                                 },
-                                class![
+                                C![
                                     C.underline,
                                     C.underline_blue_5,
                                 ],
@@ -447,7 +447,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => "https://github.com/MartinKavik/awesome-seed-rs"
                         },
-                        class![
+                        C![
                             C.block,
                             C.relative,
                             C.mt_8,
@@ -472,7 +472,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         ],
                         // Extended background
                         div![
-                            class![
+                            C![
                                 C.absolute,
                                 C.left_0,
                                 C.inset_y_0,
@@ -484,7 +484,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         ],
                         // Logo
                         img![
-                            class![
+                            C![
                                 C.h_18,
                                 C.max_w_none,
                                 // sm__
@@ -499,7 +499,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         ]
                     ],
                     ul![
-                        class![
+                        C![
                             C.mt_10,
                             C.text_blue_1,
                             // sm__
@@ -508,16 +508,16 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             C.lg__mt_32,
                         ],
                         li![
-                            class![
+                            C![
                                 C.my_3,
                             ],
                             div![
-                                class![
+                                C![
                                     C.flex,
                                     C.flex_no_wrap,
                                 ],
                                 div![
-                                    class![
+                                    C![
                                         C.text_yellow_4,
                                         C.mr_2,
                                         // lg__
@@ -531,7 +531,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                             At::Href => "https://github.com/MartinKavik/awesome-seed-rs"
                                         },
                                         h3![
-                                            class![
+                                            C![
                                                 C.inline,
                                                 C.text_18,
                                                 C.font_bold,
@@ -548,7 +548,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             ]
                         ],
                         li![
-                            class![
+                            C![
                                 C.my_3,
                                 // sm__
                                 C.sm__mt_8,
@@ -556,12 +556,12 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                 C.lg__mt_16,
                             ],
                             div![
-                                class![
+                                C![
                                     C.flex,
                                     C.flex_no_wrap,
                                 ],
                                 div![
-                                    class![
+                                    C![
                                         C.text_yellow_4,
                                         C.mr_2,
                                         // lg__
@@ -573,7 +573,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             ]
                         ],
                         li![
-                            class![
+                            C![
                                 C.my_3,
                                 // sm__
                                 C.sm__mt_8,
@@ -581,12 +581,12 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                 C.lg__mt_16,
                             ],
                             div![
-                                class![
+                                C![
                                     C.flex,
                                     C.flex_no_wrap,
                                 ],
                                 div![
-                                    class![
+                                    C![
                                         C.text_yellow_4,
                                         C.mr_2,
                                         // lg__
@@ -602,7 +602,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => "https://github.com/MartinKavik/awesome-seed-rs"
                         },
-                        class![
+                        C![
                             C.block,
                             C.mt_10,
                             C.mb_24,
@@ -617,19 +617,19 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             C.lg__mb_64,
                         ],
                         span![
-                            class![
+                            C![
                                 C.text_blue_4
                             ],
                             "MartinKavik/"
                         ],
                         span![
-                            class![
+                            C![
                                 C.text_blue_2
                             ],
                             "awesome-seed-rs"
                         ],
                         img![
-                            class![
+                            C![
                                 C.inline
                                 C.mb_4,
                                 C.ml_px,
@@ -651,18 +651,18 @@ pub fn view(base_url: &Url) -> Node<Msg> {
         ],
         // RealWorld section
         section![
-            class![
+            C![
                 C.bg_blue_10
             ],
             div![
-                class![
+                C![
                     C.flex,
                     C.flex_col,
                     C.items_center
                 ],
                 // Section content container
                 div![
-                    class![
+                    C![
                         C.mt_16,
                         C.w_xs,
                         C.px_2,
@@ -675,13 +675,13 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                     ],
                     // Testimonial
                     div![
-                        class![
+                        C![
                             C.mt_10,
                             C.mr_2,
                             C.text_right,
                         ],
                         div![
-                            class![
+                            C![
                                 C.mr_3,
                                 C.font_display,
                                 C.italic,
@@ -690,7 +690,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             "Your real world example really is the mother of all examples."
                         ],
                         div![
-                            class![
+                            C![
                                 C.mt_4,
                                 C.font_display,
                                 C.text_15,
@@ -707,7 +707,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                 attrs!{
                                     At::Href => "https://github.com/David-OConnor/seed/pull/189#issuecomment-516095587"
                                 },
-                                class![
+                                C![
                                     C.underline,
                                     C.underline_blue_5,
                                 ],
@@ -720,7 +720,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => "https://github.com/MartinKavik/seed-rs-realworld"
                         },
-                        class![
+                        C![
                             C.block,
                             C.relative,
                             C.mt_12,
@@ -744,7 +744,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         ],
                         // Extended background
                         div![
-                            class![
+                            C![
                                 C.absolute,
                                 C._right_50vw,
                                 C.inset_y_0,
@@ -755,7 +755,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         ],
                         // Logo
                         img![
-                            class![
+                            C![
                                 C.h_12,
                                 C.max_w_none,
                                 // sm__
@@ -769,7 +769,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         ]
                     ],
                     ul![
-                        class![
+                        C![
                             C.mt_12,
                             C.text_blue_1,
                             // sm__
@@ -780,16 +780,16 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             C.lg__ml_0,
                         ],
                         li![
-                            class![
+                            C![
                                 C.my_3,
                             ],
                             div![
-                                class![
+                                C![
                                     C.flex,
                                     C.flex_no_wrap,
                                 ],
                                 div![
-                                    class![
+                                    C![
                                         C.text_yellow_4,
                                         C.mr_2,
                                         // lg__
@@ -803,7 +803,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                             At::Href => "https://github.com/MartinKavik/seed-rs-realworld"
                                         },
                                         h3![
-                                            class![
+                                            C![
                                                 C.inline,
                                                 C.text_18,
                                                 C.font_bold,
@@ -824,7 +824,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => "https://github.com/MartinKavik/seed-rs-realworld"
                         },
-                        class![
+                        C![
                             C.block,
                             C.mt_10,
                             C.mb_24,
@@ -839,19 +839,19 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             C.lg__mb_64,
                         ],
                         span![
-                            class![
+                            C![
                                 C.text_blue_4
                             ],
                             "MartinKavik/"
                         ],
                         span![
-                            class![
+                            C![
                                 C.text_blue_2
                             ],
                             "seed-rs-realworld"
                         ],
                         img![
-                            class![
+                            C![
                                 C.inline
                                 C.mb_4,
                                 C.ml_px,
@@ -873,18 +873,18 @@ pub fn view(base_url: &Url) -> Node<Msg> {
         ],
         // Kavik.cz section
         section![
-            class![
+            C![
                 C.bg_blue_6
             ],
             div![
-                class![
+                C![
                     C.flex,
                     C.flex_col,
                     C.items_center
                 ],
                 // Section content container
                 div![
-                    class![
+                    C![
                         C.mt_16,
                         C.w_xs,
                         C.px_2,
@@ -897,13 +897,13 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                     ],
                     // Testimonial
                     div![
-                        class![
+                        C![
                             C.mt_10,
                             C.mr_3,
                             C.text_right,
                         ],
                         div![
-                            class![
+                            C![
                                 C.mr_4,
                                 C.font_display,
                                 C.italic,
@@ -912,7 +912,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             "Fork it, use it!"
                         ],
                         div![
-                            class![
+                            C![
                                 C.mt_4,
                                 C.font_display,
                                 C.text_15,
@@ -931,7 +931,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => "https://github.com/MartinKavik/kavik.cz"
                         },
-                        class![
+                        C![
                             C.block,
                             C.relative,
                             C.mt_8,
@@ -953,7 +953,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         ],
                         // Extended background
                         div![
-                            class![
+                            C![
                                 C.absolute,
                                 C.left_0,
                                 C.inset_y_0,
@@ -965,7 +965,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         ],
                         // Logo
                         img![
-                            class![
+                            C![
                                 C.ml_6,
                                 C.h_20,
                                 C.max_w_none,
@@ -981,7 +981,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         ]
                     ],
                     ul![
-                        class![
+                        C![
                             C.mt_10,
                             C.text_blue_1,
                             // sm__
@@ -990,16 +990,16 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             C.lg__mt_32,
                         ],
                         li![
-                            class![
+                            C![
                                 C.my_3,
                             ],
                             div![
-                                class![
+                                C![
                                     C.flex,
                                     C.flex_no_wrap,
                                 ],
                                 div![
-                                    class![
+                                    C![
                                         C.text_yellow_4,
                                         C.mr_2,
                                         // lg__
@@ -1013,7 +1013,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                             At::Href => "https://github.com/MartinKavik/kavik.cz"
                                         },
                                         h3![
-                                            class![
+                                            C![
                                                 C.inline,
                                                 C.text_18,
                                                 C.font_bold,
@@ -1030,7 +1030,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             ]
                         ],
                         li![
-                            class![
+                            C![
                                 C.my_3,
                                 // sm__
                                 C.sm__mt_8,
@@ -1038,12 +1038,12 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                 C.lg__mt_16,
                             ],
                             div![
-                                class![
+                                C![
                                     C.flex,
                                     C.flex_no_wrap,
                                 ],
                                 div![
-                                    class![
+                                    C![
                                         C.text_yellow_4,
                                         C.mr_2,
                                         // lg__
@@ -1059,7 +1059,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => "https://github.com/MartinKavik/kavik.cz"
                         },
-                        class![
+                        C![
                             C.block,
                             C.mt_10,
                             C.mb_24,
@@ -1074,19 +1074,19 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             C.lg__mb_64,
                         ],
                         span![
-                            class![
+                            C![
                                 C.text_blue_3
                             ],
                             "MartinKavik/"
                         ],
                         span![
-                            class![
+                            C![
                                 C.text_blue_2
                             ],
                             "kavik.cz"
                         ],
                         img![
-                            class![
+                            C![
                                 C.inline
                                 C.mb_4,
                                 C.ml_px,
@@ -1108,21 +1108,21 @@ pub fn view(base_url: &Url) -> Node<Msg> {
         ],
         // Seed Quickstart section
         section![
-            class![
+            C![
                 C.rounded_br_140px,
                 C.bg_blue_10,
                 // lg__
                 C.lg__rounded_br_330px,
             ],
             div![
-                class![
+                C![
                     C.flex,
                     C.flex_col,
                     C.items_center
                 ],
                 // Section content container
                 div![
-                    class![
+                    C![
                         C.mt_16,
                         C.w_xs,
                         C.px_2,
@@ -1135,14 +1135,14 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                     ],
                     // Testimonial
                     div![
-                        class![
+                        C![
                             C.mt_10,
                             C.ml_5,
                             // sm__
                             C.sm__ml_12,
                         ],
                         div![
-                            class![
+                            C![
                                 C.font_display,
                                 C.italic,
                                 C.text_yellow_4
@@ -1150,7 +1150,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             "It's great!"
                         ],
                         div![
-                            class![
+                            C![
                                 C.ml_12,
                                 C.mt_4,
                                 C.font_display,
@@ -1169,7 +1169,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                 attrs!{
                                     At::Href => "https://github.com/David-OConnor/seed/issues/200#issuecomment-522247909"
                                 },
-                                class![
+                                C![
                                     C.underline,
                                     C.underline_blue_5,
                                 ],
@@ -1182,7 +1182,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => "https://github.com/MartinKavik/seed-quickstart-webpack"
                         },
-                        class![
+                        C![
                             C.block,
                             C.relative,
                             C.mt_12,
@@ -1205,7 +1205,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         ],
                         // Extended background
                         div![
-                            class![
+                            C![
                                 C.absolute,
                                 C._right_50vw,
                                 C.inset_y_0,
@@ -1216,7 +1216,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         ],
                         // Logo
                         div![
-                            class![
+                            C![
                                 C.ml_2,
                                 C.font_display,
                                 C.font_bold,
@@ -1232,7 +1232,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         ],
                     ],
                     ul![
-                        class![
+                        C![
                             C.mt_12,
                             C.text_blue_1,
                             // sm__
@@ -1241,16 +1241,16 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             C.lg__mt_32,
                         ],
                         li![
-                            class![
+                            C![
                                 C.my_3,
                             ],
                             div![
-                                class![
+                                C![
                                     C.flex,
                                     C.flex_no_wrap,
                                 ],
                                 div![
-                                    class![
+                                    C![
                                         C.text_yellow_4,
                                         C.mr_2,
                                         // lg__
@@ -1264,7 +1264,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                             At::Href => "https://github.com/MartinKavik/seed-quickstart-webpack"
                                         },
                                         h3![
-                                            class![
+                                            C![
                                                 C.inline,
                                                 C.text_18,
                                                 C.font_bold,
@@ -1285,7 +1285,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => "https://github.com/MartinKavik/seed-quickstart-webpack"
                         },
-                        class![
+                        C![
                             C.block,
                             C.mt_10,
                             C.mb_56,
@@ -1302,19 +1302,19 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             C.lg__text_45,
                         ],
                         span![
-                            class![
+                            C![
                                 C.text_blue_4
                             ],
                             "MartinKavik/"
                         ],
                         span![
-                            class![
+                            C![
                                 C.text_blue_2
                             ],
                             "seed-quickstart-webpack"
                         ],
                         img![
-                            class![
+                            C![
                                 C.inline
                                 C.mb_4,
                                 C.ml_px,
@@ -1337,14 +1337,14 @@ pub fn view(base_url: &Url) -> Node<Msg> {
         // Hellweb section
         section![
             div![
-                class![
+                C![
                     C.flex,
                     C.flex_col,
                     C.items_center
                 ],
                 // Section content container
                 div![
-                    class![
+                    C![
                         C.mt_16,
                         C.w_xs,
                         C.px_2,
@@ -1357,7 +1357,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                     ],
                     // Hellweb container
                     div![
-                        class![
+                        C![
                             C.relative,
                             C._mt_40,
                             C.w_xs,
@@ -1374,7 +1374,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         ],
                         // Extended background
                         div![
-                            class![
+                            C![
                                 C.absolute,
                                 C.left_0,
                                 C.inset_y_0,
@@ -1389,7 +1389,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                 At::Href => "https://github.com/MartinKavik/hellweb-pain"
                             },
                             img![
-                                class![
+                                C![
                                     C.mt_1,
                                     C.ml_8,
                                     C.h_12,
@@ -1408,7 +1408,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         ]
                     ],
                     ul![
-                        class![
+                        C![
                             C.text_gray_10,
                             // sm__
                             C.sm__mt_16,
@@ -1416,16 +1416,16 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             C.sm__mt_24,
                         ],
                         li![
-                            class![
+                            C![
                                 C.my_3,
                             ],
                             div![
-                                class![
+                                C![
                                     C.flex,
                                     C.flex_no_wrap,
                                 ],
                                 div![
-                                    class![
+                                    C![
                                         C.text_blue_6,
                                         C.mr_2,
                                         // lg__
@@ -1439,7 +1439,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                             At::Href => "https://github.com/MartinKavik/hellweb-pain"
                                         },
                                         h3![
-                                            class![
+                                            C![
                                                 C.inline,
                                                 C.text_18,
                                                 C.font_bold,
@@ -1456,7 +1456,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             ]
                         ],
                         li![
-                            class![
+                            C![
                                 C.mt_8,
                                 // sm__
                                 C.sm__mt_16,
@@ -1464,12 +1464,12 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                 C.lg__mt_32,
                             ],
                             div![
-                                class![
+                                C![
                                     C.flex,
                                     C.flex_no_wrap,
                                 ],
                                 div![
-                                    class![
+                                    C![
                                         C.text_blue_6,
                                         C.mr_2,
                                         // lg__
@@ -1480,7 +1480,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                 div![
                                     "What do you hate or what annoys you about ",
                                     span![
-                                        class![
+                                        C![
                                             C.font_bold,
                                         ],
                                         "web design & development"
@@ -1490,7 +1490,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                         attrs!{
                                             At::Href => MAIL_TO_HELLWEB
                                         },
-                                        class![
+                                        C![
                                             C.underline,
                                             C.underline_yellow_7,
                                         ],
@@ -1504,7 +1504,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => "https://github.com/MartinKavik/hellweb-pain"
                         },
-                        class![
+                        C![
                             C.block
                             C.mt_10,
                             C.mr_2,
@@ -1516,19 +1516,19 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             C.lg__mr_16,
                         ],
                         span![
-                            class![
+                            C![
                                 C.text_gray_5
                             ],
                             "MartinKavik/"
                         ],
                         span![
-                            class![
+                            C![
                                 C.text_gray_9
                             ],
                             "hellweb-pain"
                         ],
                         img![
-                            class![
+                            C![
                                 C.inline
                                 C.mb_4,
                                 C.ml_px,
@@ -1550,7 +1550,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => Urls::new(base_url).about()
                         },
-                        class![
+                        C![
                             C.block,
                             C.mt_20,
                             C.mb_16,
@@ -1572,14 +1572,14 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         ],
                         ev(Ev::Click, |_| Msg::ScrollToTop),
                         span![
-                            class![
+                            C![
                                 C.font_semibold
                             ],
                             "About"
                         ],
                         "\u{00A0}your new developer",
                         img![
-                            class![
+                            C![
                                 C.mt_1,
                                 C.h_12,
                                 // sm__
@@ -1597,7 +1597,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
         ],
         // Circles
         div![
-            class![
+            C![
                 C.absolute,
                 C.left_1of2,
                 C.top_0,
@@ -1619,7 +1619,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
             ]
         ],
         div![
-            class![
+            C![
                 C.absolute,
                 C.right_1of2,
                 C.top_0,
@@ -1642,7 +1642,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
             ]
         ],
         div![
-            class![
+            C![
                 C.absolute,
                 C.left_1of2,
                 C.top_0,
@@ -1665,7 +1665,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
             ]
         ],
         div![
-            class![
+            C![
                 C.absolute,
                 C.right_1of2,
                 C.top_0,

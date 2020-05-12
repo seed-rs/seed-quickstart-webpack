@@ -3,7 +3,7 @@ use seed::{prelude::*, *};
 
 pub fn view() -> Node<Msg> {
     footer![
-        class![
+        C![
             C.h_16,
             C.shadow_2xl_above,
             C.flex,
@@ -12,7 +12,7 @@ pub fn view() -> Node<Msg> {
             C.sm__h_24,
         ],
         div![
-            class![
+            C![
                 C.w_xs,
                 C.h_full,
                 C.px_5,
@@ -23,12 +23,12 @@ pub fn view() -> Node<Msg> {
                 C.sm__w_132
             ],
             div![
-                class![
+                C![
                     // lg__
                     C.lg__pb_3,
                 ],
                 img![
-                    class![
+                    C![
                         C.inline,
                         C.w_6,
                         C.align_baseline,
@@ -40,7 +40,7 @@ pub fn view() -> Node<Msg> {
                     }
                 ],
                 span![
-                    class![
+                    C![
                         C.ml_1,
                         C.font_display,
                         C.font_semibold,
@@ -57,7 +57,7 @@ pub fn view() -> Node<Msg> {
                 attrs! {
                     At::Href => MAIL_TO_KAVIK,
                 },
-                class![
+                C![
                     C.font_display,
                     C.font_semibold,
                     C.text_16,
@@ -70,10 +70,10 @@ pub fn view() -> Node<Msg> {
                 "martin@kavik.cz"
             ],
             div![
-                class![C.cursor_pointer, C.h_full, C.flex, C.items_center,],
+                C![C.cursor_pointer, C.h_full, C.flex, C.items_center,],
                 ev(Ev::Click, |_| Msg::ScrollToTop),
                 img![
-                    class![
+                    C![
                         C.mt_1, C.w_12, // sm__
                         C.sm__w_16
                     ],

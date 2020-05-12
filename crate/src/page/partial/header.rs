@@ -32,7 +32,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
         // Header background and line container
         if show_header {
             div![
-                class![
+                C![
                     C.fixed,
                     C.top_0
                     C.inset_x_0,
@@ -41,10 +41,10 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                     C.sm__h_24,
                 ],
                 // Header background
-                div![class![C.absolute, C.inset_0, C.bg_gray_1, C.opacity_90]],
+                div![C![C.absolute, C.inset_0, C.bg_gray_1, C.opacity_90]],
                 // Bottom header line
                 div![
-                    class![
+                    C![
                         C.absolute,
                         C.bottom_0,
                         C.ml_12,
@@ -59,22 +59,22 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                         // md__
                         C.md___ml_30,
                     ],
-                    div![class![
+                    div![C![
                         C.h_full,
                         C.bg_gray_2,
                         // sm__
                         C.sm__ml_6,
                         C.sm__w_48,
-                        C.sm__bg_yellow_6 => model.page == Page::Home,
+                        IF!(model.page == Page::Home => C.sm__bg_yellow_6),
                     ],],
-                    div![class![
+                    div![C![
                         C.hidden,
                         // sm__
                         C.sm__block,
                         C.sm__h_full,
                         C.sm__bg_gray_2,
                         C.sm__w_24,
-                        C.sm__bg_yellow_6 => model.page == Page::About,
+                        IF!(model.page == Page::About => C.sm__bg_yellow_6),
                     ],]
                 ],
             ]
@@ -84,7 +84,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
         // Photo 1
         if model.page == Page::About {
             div![
-                class![
+                C![
                     C.absolute,
                     C.top_0,
                     C.inset_x_0,
@@ -97,7 +97,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                     C.md__mt_8,
                 ],
                 img![
-                    class![
+                    C![
                         C.w_xs,
                         C.h_full,
                         C.object_contain,
@@ -117,7 +117,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
         // Menu
         if model.menu_visibility == Visible {
             div![
-                class![
+                C![
                     C.fixed,
                     C.w_screen,
                     C.bg_gray_1,
@@ -127,9 +127,9 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                     C.md__hidden,
                 ],
                 div![
-                    class![C.w_56, C.mx_auto, C.flex, C.max_h_full,],
+                    C![C.w_56, C.mx_auto, C.flex, C.max_h_full,],
                     ul![
-                        class![
+                        C![
                             C.mt_20,
                             C.w_full,
                             C.font_semibold,
@@ -143,7 +143,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                             C.sm__text_21,
                         ],
                         li![
-                            class![
+                            C![
                                 C.block,
                                 C.h_full,
                                 C.border_l_4,
@@ -158,7 +158,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                                 C.sm__hidden,
                             ],
                             a![
-                                class![
+                                C![
                                     C.pl_8,
                                     C.h_full,
                                     C.flex,
@@ -176,7 +176,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                             ]
                         ],
                         li![
-                            class![
+                            C![
                                 C.block,
                                 C.h_full,
                                 C.border_l_4,
@@ -191,7 +191,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                                 C.sm__hidden,
                             ],
                             a![
-                                class![
+                                C![
                                     C.pl_8,
                                     C.h_full,
                                     C.flex,
@@ -209,9 +209,9 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                             ]
                         ],
                         li![
-                            class![C.block, C.h_full, C.w_full,],
+                            C![C.block, C.h_full, C.w_full,],
                             a![
-                                class![
+                                C![
                                     C.pl_8,
                                     C.h_full,
                                     C.flex,
@@ -228,13 +228,13 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                                 },
                                 ev(Ev::Click, |_| Msg::HideMenu),
                                 "Resume",
-                                span![class![C.text_gray_5,], ".pdf"]
+                                span![C![C.text_gray_5,], ".pdf"]
                             ]
                         ],
                         li![
-                            class![C.block, C.h_full, C.w_full,],
+                            C![C.block, C.h_full, C.w_full,],
                             a![
-                                class![
+                                C![
                                     C.pl_8,
                                     C.h_full,
                                     C.flex,
@@ -252,7 +252,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                                 ev(Ev::Click, |_| Msg::HideMenu),
                                 "GitHub",
                                 img![
-                                    class![
+                                    C![
                                         C.inline
                                         C.mb_3,
                                         C.w_3,
@@ -276,14 +276,14 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
         // Header
         if show_header {
             header![
-                class![
+                C![
                     C.fixed,
                     C.top_0
                     C.inset_x_0,
                 ],
                 // Header controls container
                 div![
-                    class![
+                    C![
                         C.mx_8
                         C.h_16,
                         C.flex,
@@ -300,7 +300,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                         ev(Ev::Click, |_| Msg::ScrollToTop),
                         ev(Ev::Click, |_| Msg::HideMenu),
                         img![
-                            class![
+                            C![
                                 C.h_6,
                                 // sm__
                                 C.sm__h_10,
@@ -313,7 +313,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                     ],
                     // Links
                     ul![
-                        class![
+                        C![
                             C.hidden,
                             // sm__
                             C.sm___mt_px,
@@ -325,13 +325,13 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                             C.sm__h_full,
                         ],
                         li![
-                            class![
+                            C![
                                 // sm__
                                 C.sm__block,
                                 C.sm__h_full,
                             ],
                             a![
-                                class![
+                                C![
                                     // sm__
                                     C.sm__h_full,
                                     C.sm__flex,
@@ -348,14 +348,14 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                             ]
                         ],
                         li![
-                            class![
+                            C![
                                 // sm__
                                 C.sm__block,
                                 C.sm__ml_8
                                 C.sm__h_full,
                             ],
                             a![
-                                class![
+                                C![
                                     // sm__
                                     C.sm__h_full,
                                     C.sm__flex,
@@ -372,7 +372,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                             ]
                         ],
                         li![
-                            class![
+                            C![
                                 C.hidden,
                                 // md__
                                 C.md__block,
@@ -380,7 +380,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                                 C.md__h_full,
                             ],
                             a![
-                                class![
+                                C![
                                     // md__
                                     C.md__h_full,
                                     C.md__flex,
@@ -392,7 +392,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                                 },
                                 "Resume",
                                 span![
-                                    class![
+                                    C![
                                         // md__
                                         C.md__text_gray_5,
                                     ],
@@ -401,7 +401,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                             ]
                         ],
                         li![
-                            class![
+                            C![
                                 C.hidden,
                                 // md__
                                 C.md__block,
@@ -409,7 +409,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                                 C.md__h_full,
                             ],
                             a![
-                                class![
+                                C![
                                     // md__
                                     C.md__h_full,
                                     C.md__flex,
@@ -421,7 +421,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                                 },
                                 "GitHub",
                                 img![
-                                    class![
+                                    C![
                                         // md__
                                         C.md__inline
                                         C.md__mb_5,
@@ -437,15 +437,15 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                     ],
                     // Hamburger
                     div![
-                        class![
-                            C.cursor_pointer => !model.in_prerendering,
+                        C![
+                            IF!(not(model.in_prerendering) => C.cursor_pointer),
                             // md__
                             C.md__hidden,
                         ],
                         ev(Ev::Click, |_| Msg::ToggleMenu),
                         img![
                             id!("hamburger"),
-                            class![
+                            C![
                                 C.h_8,
                                 C.w_12,
                                 // sm__
@@ -468,7 +468,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                         ]
                     ],
                     // Spacer
-                    div![class![
+                    div![C![
                         C.hidden,
                         // md__
                         C.md__block,
@@ -476,7 +476,7 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                 ],
                 // Bottom header line
                 div![
-                    class![
+                    C![
                         C.absolute,
                         C.top_0,
                         C.ml_12,
@@ -491,22 +491,22 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                         // md__
                         C.md___ml_30,
                     ],
-                    div![class![
+                    div![C![
                         C.h_full,
                         C.bg_gray_2,
                         // sm__
                         C.sm__ml_6,
                         C.sm__w_48,
-                        C.sm__bg_yellow_6 => model.page == Page::Home,
+                        IF!(model.page == Page::Home => C.sm__bg_yellow_6),
                     ],],
-                    div![class![
+                    div![C![
                         C.hidden,
                         // sm__
                         C.sm__block,
                         C.sm__h_full,
                         C.sm__bg_gray_2,
                         C.sm__w_24,
-                        C.sm__bg_yellow_6 => model.page == Page::About,
+                        IF!(model.page == Page::About => C.sm__bg_yellow_6),
                     ],]
                 ],
             ]
