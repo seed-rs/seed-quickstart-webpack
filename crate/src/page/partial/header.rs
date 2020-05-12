@@ -1,9 +1,8 @@
 use crate::{
     asset_path,
     generated::css_classes::C,
-    image_src, Model, Msg, Page, ScrollHistory,
+    image_src, Model, Msg, Page, ScrollHistory, Urls,
     Visibility::{self, *},
-    Urls,
 };
 use seed::{prelude::*, *};
 
@@ -17,8 +16,8 @@ fn header_visibility(
     let scrolling_up = scroll_history.front() >= scroll_history.back();
 
     if menu_is_visible || at_the_top_or_higher || scrolling_up {
-        return Visible
-    } 
+        return Visible;
+    }
     Hidden
 }
 

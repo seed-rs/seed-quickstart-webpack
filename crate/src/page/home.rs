@@ -1,5 +1,5 @@
 use crate::{
-    generated::css_classes::C, image_src, Msg, MAIL_TO_HELLWEB, Urls,
+    generated::css_classes::C, image_src, Msg, Urls, MAIL_TO_HELLWEB,
     MAIL_TO_KAVIK,
 };
 use seed::{prelude::*, *};
