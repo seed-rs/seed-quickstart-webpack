@@ -16,7 +16,9 @@ crate-type = ["cdylib"]
 wasm-bindgen-test = "0.3.12"
 
 [dependencies]
-seed = "0.7.0"
+# Referenced commit fixes base url bug in Seed 0.7.0 (https://github.com/seed-rs/seed/pull/454).
+# Replace with "0.8.0" once the new Seed version is released.
+seed = { git = "https://github.com/seed-rs/seed", rev = "2386d9a" }
 fixed-vec-deque = "0.1.9"
 
 [dependencies.web-sys]
