@@ -32,8 +32,7 @@ const ABOUT: &str = "about";
 fn init(url: Url, orders: &mut impl Orders<Msg>) -> Model {
     orders
         .subscribe(Msg::UrlChanged)
-        .stream(streams::window_event(Ev::Scroll, |_| Msg::Scrolled))
-        .send_msg(Msg::UpdatePageTitle);
+        .stream(streams::window_event(Ev::Scroll, |_| Msg::Scrolled));
 
     Model {
         base_url: url.to_base_url(),
@@ -93,11 +92,13 @@ pub enum Page {
 
 impl Page {
     pub fn init(mut url: Url) -> Self {
-        match url.remaining_path_parts().as_slice() {
-            [] => Self::Home,
-            [ABOUT] => Self::About,
-            _ => Self::NotFound,
-        }
+        let (page, title) = match url.remaining_path_parts().as_slice() {
+            [] => (Self::Home, TITLE_SUFFIX.to_owned()),
+            [ABOUT] => (Self::About, format!("About - {}", TITLE_SUFFIX)),
+            _ => (Self::NotFound, format!("404 - {}", TITLE_SUFFIX)),
+        };
+        document().set_title(&title);
+        page
     }
 }
 
@@ -121,26 +122,16 @@ impl<'a> Urls<'a> {
 
 pub enum Msg {
     UrlChanged(subs::UrlChanged),
-    UpdatePageTitle,
     ScrollToTop,
     Scrolled,
     ToggleMenu,
     HideMenu,
 }
 
-pub fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
+pub fn update(msg: Msg, model: &mut Model, _: &mut impl Orders<Msg>) {
     match msg {
         Msg::UrlChanged(subs::UrlChanged(url)) => {
             model.page = Page::init(url);
-            orders.send_msg(Msg::UpdatePageTitle);
-        },
-        Msg::UpdatePageTitle => {
-            let title = match model.page {
-                Page::Home => TITLE_SUFFIX.to_owned(),
-                Page::About => format!("About - {}", TITLE_SUFFIX),
-                Page::NotFound => format!("404 - {}", TITLE_SUFFIX),
-            };
-            document().set_title(&title);
         },
         Msg::ScrollToTop => window().scroll_to_with_scroll_to_options(
             web_sys::ScrollToOptions::new().top(0.),
