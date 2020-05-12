@@ -1,10 +1,13 @@
 // @TODO: uncomment once https://github.com/rust-lang/rust/issues/54726 stable
 //#![rustfmt::skip::macros(class)]
 
-#![allow(clippy::used_underscore_binding)]
-#![allow(clippy::non_ascii_literal)]
-#![allow(clippy::enum_glob_use)]
-#![allow(clippy::must_use_candidate)]
+#![allow(
+    clippy::used_underscore_binding,
+    clippy::non_ascii_literal,
+    clippy::enum_glob_use,
+    clippy::must_use_candidate,
+    clippy::wildcard_imports
+)]
 
 mod generated;
 mod page;
@@ -111,6 +114,7 @@ impl<'a> Urls<'a> {
     pub fn home(self) -> Url {
         self.base_url()
     }
+
     pub fn about(self) -> Url {
         self.base_url().add_path_part(ABOUT)
     }
@@ -187,7 +191,6 @@ pub fn view(model: &Model) -> impl IntoNodes<Msg> {
 pub fn image_src(image: &str) -> String {
     format!("{}/{}", IMAGES_PATH, image)
 }
-
 
 pub fn asset_path(asset: &str) -> String {
     format!("{}/{}", STATIC_PATH, asset)
