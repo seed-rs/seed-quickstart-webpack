@@ -17,10 +17,9 @@ fn header_visibility(
     let scrolling_up = scroll_history.front() >= scroll_history.back();
 
     if menu_is_visible || at_the_top_or_higher || scrolling_up {
-        Visible
-    } else {
-        Hidden
-    }
+        return Visible
+    } 
+    Hidden
 }
 
 #[allow(clippy::too_many_lines)]
@@ -28,9 +27,9 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
     let show_header =
         header_visibility(model.menu_visibility, &model.scroll_history)
             == Visible;
-    vec![
+    nodes![
         // Header background and line container
-        if show_header {
+        IF!(show_header =>
             div![
                 C![
                     C.fixed,
@@ -78,11 +77,9 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                     ],]
                 ],
             ]
-        } else {
-            empty![]
-        },
+        ),
         // Photo 1
-        if model.page == Page::About {
+        IF!(model.page == Page::About =>
             div![
                 C![
                     C.absolute,
@@ -111,11 +108,9 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                     }
                 ],
             ]
-        } else {
-            empty![]
-        },
+        ),
         // Menu
-        if model.menu_visibility == Visible {
+        IF!(model.menu_visibility == Visible =>
             div![
                 C![
                     C.fixed,
@@ -270,11 +265,9 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                     ],
                 ]
             ]
-        } else {
-            empty![]
-        },
+        ),
         // Header
-        if show_header {
+        IF!(show_header =>
             header![
                 C![
                     C.fixed,
@@ -510,8 +503,6 @@ pub fn view(model: &Model) -> Vec<Node<Msg>> {
                     ],]
                 ],
             ]
-        } else {
-            empty![]
-        },
+        ),
     ]
 }
