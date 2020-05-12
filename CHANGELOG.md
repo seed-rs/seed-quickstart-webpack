@@ -2,6 +2,8 @@
 
 [UNRELEASED]
 
+[0.6.0]
+
 - Updated all JS dependencies.
 - Added `<base href="/">` and related comments to support non-root deploys.
 - Updated all JS dependencies.
