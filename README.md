@@ -202,7 +202,7 @@ And how to setup Github Actions with deploy into Netlify.
    - _Note_: There is only one test in this project (`crate/tests/test.rs`), see [seed-rs-realworld](https://github.com/seed-rs/seed-rs-realworld) for more examples.
 1. If you want to test prerendered website:
    1. `$ yarn build:prerender`
-   1. `$ serve:dist`
+   1. `$ yarn serve:dist`
    1. Open [localhost:8000](http://localhost:8000) in a browser.
    1. _Tip_: Always test it also in production environment because e.g. routing is a little bit different among servers.
 1. **Always run `$ cargo make verify`** before push to make sure CI pipeline will accept your code.
