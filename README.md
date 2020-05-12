@@ -45,9 +45,9 @@ I want to show you how to create, build and host your website for free, so we wi
 
 1. Make sure you have basic tools installed:
 
-   - [Yarn](https://yarnpkg.com/lang/en/docs/install) - run `$ yarn -v` in terminal. It should output something like `1.17.3`
-   - [Node.js](https://nodejs.org) - `$ node -v` => `v10.16.3`
-   - [Rust](https://www.rust-lang.org/tools/install) - `$ rustc -V` => `rustc 1.38.0 (625451e37 2019-09-23)`
+   - [Yarn](https://yarnpkg.com/lang/en/docs/install) - run `$ yarn -v` in terminal. It should output something like `1.22.4`
+   - [Node.js](https://nodejs.org) - `$ node -v` => `v12.13.0`
+   - [Rust](https://www.rust-lang.org/tools/install) - `$ rustc -V` => `rustc 1.43.1 (8d69840ab 2020-05-04)`
    - Rust target `wasm` - `$ rustup target list` => `.. wasm32-unknown-unknown (installed) ..`
        - Install: `$ rustup target add wasm32-unknown-unknown`
        
@@ -60,15 +60,15 @@ I want to show you how to create, build and host your website for free, so we wi
    - [wasm-pack](https://rustwasm.github.io/wasm-pack/)
 
      - Check: `$ wasm-pack -V` => `wasm-pack 0.9.1`
-     - Install: `$ cargo install --force wasm-pack`
+     - Install: `$ cargo install wasm-pack`
 
    - [cargo-make](https://sagiegurari.github.io/cargo-make/)
 
-     - Check: `$ cargo make -V` => `cargo-make 0.22.1`
-     - Install: `$ cargo install --force cargo-make`
+     - Check: `$ cargo make -V` => `cargo-make 0.30.7`
+     - Install: `$ cargo install cargo-make`
 
    - [nightly rustfmt](https://github.com/rust-lang/rustfmt#on-the-nightly-toolchain)
-     - Check: `$ cargo +nightly fmt -- -V` => `rustfmt 1.4.8-nightly (afb1ee1c 2019-09-08)`
+     - Check: `$ cargo +nightly fmt -- -V` => `rustfmt 1.4.14-nightly (a5cb5d26 2020-04-14)`
      - Install:
        1. `$ rustup toolchain install nightly`
        2. `$ rustup component add rustfmt --toolchain nightly`
