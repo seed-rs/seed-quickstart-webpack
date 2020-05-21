@@ -230,6 +230,12 @@ And how to setup Github Actions with deploy into Netlify.
    - Replace `yarn build:prerender` with `yarn build:release` if you don't want to prerender pages.
 1. _[Optional]_ Push your code and switch to tab `Actions` to check that everything works.
 
+### Manual Deployment
+
+1. Run `yarn build:realease`.
+1. Check if build works by running `yarn serve:dist` and view in a browser.
+1. Deploy the contents of the `dist` directory to a web server.
+
 ### Travis CI
 
 <details>
