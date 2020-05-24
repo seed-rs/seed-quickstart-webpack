@@ -1,5 +1,5 @@
 const path = require("path");
-const dist = path.resolve(__dirname, "../dist");
+const dist = path.resolve(__dirname, "dist");
 
 const WebpackBar = require("webpackbar");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -16,7 +16,7 @@ module.exports = (env, argv) => {
     },
     entry: {
       // Bundle root with name `app.js`.
-      app: path.resolve(__dirname, "../entries/index.ts")
+      app: path.resolve(__dirname, "index.ts")
     },
     output: {
       // You can change it to e.g. `/ui/`, but also edit `historyApiFallback` below and `<base href..`> in `index.hbs`.
@@ -54,12 +54,11 @@ module.exports = (env, argv) => {
       }),
       // Add scripts, css, ... to html template.
       new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, "../entries/index.hbs")
+        template: path.resolve(__dirname, "static/index.hbs")
       }),
       // Compile Rust.
       new WasmPackPlugin({
-        crateDirectory: path.resolve(__dirname, "../crate"),
-        outDir: path.resolve(__dirname, "../crate/pkg")
+        crateDirectory: __dirname
       }),
 
       // You can find files from folder `../static` on url `http://my-site.com/static/`.
@@ -79,7 +78,7 @@ module.exports = (env, argv) => {
     resolve: {
       extensions: [".ts", ".js", ".wasm"],
       alias: {
-        crate: path.resolve(__dirname, "../crate")
+        crate: __dirname
       }
     },
     module: {
@@ -111,7 +110,7 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.ts$/,
-          loader: "ts-loader?configFile=configs/tsconfig.json"
+          loader: "ts-loader?configFile=tsconfig.json"
         },
         {
           test: /\.css$/,

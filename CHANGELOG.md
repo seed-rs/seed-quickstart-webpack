@@ -2,6 +2,14 @@
 
 [UNRELEASED]
 
+[0.7.0]
+
+- Moved files and directories located in `crate` directory to project root directory.
+- Moved files and directories located in `configs` directory to project root directory.
+- Moved files and directories located in `entries` directory to static directory.
+- Moved `entries/index.ts` to project root directoy.
+- Update/remove references to `crate`, `configs` and `entries` directories in configuration files and documentation.
+
 [0.6.0]
 
 - Updated all JS dependencies.

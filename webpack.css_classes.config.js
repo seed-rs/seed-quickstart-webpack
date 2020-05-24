@@ -9,7 +9,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = (env, argv) => {
   return {
-    entry: path.resolve(__dirname, "../entries/index.css_classes.ts"),
+    entry: path.resolve(__dirname, "./static/index.css_classes.ts"),
     output: {
       path: path.resolve(__dirname, "../dist"),
       filename: "css_classes.js"
@@ -31,7 +31,7 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.ts$/,
-          loader: "ts-loader?configFile=configs/tsconfig.css_classes.json"
+          loader: "ts-loader?configFile=tsconfig.css_classes.json"
         },
         {
           test: /\.css$/,

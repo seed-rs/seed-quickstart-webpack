@@ -35,7 +35,7 @@ env:
 script:
   - yarn
   - yarn build:prerender # change it to `yarn build:release` if you don't want to prerender pages
-  - cargo make --cwd ./crate verify_only # includes task `test_h_firefox`
+  - cargo make verify_only # includes task `test_h_firefox`
 
 before_deploy:
   - yarn global add netlify-cli

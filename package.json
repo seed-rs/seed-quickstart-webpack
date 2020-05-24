@@ -1,18 +1,18 @@
 {
   "author": "Martin Kavík <martin@kavik.cz>",
   "name": "seed-quickstart-webpack",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "repository": "https://github.com/MartinKavik/seed-quickstart-webpack",
   "license": "MIT",
   "scripts": {
-    "start": "yarn generate:css_classes && webpack-dev-server --config configs/webpack.config.js -d",
-    "start:release": "yarn generate:css_classes && webpack-dev-server --config configs/webpack.config.js --mode=production",
-    "build": "yarn generate:css_classes && webpack --config configs/webpack.config --mode=development",
-    "build:release": "yarn generate:css_classes && webpack --config configs/webpack.config --mode=production",
+    "start": "yarn generate:css_classes && webpack-dev-server --config webpack.config.js -d",
+    "start:release": "yarn generate:css_classes && webpack-dev-server --config webpack.config.js --mode=production",
+    "build": "yarn generate:css_classes && webpack --config webpack.config --mode=development",
+    "build:release": "yarn generate:css_classes && webpack --config webpack.config --mode=production",
     "build:prerender": "yarn build:release && yarn prerender",
     "serve:dist": "yarn serve -s -l 8000 dist",
     "prerender": "yarn concurrently -k -s first \"yarn serve:dist\" \"wait-on http://localhost:8000/ && react-snap\"",
-    "generate:css_classes": "webpack --config configs/webpack.css_classes.config --mode=development"
+    "generate:css_classes": "webpack --config webpack.css_classes.config --mode=development"
   },
   "reactSnap": {
     "source": "dist",

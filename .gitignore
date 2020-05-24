@@ -1,11 +1,11 @@
 dist
 node_modules
-crate/bin
-crate/pkg
-crate/target
-crate/wasm-pack.log
+bin
+pkg
+target
+wasm-pack.log
 .idea
 
-crate/src/generated/**
-!crate/src/generated/mod.rs
+src/generated/**
+!src/generated/mod.rs
 !**/.keep

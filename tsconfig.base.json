@@ -21,6 +21,5 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "forceConsistentCasingInFileNames": true
-  },
-  "include": ["../**/*/"]
+  }
 }
