@@ -1,4 +1,0 @@
-{
-  "extends": "./tsconfig.base",
-  "include": ["../entries/index.css_classes.ts"]
-}

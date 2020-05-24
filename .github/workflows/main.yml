@@ -37,7 +37,6 @@ jobs:
 
       - name: Run tests
         run: cargo make verify_only
-        working-directory: ./crate
 
       - name: Install Netlify CLI
         if: github.ref == 'refs/heads/master'

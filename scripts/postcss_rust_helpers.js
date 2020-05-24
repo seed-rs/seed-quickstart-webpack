@@ -2,7 +2,7 @@ const path = require('path')
 const findFiles = require('find');
 const fs = require('fs');
 
-// Helpers are used by `configs/postcss.config.js`.
+// Helpers are used by `postcss.config.js`.
 
 module.exports = {
     escapeClassName: escapeClassName,
@@ -85,7 +85,7 @@ function getKeywords () {
 function getUsedCssClassesInRust() {
     const usedCssClasses = new Set;
     // search in Rust files
-    const files = findFiles.fileSync(/\.rs$/, './crate/src');
+    const files = findFiles.fileSync(/\.rs$/, './src');
     files.forEach(filePath => {
         const fileContent = fs.readFileSync(filePath, 'utf8')
         // example of a used class in Rust code is `C.mb_16`
@@ -107,7 +107,7 @@ function getUsedCssClassesInRust() {
 function getUsedCssClassesInHandlebars() {
     const usedCssClasses = new Set;
     // search in Handlebars templates
-    const files = findFiles.fileSync(/\.hbs$/, './entries');
+    const files = findFiles.fileSync(/\.hbs$/, './static');
     files.forEach(filePath => {
         const fileContent = fs.readFileSync(filePath, 'utf8')
         // example of a used class in HTML code is `class="mb-16 text-blue-1"` or `class='font-bold'`
