@@ -21,6 +21,8 @@ wasm-bindgen-test = "0.3.12"
 # Replace with "0.8.0" once the new Seed version is released.
 seed = { git = "https://github.com/seed-rs/seed", rev = "b25cf59" }
 fixed-vec-deque = "0.1.9"
+strum = "0.18.0"
+strum_macros = "0.18.0"
 
 [dependencies.web-sys]
 version = "0.3.39"

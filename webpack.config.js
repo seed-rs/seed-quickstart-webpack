@@ -11,8 +11,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = (env, argv) => {
   return {
     performance: {
-        // Don't break compilation because of WASM file bigger than 244 KB.
-        hints: false
+      // Don't break compilation because of WASM file bigger than 244 KB.
+      hints: false
     },
     entry: {
       // Bundle root with name `app.js`.
@@ -23,7 +23,7 @@ module.exports = (env, argv) => {
       publicPath: '/',
       // You can deploy your site from this folder (after build with e.g. `yarn build:release`)
       path: dist,
-      filename:'[name].[contenthash].js'
+      filename: '[name].[contenthash].js',
     },
     devServer: {
       contentBase: dist,
@@ -50,27 +50,38 @@ module.exports = (env, argv) => {
       new CleanWebpackPlugin(),
       // Extract CSS styles into a file.
       new MiniCssExtractPlugin({
-        filename:'[name].[contenthash].css'
+        filename: '[name].[contenthash].css'
       }),
-      // Add scripts, css, ... to html template.
       new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, "static/index.hbs")
+        title: "Seed App",
+        template: "assets/index.html",
+        scriptLoading: "defer",
+        inject: "body",
+        meta: {
+          viewport: "width=device-width, initial-scale=1.0, user-scalable=1",
+        },
+        favicon: "assets/favicons/favicon.ico",
       }),
       // Compile Rust.
       new WasmPackPlugin({
         crateDirectory: __dirname
       }),
 
-      // You can find files from folder `../static` on url `http://my-site.com/static/`.
+      // You can find files from folder `../assets` on url `http://my-site.com/assets/`.
       // And favicons in the root.
       new CopyWebpackPlugin([
         {
-          from: "static",
-          to: "static"
+          from: "assets",
+          to: "assets",
+          ignore: ['index.*', 'css/**/*', 'favicons/**/*']
         },
         {
-          from: "favicons",
+          from: "assets/favicons",
           to: ""
+        },
+        {
+          from: "assets/css/fontawesome/webfonts",
+          to: "assets/css/fontawesome/webfonts"
         }
       ]),
     ],
@@ -78,24 +89,13 @@ module.exports = (env, argv) => {
     resolve: {
       extensions: [".ts", ".js", ".wasm"],
       alias: {
-        crate: __dirname
+        crate: __dirname,
       }
     },
     module: {
       rules: [
         {
-          test: /\.hbs$/,
-          use: [
-            {
-              loader: "handlebars-loader",
-              options: {
-                rootRelative: './templates/'
-              }
-            }
-          ]
-        },
-        {
-          test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/,
+          test: /\.(jpg|jpeg|png|woff(2)?|eot|ttf|svg)(\?[a-z0-9]+)?$/,
           use: [
             {
               loader: "file-loader",
@@ -113,10 +113,10 @@ module.exports = (env, argv) => {
           loader: "ts-loader?configFile=tsconfig.json"
         },
         {
-          test: /\.css$/,
+          test: /\.s[ac]ss$/i,
           use: [
             MiniCssExtractPlugin.loader,
-            "css-loader",
+            'css-loader',
             {
               loader: "postcss-loader",
               options: {
@@ -127,10 +127,11 @@ module.exports = (env, argv) => {
                   ctx: { mode: argv.mode }
                 }
               }
-            }
+            },
+            'sass-loader',
           ]
         }
       ]
-    }
+    },
   };
 };

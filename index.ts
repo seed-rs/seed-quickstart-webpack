@@ -1,4 +1,4 @@
-import "./css/styles.css";
+import "./styles/app.scss";
 
 (async () => {
   // Note: files in `./pkg/` will be created on the first build.

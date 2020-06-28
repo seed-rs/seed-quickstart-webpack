@@ -1,4 +1,25 @@
 {
-  "extends": "./tsconfig.base",
-  "exclude": ["index.css_classes.ts"]
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esNext",
+    "lib": ["dom", "es2015"],
+    "strict": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "strictBindCallApply": true,
+    "allowJs": false,
+    "allowUnreachableCode": false,
+    "allowSyntheticDefaultImports": false,
+    "allowUnusedLabels": false,
+    "alwaysStrict": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "forceConsistentCasingInFileNames": true
+  }
 }

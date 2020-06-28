@@ -1,14 +1,26 @@
+html {
+  /* 1 */
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.5;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  /* 3 */
+  background: #fff;
+  color: #666;
+}
 
 .blur {
   filter: blur(7px);
 }
 
 .underline-yellow-7 {
-  text-decoration-color: hsl(36, 77%, 49%)
+  text-decoration-color: hsl(36, 77%, 49%);
 }
 
 .underline-blue-5 {
-  text-decoration-color: hsl(205, 65%, 55%)
+  text-decoration-color: hsl(205, 65%, 55%);
 }
 
 
@@ -64,5 +76,23 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.user {
+  @extend %fa-icon;
+  @extend .fas;
+  
+  &:before {
+    content: fa-content($fa-var-user);
+  }
+}
+
+.twitter {
+  @extend %fa-icon;
+  @extend .fab;
+  
+  &:before {
+    content: fa-content($fa-var-twitter);
   }
 }
