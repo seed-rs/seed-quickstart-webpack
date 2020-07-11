@@ -36,7 +36,7 @@
     "no-emit-webpack-plugin": "^2.0.1",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
-    "postcss-typed-css-classes": "/home/frank/repos/postcss-typed-css-classes",
+    "postcss-typed-css-classes": "^0.2.0",
     "react-snap": "^1.23.0",
     "sass": "^1.26.8",
     "sass-loader": "^8.0.2",
@@ -50,9 +50,5 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0",
     "webpackbar": "^4.0.0"
-  },
-  "dependencies": {
-    "fast-glob": "^3.2.4",
-    "path": "^0.12.7"
   }
 }
