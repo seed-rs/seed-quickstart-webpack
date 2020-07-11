@@ -2,6 +2,10 @@
 
 [UNRELEASED]
 
+[0.7.2]
+
+- Upgrade postcss-typed-css-classes
+
 [0.7.1]
 
 - dependabot > [Changelog](https://github.com/seed-rs/seed-quickstart-webpack/pull/21#issue-429231397)
