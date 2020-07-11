@@ -1,29 +1,24 @@
-const postcssRustHelpers = require("./scripts/postcss_rust_helpers");
-
 module.exports = ({ file, options, env }) => {
-  // we want to filter out unused css classes in production mode
-  // NOTE: options.mode is set in webpack, in the postcss loader ctx
-  const usedCssClasses =
-    options.mode === "production"
-      ? postcssRustHelpers.getUsedCssClasses()
-      : null;
 
   return {
     plugins: [
       require("postcss-import"),
       require("tailwindcss")('tailwind.config.js'),
       require("postcss-typed-css-classes")({
-        output_filepath: "src/generated/css_classes.rs",
         generator: "rust",
-        filter: class_ => {
-          if (options.mode === "production") {
-            return usedCssClasses.has(
-              postcssRustHelpers.escapeClassName(class_)
-            );
-          } else {
-            return true;
+        purge: options.mode === "production",
+        output_filepath: "src/generated/css_classes.rs",
+        content: [
+          { path: ['src/**/*.rs'] },
+          {
+            path: ['static/index.hbs', 'static/templates/**/*.hbs'],
+            regex: /class\s*=\s*["'|][^"'|]+["'|]/g,
+            mapper: className => {
+              return (className.match(/class\s*=\s*["'|]([^"'|]+)["'|]/)[1]).match(/\S+/g)
+            },
+            escape: true
           }
-        }
+        ],
       }),
       require("autoprefixer")
     ]
