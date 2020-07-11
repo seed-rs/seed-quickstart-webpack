@@ -1,7 +1,10 @@
+@charset "utf-8";
 $fa-font-path: "../assets/css/fontawesome/webfonts";
-@import "~bulma/bulma.sass";
 @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss"; 
 @import "~@fortawesome/fontawesome-free/scss/regular.scss"; 
 @import "~@fortawesome/fontawesome-free/scss/solid.scss"; 
 @import "~@fortawesome/fontawesome-free/scss/brands.scss"; 
+
 @import "custom.scss";
+@import "~bulma/bulma.sass";
+

@@ -950,7 +950,12 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001087, caniuse-lite@^1.0.30001093:
+caniuse-lite@^1.0.0:
+  version "1.0.30001097"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001097.tgz#1129c40c9f5ee3282158da08fd915d301f4a9bd8"
+  integrity sha512-TeuSleKt/vWXaPkLVFqGDnbweYfq4IaZ6rUugFf3rWY6dlII8StUZ8Ddin0PkADfgYZ4wRqCdO2ORl4Rn5eZIA==
+
+caniuse-lite@^1.0.30001087, caniuse-lite@^1.0.30001093:
   version "1.0.30001094"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001094.tgz#0b11d02e1cdc201348dbd8e3e57bd9b6ce82b175"
   integrity sha512-ufHZNtMaDEuRBpTbqD93tIQnngmJ+oBknjvr0IbFympSdtFpAUFmNv4mVKbb53qltxFx0nK3iy32S9AqkLzUNA==
@@ -4566,10 +4571,10 @@ postcss-svgo@^4.0.2:
     postcss-value-parser "^3.0.0"
     svgo "^1.0.0"
 
-postcss-typed-css-classes@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/postcss-typed-css-classes/-/postcss-typed-css-classes-0.2.0.tgz#a256341052ce990587cc1b33d0565493775cf994"
-  integrity sha512-VTDzJb+ydaru/ejI82WXr3zmz1C/7yYOS4Z738/D5nG4s6MM6uRrwTifl6A90f13GBGo0hJEAKuaD85QgiIARA==
+postcss-typed-css-classes@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/postcss-typed-css-classes/-/postcss-typed-css-classes-0.2.1.tgz#c546ec6d28095a651d4c1ae1b07b0caa1f3cb003"
+  integrity sha512-NqP6a/L16FH/ymPRbQXggifLTOiiDOdllvC48ybezUl+YwDXvRdbCiKQw2pT9DZ94GdcljrOcr4F7gJwRyXbUQ==
   dependencies:
     fast-glob "^3.2.4"
     postcss "7.0.29"
