@@ -1,7 +1,7 @@
 {
   "author": "Martin Kavík <martin@kavik.cz>",
   "name": "seed-quickstart-webpack",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "repository": "https://github.com/MartinKavik/seed-quickstart-webpack",
   "license": "MIT",
   "scripts": {
@@ -34,7 +34,7 @@
     "no-emit-webpack-plugin": "^2.0.1",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
-    "postcss-typed-css-classes": "^0.2.0",
+    "postcss-typed-css-classes": "^0.2.1",
     "react-snap": "^1.23.0",
     "serve": "^11.3.2",
     "style-loader": "^1.2.1",

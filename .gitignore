@@ -9,3 +9,4 @@ wasm-pack.log
 src/generated/**
 !src/generated/mod.rs
 !**/.keep
+css_classes.rs

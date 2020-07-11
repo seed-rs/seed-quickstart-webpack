@@ -2,6 +2,10 @@
 
 [UNRELEASED]
 
+[0.7.3]
+
+- Upgrade postcss-typed-css-classes to bring in bug fix
+
 [0.7.2]
 
 - Upgrade postcss-typed-css-classes
