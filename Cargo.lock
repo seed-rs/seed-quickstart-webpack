@@ -234,18 +234,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "kavik_cz"
-version = "0.1.0"
-dependencies = [
- "fixed-vec-deque 0.1.9 (registry+https://github.com/rust-lang/crates.io-index)",
- "seed 0.7.0 (git+https://github.com/seed-rs/seed?rev=b25cf59)",
- "strum 0.18.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "strum_macros 0.18.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "wasm-bindgen-test 0.3.13 (registry+https://github.com/rust-lang/crates.io-index)",
- "web-sys 0.3.39 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
 name = "lazy_static"
 version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -434,6 +422,18 @@ dependencies = [
  "version_check 0.9.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "wasm-bindgen 0.2.63 (registry+https://github.com/rust-lang/crates.io-index)",
  "wasm-bindgen-futures 0.4.13 (registry+https://github.com/rust-lang/crates.io-index)",
+ "web-sys 0.3.39 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "seed_qs_webpack"
+version = "0.2.0"
+dependencies = [
+ "fixed-vec-deque 0.1.9 (registry+https://github.com/rust-lang/crates.io-index)",
+ "seed 0.7.0 (git+https://github.com/seed-rs/seed?rev=b25cf59)",
+ "strum 0.18.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "strum_macros 0.18.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "wasm-bindgen-test 0.3.13 (registry+https://github.com/rust-lang/crates.io-index)",
  "web-sys 0.3.39 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 

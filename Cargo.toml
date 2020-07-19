@@ -1,10 +1,10 @@
 [package]
-version = "0.1.0"
-name = "kavik_cz"
-repository = "https://github.com/MartinKavik/kavik.cz"
+version = "0.2.0"
+name = "seed_qs_webpack"
+repository = "https://github.com/seed-rs/seed-quickstart-webpack"
 authors = ["Martin Kavík <martin@kavik.cz>"]
-description = "Personal website kavik.cz"
-categories = ["wasm", "rust", "tailwindcss", "seed", "personal", "website"]
+description = "Seed framework quick start template"
+categories = ["wasm", "rust", "seed", "frontend"]
 license = "MIT"
 readme = "./README.md"
 edition = "2018"

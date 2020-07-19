@@ -1,255 +1,188 @@
-mod component;
 mod css_classes;
-mod model;
-mod view;
+mod page;
 
-use crate::component::*;
 use crate::css_classes::C;
-use crate::model::*;
-use crate::view::*;
+use seed::{prelude::*, *};
 
 const STATIC_PATH: &str = "assets";
 const IMAGES_PATH: &str = "assets/images";
 
-use seed::{prelude::*, *};
-use strum_macros::{EnumIter, ToString};
+const EXAMPLE: &str = "example";
 
-fn init(_: Url, orders: &mut impl Orders<Msg>) -> Model {
+// ------ ------
+//     Init
+// ------ ------
+// page::counter::init(&mut orders.proxy(Msg::Counter))
+fn init(url: Url, orders: &mut impl Orders<Msg>) -> Model {
+  orders.subscribe(Msg::UrlChanged);
   Model {
-    todos: vec![],
-    current_todo: None,
-    editing: false,
-    filter: Filter::All,
-    todo: todo_input::init(&mut orders.proxy(Msg::Input)),
+    base_url: url.to_base_url(),
+    counter: page::counter::init(&mut orders.proxy(Msg::Counter)),
+    page: Page::init(url),
+    menu_visible: false,
   }
 }
 
-#[derive(EnumIter, ToString, Clone, PartialEq, Eq)]
-pub enum Filter {
-  All,
-  Active,
-  Completed,
-}
+// ------ ------
+//     Model
+// ------ ------
 
 pub struct Model {
-  pub todos: Vec<TodoModel>,
-  pub current_todo: Option<TodoModel>,
-  pub editing: bool,
-  pub filter: Filter,
-  pub todo: todo_input::Model,
+  base_url: Url,
+  counter: page::counter::Model,
+  page: Page,
+  menu_visible: bool,
 }
 
-#[derive(Clone)]
-pub enum Msg {
-  Input(todo_input::Msg),
-  AddTodo,
+// ------ Page ------
+#[derive(PartialEq)]
+enum Page {
+  Home,
+  Example,
+  NotFound,
 }
 
-fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
-  match msg {
-    Msg::Input(msg) => todo_input::update(msg, &mut model.todo, orders),
-    Msg::AddTodo => {
-      // maybe add a dirty/hasValue flag to the todo_input rather then check the len
-      if &model.todo.value.len() > &0 {
-        let entry = TodoModel {
-          description: model.todo.value.to_owned(),
-          completed: false,
-        };
-        model.todos.push(entry);
-        orders.notify(todo_input::Reset);
-      }
+impl Page {
+  fn init(mut url: Url) -> Self {
+    match url.next_path_part() {
+      None => Self::Home,
+      Some(EXAMPLE) => Self::Example,
+      _ => Self::NotFound,
     }
   }
 }
 
-fn view(model: &Model) -> Vec<Node<Msg>> {
+// ------ ------
+//     Urls
+// ------ ------
+
+struct_urls!();
+impl<'a> Urls<'a> {
+  pub fn home(self) -> Url {
+    self.base_url()
+  }
+  pub fn counter(self) -> page::counter::Urls<'a> {
+    page::counter::Urls::new(self.base_url().add_path_part(EXAMPLE))
+  }
+}
+
+// ------ ------
+//    Update
+// ------ ------
+
+enum Msg {
+  UrlChanged(subs::UrlChanged),
+  Counter(page::counter::Msg),
+  ResetCounter,
+  ToggleMenu,
+}
+
+fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
+  match msg {
+    Msg::UrlChanged(subs::UrlChanged(url)) => {
+      model.page = Page::init(url);
+    }
+    Msg::Counter(msg) => page::counter::update(msg, &mut model.counter),
+    Msg::ResetCounter => {
+      orders.notify(page::counter::DoReset);
+    }
+    Msg::ToggleMenu => model.menu_visible = !model.menu_visible,
+  }
+}
+
+// ------ ------
+//     View
+// ------ ------
+
+fn view(model: &Model) -> impl IntoNodes<Msg> {
   vec![
-    section![
-      C![C.hero, C.is_primary, C.is_bold, C.is_fullheight_with_navbar],
-      div![
-        C![C.hero_head],
-        header![
-          C![C.navbar],
+    navbar(&model.base_url, &model.page, &model),
+    match &model.page {
+      Page::Home => section![
+        C![C.hero, C.is_primary, C.is_bold, C.is_fullheight_with_navbar],
+        div![
+          C![C.hero_body],
           div![
-            C![C.container],
-            div![
-              C![C.navbar_brand],
-              a![
-                C![C.navbar_item],
-                img![
-                  attrs! {
-                    At::Src => image_src("seed_logo.svg"), At::Alt => "Logo"
-                  },
-                  style! {St::Height => rem(2)}
-                ]
-              ],
-              span![
-                C![C.navbar_burger],
-                attrs! {At::Data => "navbarMenu"},
-                span![],
-                span![],
-                span![],
-              ]
+            C![C.container, C.has_text_centered],
+            h1![
+              format!("Counter is {}", model.counter.value),
+              C![C.title C.is_1]
             ],
-            div![
-              attrs! {At::Id => "navbarMenu"},
-              C![C.navbar_menu],
-              div![
-                C![C.navbar_end],
-                a![C![C.navbar_item, C.is_active], "Home"],
-                a![C![C.navbar_item, C.is_active], "Examples"],
-                a![C![C.navbar_item, C.is_active], "Documentation"],
-                span![
-                  C![C.navbar_item],
-                  a![
-                    C![C.button, C.is_success, C.is_inverted],
-                    span![C![C.icon], i![C![C.fab, C.fa_github]]],
-                    span!["Download"]
-                  ]
-                ]
-              ]
+            h2!["Navigate to Example page and change", C![C.subtitle]],
+            button![
+              C![C.button, C.is_primary, C.is_inverted, C.is_outlined],
+              "Reset Counter",
+              ev(Ev::Click, |_| Msg::ResetCounter),
+              ev(Ev::Click, |_| log!("Reset counter!")),
             ]
           ]
+        ],
+      ],
+      Page::Example => {
+        page::counter::view(&model.counter).map_msg(Msg::Counter)
+      }
+      Page::NotFound => div!["404"],
+    },
+  ]
+}
+
+fn navbar(base_url: &Url, current_page: &Page, model: &Model) -> Node<Msg> {
+  nav![
+    C![C.navbar, C.is_light],
+    div![
+      C![C.navbar_brand],
+      a![
+        C![C.navbar_item],
+        attrs! { At::Href => "https://seed-rs.org/"},
+        img![
+          attrs! {
+            At::Src => image_src("seed_logo.svg"), At::Alt => "Logo"
+          },
+          style! {St::Height => rem(2)}
         ]
       ],
+      span![
+        C![C.navbar_burger, IF!(model.menu_visible => C.is_active)],
+        ev(Ev::Click, |_| Msg::ToggleMenu),
+        span![],
+        span![],
+        span![],
+      ]
+    ],
+    div![
+      C![C.navbar_menu, IF!(model.menu_visible => C.is_active)],
       div![
-        C![C.hero_body],
-        div![
-          C![C.container, C.has_text_centered],
-          h1!["Coding highlights", C![C.title C.is_1]],
-          h2!["Like your favorites", C![C.subtitle]]
-        ]
+        C![C.navbar_start],
+        a![
+          C![C.navbar_item, IF!(*current_page == Page::Home => C.is_active)],
+          attrs! { At::Href => Urls::new(base_url).home() },
+          "Home"
+        ],
+        a![
+          C![C.navbar_item, IF!(*current_page == Page::Example => C.is_active)],
+          attrs! { At::Href => Urls::new(base_url).counter().counter_url()},
+          "Example"
+        ],
+        a![
+          C![C.navbar_item],
+          "Documentation",
+          attrs! {At::Href => "https://docs.rs/crate/seed/0.7.0"}
+        ],
       ],
       div![
-        C![C.hero_foot],
-        div![
-          C![C.columns],
-          div![
-            C![C.column],
-            div![
-              C![C.card],
-              div![
-                C![C.card_content],
-                h2![C![C.title], "Card Title"],
-                h3![C![C.subtitle], "Card Title"],
-              ],
-              footer![
-                C![C.card_footer],
-                span![
-                  C![C.card_footer_item],
-                  a![
-                    C![C.button, C.is_success],
-                    attrs! {At::Href => "#"},
-                    i![C![C.fa, C.fa_thumbs_up]]
-                  ],
-                  C![C.card_footer_item],
-                  a![
-                    C![C.button, C.is_danger],
-                    attrs! {At::Href => "#"},
-                    i![C![C.fa, C.fa_thumbs_down]]
-                  ],
-                  C![C.card_footer_item],
-                  a![
-                    C![C.button, C.is_info],
-                    attrs! {At::Href => "#"},
-                    i![C![C.fa, C.fa_retweet]]
-                  ],
-                ]
-              ]
-            ]
-          ],
-          div![
-            C![C.column],
-            div![
-              C![C.card],
-              div![
-                C![C.card_content],
-                h2![C![C.title], "Card Title"],
-                h3![C![C.subtitle], "Card Title"],
-              ],
-              footer![
-                C![C.card_footer],
-                span![
-                  C![C.card_footer_item],
-                  a![
-                    C![C.button, C.is_success],
-                    attrs! {At::Href => "#"},
-                    i![C![C.fa, C.fa_thumbs_up]]
-                  ],
-                  C![C.card_footer_item],
-                  a![
-                    C![C.button, C.is_danger],
-                    attrs! {At::Href => "#"},
-                    i![C![C.fa, C.fa_thumbs_down]]
-                  ],
-                  C![C.card_footer_item],
-                  a![
-                    C![C.button, C.is_info],
-                    attrs! {At::Href => "#"},
-                    i![C![C.fa, C.fa_retweet]]
-                  ],
-                ]
-              ]
-            ]
-          ],
-          div![
-            C![C.column],
-            div![
-              C![C.card],
-              div![
-                C![C.card_content],
-                h2![C![C.title], "Card Title"],
-                h3![C![C.subtitle], "Card Title"],
-              ],
-              footer![
-                C![C.card_footer],
-                span![
-                  C![C.card_footer_item],
-                  a![
-                    C![C.button, C.is_success],
-                    attrs! {At::Href => "#"},
-                    i![C![C.fa, C.fa_thumbs_up]]
-                  ],
-                  C![C.card_footer_item],
-                  a![
-                    C![C.button, C.is_danger],
-                    attrs! {At::Href => "#"},
-                    i![C![C.fa, C.fa_thumbs_down]]
-                  ],
-                  C![C.card_footer_item],
-                  a![
-                    C![C.button, C.is_info],
-                    attrs! {At::Href => "#"},
-                    i![C![C.fa, C.fa_retweet]]
-                  ],
-                ]
-              ]
-            ]
+        C![C.navbar_end],
+        span![
+          C![C.navbar_item],
+          a![
+            attrs! {At::Href => "https://github.com/seed-rs/seed"},
+            span![
+              C![C.icon, C.is_medium, C.has_text_dark],
+              i![C![C.fab, C.fa_2x, C.fa_github]]
+            ],
           ]
         ]
-      ],
-    ], // page::view(
-       //   header::view("todos".to_owned(), model),
-       //   Body(&model),
-       //   Footer(&model),
-       //   vec![
-       //     p!["Double-click to edit a todo".to_owned()],
-       //     p![
-       //       "Written by ".to_owned(),
-       //       a![
-       //         attrs! {At::Href => "https://github.com/fattenap/", At::Target => "_blank" },
-       //         "Frank Panetta"
-       //       ]
-       //     ],
-       //     p![
-       //       "Part of ".to_owned(),
-       //       a![
-       //         attrs! {At::Href => "http://todomvc.com/", At::Target => "_blank" },
-       //         "TodoMVC"
-       //       ]
-       //     ],
-       //   ],
-       // )
+      ]
+    ]
   ]
 }
 
@@ -265,14 +198,11 @@ pub fn asset_path(asset: &str) -> String {
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
+// ------ ------
+//     Start
+// ------ ------
+
 #[wasm_bindgen(start)]
 pub fn start() {
   App::start("app", init, update, view);
 }
-
-// @media screen and (min-width: 769px), print
-// .columns:not(.is-desktop) {
-  // display: flex;
-// }
-
-// C.is_desktop
