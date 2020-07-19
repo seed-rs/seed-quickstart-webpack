@@ -1,6 +1,6 @@
 #![allow(clippy::needless_pass_by_value, clippy::trivially_copy_pass_by_ref)]
 
-use crate::C;
+use crate::css_classes::C;
 use seed::{prelude::*, *};
 
 // ------ ------
@@ -60,7 +60,7 @@ pub fn update(msg: Msg, model: &mut Model) {
 
 pub fn view(model: &Model) -> Node<Msg> {
     div![
-        C![C.pl_4, C.pt_4, C.field, C.is_grouped],
+        C![C.fade_in, C.pl_4, C.pt_4, C.field, C.is_grouped],
         p![
             C![C.control],
             button![

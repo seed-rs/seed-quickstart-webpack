@@ -6,6 +6,7 @@ use seed::{prelude::*, *};
 
 const STATIC_PATH: &str = "assets";
 const IMAGES_PATH: &str = "assets/images";
+const USER_AGENT_FOR_PRERENDERING: &str = "ReactSnap";
 
 const EXAMPLE: &str = "example";
 
@@ -20,7 +21,15 @@ fn init(url: Url, orders: &mut impl Orders<Msg>) -> Model {
     counter: page::counter::init(&mut orders.proxy(Msg::Counter)),
     page: Page::init(url),
     menu_visible: false,
+    in_prerendering: is_in_prerendering(),
   }
+}
+
+fn is_in_prerendering() -> bool {
+  let user_agent =
+    window().navigator().user_agent().expect("cannot get user agent");
+
+  user_agent == USER_AGENT_FOR_PRERENDERING
 }
 
 // ------ ------
@@ -32,6 +41,7 @@ pub struct Model {
   counter: page::counter::Model,
   page: Page,
   menu_visible: bool,
+  pub in_prerendering: bool,
 }
 
 // ------ Page ------
@@ -97,9 +107,15 @@ fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
 fn view(model: &Model) -> impl IntoNodes<Msg> {
   vec![
     navbar(&model.base_url, &model.page, &model),
+    // figure![
+    //   C![C.image, C.is_square],
+    //   img![attrs! {
+    //       At::Src => image_src("gear.svg")
+    //   }],
+    // ],
     match &model.page {
       Page::Home => section![
-        C![C.hero, C.is_primary, C.is_bold, C.is_fullheight_with_navbar],
+        C![C.fade_in, C.hero, C.is_primary, C.is_bold, C.is_fullheight_with_navbar],
         div![
           C![C.hero_body],
           div![
@@ -108,7 +124,7 @@ fn view(model: &Model) -> impl IntoNodes<Msg> {
               format!("Counter is {}", model.counter.value),
               C![C.title C.is_1]
             ],
-            h2!["Navigate to Example page and change", C![C.subtitle]],
+            h2!["Navigate to the Example page and change", C![C.subtitle]],
             button![
               C![C.button, C.is_primary, C.is_inverted, C.is_outlined],
               "Reset Counter",
