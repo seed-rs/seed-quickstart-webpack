@@ -107,15 +107,25 @@ fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
 fn view(model: &Model) -> impl IntoNodes<Msg> {
   vec![
     navbar(&model.base_url, &model.page, &model),
-    // figure![
-    //   C![C.image, C.is_square],
-    //   img![attrs! {
-    //       At::Src => image_src("gear.svg")
-    //   }],
-    // ],
     match &model.page {
       Page::Home => section![
-        C![C.fade_in, C.hero, C.is_primary, C.is_bold, C.is_fullheight_with_navbar],
+        C![
+          C.fade_in,
+          C.hero,
+          C.is_primary,
+          C.is_bold,
+          C.is_fullheight_with_navbar
+        ],
+        figure![
+          C![C.image],
+          img![
+            C![C.gear_bgd, C.blur, C.rotate],
+            attrs! {
+              At::Width => "70%", At::Height => "70%"
+              At::Src => image_src("gear.svg")
+            }
+          ],
+        ],
         div![
           C![C.hero_body],
           div![
