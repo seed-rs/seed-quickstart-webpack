@@ -1,5 +1,5 @@
 use crate::{
-    generated::css_classes::C, image_src, Msg, Urls, MAIL_TO_HELLWEB,
+    css_classes::C, image_src, Msg, Urls, MAIL_TO_HELLWEB,
     MAIL_TO_KAVIK,
 };
 use seed::{prelude::*, *};
@@ -7,95 +7,40 @@ use seed::{prelude::*, *};
 #[allow(clippy::too_many_lines)]
 pub fn view(base_url: &Url) -> Node<Msg> {
     div![
-        C![
-            C.flex_grow,
-        ],
+        C![],
         // Main section
         section![
-            C![
-                C.relative,
-                C.h_690px,
-                C.bg_gray_1,
-                // sm__
-                C.sm__h_890px,
-                // lg__
-                C.lg__h_1420px,
-            ],
+            C![],
             // Left background
             div![
-                C![
-                    C.absolute,
-                    C.left_0,
-                    C.inset_y_0,
-                    C.w_1of2,
-                    C.bg_yellow_4,
-                ]
+                C![]
             ],
             div![
-                C![
-                    C.relative,
-                    C.flex,
-                    C.justify_center,
-                ],
+                C![],
                 // Martin Kavík container
                 div![
-                    C![
-                        C.h_360px,
-                        C.rounded_bl_90px,
-                        C.bg_gray_1,
-                        // sm__
-                        C.sm__h_550px,
-                        // lg__
-                        C.lg__h_860px,
-                        C.lg__rounded_bl_260px,
-                    ],
+                    C![],
                     // Martin Kavík
                     div![
-                        C![
-                            C.mt_40,
-                            C.ml_12,
-                            C.w_xs,
-                            C.font_display,
-                            // sm__
-                            C.sm__mt_64,
-                            C.sm__ml_20,
-                            C.sm__w_md,
-                            // lg__
-                            C.lg__mt_72,
-                            C.lg__ml_20,
-                            C.lg__w_216,
+                        span![
+                            i![C![C.fa, C.fa_user]],
                         ],
+                                               span![
+                            i![C![C.far, C.fa_user]],
+                        ],
+                        C![],
                         h1![
-                            C![
-                                C.inline,
-                                C.leading_tight,
-                                C.text_31,
-                                C.text_gray_10
-                                // sm__
-                                C.sm__text_40,
-                                // lg__
-                                C.lg__leading_none,
-                                C.lg__text_120,
-                            ],
+                            C![],
                             span![
                                 "Martin "
                             ],
                             span![
-                                C![
-                                    C.font_bold
-                                ],
+                                C![],
                                 "Kavík"
                             ],
                         ],
                         span![
-                            C![
-                                C.text_21,
-                                C.text_gray_7,
-                                // sm__
-                                C.sm__text_32,
-                                // lg__
-                                C.lg__text_60,
-                            ],
+                            C![],
                             "\u{00A0}is",
                             br![],
                             "a developer",
@@ -109,21 +54,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
             ],
             // Gear
             img![
-                C![
-                    C.absolute
-                    C.top_0,
-                    C.left_full,
-                    C._ml_40,
-                    C._mt_56,
-                    C.w_md,
-                    C.max_w_none,
-                    C.blur,
-                    // sm__
-                    C.sm___mt_64,
-                    C.sm__w_750px,
-                    // lg__
-                    C.lg__w_900px,
-                ],
+                C![],
                 attrs!{
                     At::Src => image_src("gear.svg")
                 }
@@ -131,91 +62,25 @@ pub fn view(base_url: &Url) -> Node<Msg> {
         ],
         // Seed section
         section![
-            C![
-                C.relative,
-                C._mt_48,
-                C.pt_px,
-                C.rounded_tl_140px,
-                C.bg_blue_8,
-                // lg__
-                C.lg___mt_80,
-                C.lg__rounded_tl_330px,
-            ],
+            C![],
             // Main list
             div![
-                C![
-                    C._ml_5,
-                    C._mt_48,
-                    C.max_w_lg,
-                    C.flex,
-                    C.justify_end,
-                    C.relative,
-                    // sm__
-                    C.max_w_4xl,
-                    // lg__
-                    C.lg___mt_92,
-                    C.lg__max_w_8xl,
-                    C.lg__mx_auto,
-                ],
+                C![],
                 // Right background
                 div![
-                    C![
-                        C.absolute,
-                        C.right_0,
-                        C.inset_y_0,
-                        C._right_50vw,
-                        C.w_50vw,
-                        C.bg_gray_1
-                    ]
+                    C![]
                 ],
                 // List
                 div![
-                    C![
-                        C.relative,
-                        C.pl_4,
-                        C.rounded_bl_45px,
-                        C.font_display,
-                        C.text_17,
-                        C.text_gray_8,
-                        C.bg_gray_1,
-                        C.overflow_hidden,
-                        // sm__
-                        C.sm__pl_8,
-                        C.sm__pr_2,
-                        C.sm__text_26,
-                        // lg__
-                        C.lg__pl_16,
-                        C.lg__text_45,
-                        C.lg__rounded_bl_140px,
-                    ],
+                    C![],
                     ul![
-                        C![
-                            C.w_xs,
-                            C.pl_2,
-                            C.py_8,
-                            // sm__
-                            C.sm__w_120,
-                            // lg__
-                            C.lg__w_204,
-                            C.lg__pt_32,
-                            C.lg__pb_24,
-                        ],
+                        C![],
                         li![
-                            C![
-                                C.my_3,
-                            ],
+                            C![],
                             div![
-                                C![
-                                    C.flex,
-                                    C.flex_no_wrap,
-                                ],
+                                C![],
                                 div![
-                                    C![
-                                        C.text_blue_6,
-                                        C.mr_2,
-                                        // lg__
-                                        C.lg__mr_4,
-                                    ],
+                                    C![],
                                     // https://stackoverflow.com/a/39900080
                                     "▶\u{fe0e}"
                                 ],
@@ -223,63 +88,33 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             ]
                         ],
                         li![
-                            C![
-                                C.my_3,
-                            ],
+                            C![],
                             div![
-                                C![
-                                    C.flex,
-                                    C.flex_no_wrap,
-                                ],
+                                C![],
                                 div![
-                                    C![
-                                        C.text_blue_6,
-                                        C.mr_2,
-                                        // lg__
-                                        C.lg__mr_4,
-                                    ],
+                                    C![],
                                     "▶\u{fe0e}"
                                 ],
                                 "Readable code and UI."
                             ]
                         ],
                         li![
-                            C![
-                                C.my_3,
-                            ],
+                            C![],
                             div![
-                                C![
-                                    C.flex,
-                                    C.flex_no_wrap,
-                                ],
+                                C![],
                                 div![
-                                    C![
-                                        C.text_blue_6,
-                                        C.mr_2,
-                                        // lg__
-                                        C.lg__mr_4,
-                                    ],
+                                    C![],
                                     "▶\u{fe0e}"
                                 ],
                                 "Rust, Affinity Designer and Figma."
                             ]
                         ],
                         li![
-                            C![
-                                C.my_3,
-                            ],
+                            C![],
                             div![
-                                C![
-                                    C.flex,
-                                    C.flex_no_wrap,
-                                ],
+                                C![],
                                 div![
-                                    C![
-                                        C.text_blue_6,
-                                        C.mr_2,
-                                        // lg__
-                                        C.lg__mr_4,
-                                    ],
+                                    C![],
                                     "▶\u{fe0e}"
                                 ],
                                 div![
@@ -288,11 +123,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                         attrs!{
                                             At::Href => MAIL_TO_KAVIK
                                         },
-                                        C![
-                                            C.underline,
-                                            C.underline_yellow_7,
-                                            C.font_semibold
-                                        ],
+                                        C![],
                                         "martin@kavik.cz"
                                     ]
                                 ]
@@ -302,142 +133,58 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                 ]
             ],
             div![
-                C![
-                    C.flex,
-                    C.flex_col,
-                    C.items_center
-                ],
+                C![],
                 // Section content container
                 div![
-                    C![
-                        C.mt_20,
-                        C.w_xs,
-                        C.px_2,
-                        // sm__
-                        C.sm__mt_48,
-                        C.sm__w_md,
-                        // lg__
-                        C.lg__mt_64,
-                        C.lg__w_236,
-                    ],
+                    C![],
                     // Github projects
                     h2![
-                        C![
-                            C.font_display,
-                            C.text_23,
-                            C.text_blue_3,
-                            C.text_center,
-                            // sm__
-                            C.sm__text_50,
-                            // lg__
-                            C.lg__text_80,
-                        ],
+                        C![],
                         span![
-                            C![
-                                C.font_thin
-                            ],
+                            C![],
                             "TOP-5"
                         ],
                         span![
-                            C![
-                                C.font_normal
-                            ],
+                            C![],
                             " GITHUB PROJECTS"
                         ]
                     ],
                     // Testimonial 1
                     div![
-                        C![
-                            C.mt_20,
-                            C.text_right,
-                            // sm__
-                            C.sm__mt_40,
-                            // lg__
-                            C.lg__mt_64,
-                        ],
+                        C![],
                         div![
-                            C![
-                                C.font_display,
-                                C.italic,
-                                C.text_yellow_4
-                            ],
+                            C![],
                             "Awesome, awesome framework!"
                         ],
                         div![
-                            C![
-                                C.mt_2,
-                                C.mr_2,
-                                C.font_display,
-                                C.text_15,
-                                C.text_blue_3,
-                                // sm__
-                                C.sm__mt_4,
-                                C.sm__text_20,
-                                // lg__
-                                C.lg__mt_6,
-                                C.lg__mr_8,
-                                C.lg__text_35,
-                            ],
+                            C![],
                             "- ",
                             a![
                                 attrs!{
                                     At::Href => "https://github.com/David-OConnor/seed/issues/193#issue-479188076"
                                 },
-                                C![
-                                    C.underline,
-                                    C.underline_blue_5,
-                                ],
+                                C![],
                                 "rebo"
                             ]
                         ]
                     ],
                     // Testimonial 2
                     div![
-                        C![
-                            C.mt_8,
-                            C.text_right,
-                            // sm__
-                            C.sm__mt_12,
-                            // lg__
-                            C.lg__mt_16,
-                        ],
+                        C![],
                         div![
-                            C![
-                                C.mr_4,
-                                C.font_display,
-                                C.italic,
-                                C.text_yellow_4,
-                                // lg__
-                                C.lg__mr_16,
-                            ],
+                            C![],
                             "Seed rocks, and ",
                             br![],
                             "Martin makes it better."
                         ],
                         div![
-                            C![
-                                C.mt_2,
-                                C.mr_5,
-                                C.font_display,
-                                C.text_15,
-                                C.text_blue_3,
-                                // sm__
-                                C.sm__mt_4,
-                                C.sm__text_20,
-                                // lg__
-                                C.lg__mt_8,
-                                C.lg__mr_20,
-                                C.lg__text_35,
-                            ],
+                            C![],
                             "- ",
                             a![
                                 attrs!{
                                     At::Href => "https://github.com/MartinKavik/seed-rs-realworld/issues/1#issuecomment-525413644"
                                 },
-                                C![
-                                    C.underline,
-                                    C.underline_blue_5,
-                                ],
+                                C![],
                                 "robwebbjr"
                             ]
                         ]
@@ -447,82 +194,27 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => "https://github.com/MartinKavik/awesome-seed-rs"
                         },
-                        C![
-                            C.block,
-                            C.relative,
-                            C.mt_8,
-                            C.pt_5,
-                            C.pb_3,
-                            C.w_36,
-                            C.rounded_tr_28px,
-                            C.bg_blue_2,
-                            C.shadow_glow,
-                            // sm__
-                            C.sm__mt_24,
-                            C.sm__pt_8,
-                            C.sm__pb_8,
-                            C.sm__w_64,
-                            C.sm__rounded_tr_55px,
-                            // lg__
-                            C.lg__mt_32,
-                            C.lg__pt_12,
-                            C.lg__pb_12,
-                            C.lg__w_md,
-                            C.lg__rounded_tr_90px,
-                        ],
+                        C![],
                         // Extended background
                         div![
-                            C![
-                                C.absolute,
-                                C.left_0,
-                                C.inset_y_0,
-                                C._left_50vw,
-                                C.w_50vw,
-                                C.bg_blue_2,
-                                C.shadow_glow,
-                            ]
+                            C![]
                         ],
                         // Logo
                         img![
-                            C![
-                                C.h_18,
-                                C.max_w_none,
-                                // sm__
-                                C.sm__h_32
-                                // lg__
-                                C.lg__ml_32,
-                                C.lg__h_40,
-                            ],
+                            C![],
                             attrs!{
                                 At::Src => image_src("seed_logo.svg")
                             }
                         ]
                     ],
                     ul![
-                        C![
-                            C.mt_10,
-                            C.text_blue_1,
-                            // sm__
-                            C.sm__mt_20,
-                            // lg__
-                            C.lg__mt_32,
-                        ],
+                        C![],
                         li![
-                            C![
-                                C.my_3,
-                            ],
+                            C![],
                             div![
-                                C![
-                                    C.flex,
-                                    C.flex_no_wrap,
-                                ],
+                                C![],
                                 div![
-                                    C![
-                                        C.text_yellow_4,
-                                        C.mr_2,
-                                        // lg__
-                                        C.lg__mr_4,
-                                    ],
+                                    C![],
                                     "▶\u{fe0e}"
                                 ],
                                 div![
@@ -531,15 +223,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                             At::Href => "https://github.com/MartinKavik/awesome-seed-rs"
                                         },
                                         h3![
-                                            C![
-                                                C.inline,
-                                                C.text_18,
-                                                C.font_bold,
-                                                // sm__
-                                                C.sm__text_26,
-                                                // lg__
-                                                C.lg__text_45,
-                                            ],
+                                            C![],
                                             "Seed"
                                         ],
                                     ],
@@ -548,50 +232,22 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             ]
                         ],
                         li![
-                            C![
-                                C.my_3,
-                                // sm__
-                                C.sm__mt_8,
-                                // lg__
-                                C.lg__mt_16,
-                            ],
+                            C![],
                             div![
-                                C![
-                                    C.flex,
-                                    C.flex_no_wrap,
-                                ],
+                                C![],
                                 div![
-                                    C![
-                                        C.text_yellow_4,
-                                        C.mr_2,
-                                        // lg__
-                                        C.lg__mr_4,
-                                    ],
+                                    C![],
                                     "▶\u{fe0e}"
                                 ],
                                 "I'm the main contributor."
                             ]
                         ],
                         li![
-                            C![
-                                C.my_3,
-                                // sm__
-                                C.sm__mt_8,
-                                // lg__
-                                C.lg__mt_16,
-                            ],
+                            C![],
                             div![
-                                C![
-                                    C.flex,
-                                    C.flex_no_wrap,
-                                ],
+                                C![],
                                 div![
-                                    C![
-                                        C.text_yellow_4,
-                                        C.mr_2,
-                                        // lg__
-                                        C.lg__mr_4,
-                                    ],
+                                    C![],
                                     "▶\u{fe0e}"
                                 ],
                                 "I've designed the logo."
@@ -602,45 +258,17 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => "https://github.com/MartinKavik/awesome-seed-rs"
                         },
-                        C![
-                            C.block,
-                            C.mt_10,
-                            C.mb_24,
-                            C.mr_2,
-                            C.text_right,
-                            C.font_display,
-                            // sm__
-                            C.sm__mt_16,
-                            C.sm__mb_48,
-                            // lg__
-                            C.lg__mt_24,
-                            C.lg__mb_64,
-                        ],
+                        C![],
                         span![
-                            C![
-                                C.text_blue_4
-                            ],
+                            C![],
                             "MartinKavik/"
                         ],
                         span![
-                            C![
-                                C.text_blue_2
-                            ],
+                            C![],
                             "awesome-seed-rs"
                         ],
                         img![
-                            C![
-                                C.inline
-                                C.mb_4,
-                                C.ml_px,
-                                C.w_3,
-                                // sm__
-                                C.sm__mb_6,
-                                C.sm__w_4,
-                                // lg__
-                                C.lg__mb_8,
-                                C.lg__w_5,
-                            ],
+                            C![],
                             attrs!{
                                 At::Src => image_src("link_arrow.svg")
                             }
@@ -651,66 +279,27 @@ pub fn view(base_url: &Url) -> Node<Msg> {
         ],
         // RealWorld section
         section![
-            C![
-                C.bg_blue_10
-            ],
+            C![],
             div![
-                C![
-                    C.flex,
-                    C.flex_col,
-                    C.items_center
-                ],
+                C![],
                 // Section content container
                 div![
-                    C![
-                        C.mt_16,
-                        C.w_xs,
-                        C.px_2,
-                        // sm__
-                        C.sm__mt_40,
-                        C.sm__w_132,
-                        // lg__
-                        C.lg__mt_64,
-                        C.lg__w_236,
-                    ],
+                    C![],
                     // Testimonial
                     div![
-                        C![
-                            C.mt_10,
-                            C.mr_2,
-                            C.text_right,
-                        ],
+                        C![],
                         div![
-                            C![
-                                C.mr_3,
-                                C.font_display,
-                                C.italic,
-                                C.text_yellow_4
-                            ],
+                            C![],
                             "Your real world example really is the mother of all examples."
                         ],
                         div![
-                            C![
-                                C.mt_4,
-                                C.font_display,
-                                C.text_15,
-                                C.text_blue_3,
-                                // sm__
-                                C.sm__mt_6,
-                                C.sm__text_20,
-                                // lg__
-                                C.lg__mt_8,
-                                C.lg__text_35,
-                            ],
+                            C![],
                             "- ",
                             a![
                                 attrs!{
                                     At::Href => "https://github.com/David-OConnor/seed/pull/189#issuecomment-516095587"
                                 },
-                                C![
-                                    C.underline,
-                                    C.underline_blue_5,
-                                ],
+                                C![],
                                 "theduke"
                             ]
                         ]
@@ -720,81 +309,27 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => "https://github.com/MartinKavik/seed-rs-realworld"
                         },
-                        C![
-                            C.block,
-                            C.relative,
-                            C.mt_12,
-                            C.ml_1,
-                            C.pt_8,
-                            C.pb_6,
-                            C.rounded_tl_28px,
-                            C.bg_blue_2,
-                            C.shadow_glow,
-                            // sm__
-                            C.sm__mt_32,
-                            C.sm__pt_12,
-                            C.sm__pb_10,
-                            C.sm__rounded_tl_55px,
-                            // lg__
-                            C.lg__mt_40,
-                            C.lg__ml_32,
-                            C.sm__pt_16,
-                            C.sm__pb_12,
-                            C.lg__rounded_tl_90px,
-                        ],
+                        C![],
                         // Extended background
                         div![
-                            C![
-                                C.absolute,
-                                C._right_50vw,
-                                C.inset_y_0,
-                                C.w_50vw,
-                                C.bg_blue_2,
-                                C.shadow_glow,
-                            ]
+                            C![]
                         ],
                         // Logo
                         img![
-                            C![
-                                C.h_12,
-                                C.max_w_none,
-                                // sm__
-                                C.sm__h_20
-                                // lg__
-                                C.lg__h_32,
-                            ],
+                            C![],
                             attrs!{
                                 At::Src => image_src("realworld_logo.png")
                             }
                         ]
                     ],
                     ul![
-                        C![
-                            C.mt_12,
-                            C.text_blue_1,
-                            // sm__
-                            C.sm__mt_24,
-                            C.sm__ml_8,
-                            // lg__
-                            C.lg__mt_40,
-                            C.lg__ml_0,
-                        ],
+                        C![],
                         li![
-                            C![
-                                C.my_3,
-                            ],
+                            C![],
                             div![
-                                C![
-                                    C.flex,
-                                    C.flex_no_wrap,
-                                ],
+                                C![],
                                 div![
-                                    C![
-                                        C.text_yellow_4,
-                                        C.mr_2,
-                                        // lg__
-                                        C.lg__mr_4,
-                                    ],
+                                    C![],
                                     "▶\u{fe0e}"
                                 ],
                                 div![
@@ -803,15 +338,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                             At::Href => "https://github.com/MartinKavik/seed-rs-realworld"
                                         },
                                         h3![
-                                            C![
-                                                C.inline,
-                                                C.text_18,
-                                                C.font_bold,
-                                                // sm__
-                                                C.sm__text_26,
-                                                // lg__
-                                                C.lg__text_45,
-                                            ],
+                                            C![],
                                             "RealWorld example"
                                         ],
                                     ],
@@ -824,45 +351,17 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => "https://github.com/MartinKavik/seed-rs-realworld"
                         },
-                        C![
-                            C.block,
-                            C.mt_10,
-                            C.mb_24,
-                            C.mr_2,
-                            C.text_right,
-                            C.font_display,
-                            // sm__
-                            C.sm__mt_20,
-                            C.sm__mb_48,
-                            // lg__
-                            C.lg__mt_32,
-                            C.lg__mb_64,
-                        ],
+                        C![],
                         span![
-                            C![
-                                C.text_blue_4
-                            ],
+                            C![],
                             "MartinKavik/"
                         ],
                         span![
-                            C![
-                                C.text_blue_2
-                            ],
+                            C![],
                             "seed-rs-realworld"
                         ],
                         img![
-                            C![
-                                C.inline
-                                C.mb_4,
-                                C.ml_px,
-                                C.w_3,
-                                // sm__
-                                C.sm__mb_6,
-                                C.sm__w_4,
-                                // lg__
-                                C.lg__mb_8,
-                                C.lg__w_5,
-                            ],
+                            C![],
                             attrs!{
                                 At::Src => image_src("link_arrow.svg")
                             }
@@ -873,56 +372,21 @@ pub fn view(base_url: &Url) -> Node<Msg> {
         ],
         // Kavik.cz section
         section![
-            C![
-                C.bg_blue_6
-            ],
+            C![],
             div![
-                C![
-                    C.flex,
-                    C.flex_col,
-                    C.items_center
-                ],
+                C![],
                 // Section content container
                 div![
-                    C![
-                        C.mt_16,
-                        C.w_xs,
-                        C.px_2,
-                        // sm__
-                        C.sm__mt_40,
-                        C.sm__w_md,
-                        // lg__
-                        C.lg__mt_64,
-                        C.lg__w_204,
-                    ],
+                    C![],
                     // Testimonial
                     div![
-                        C![
-                            C.mt_10,
-                            C.mr_3,
-                            C.text_right,
-                        ],
+                        C![],
                         div![
-                            C![
-                                C.mr_4,
-                                C.font_display,
-                                C.italic,
-                                C.text_yellow_4
-                            ],
+                            C![],
                             "Fork it, use it!"
                         ],
                         div![
-                            C![
-                                C.mt_4,
-                                C.font_display,
-                                C.text_15,
-                                C.text_blue_3,
-                                // sm__
-                                C.sm__text_20,
-                                // lg__
-                                C.lg__mt_8,
-                                C.lg__text_35,
-                            ],
+                            C![],
                             "- me"
                         ]
                     ],
@@ -931,80 +395,27 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => "https://github.com/MartinKavik/kavik.cz"
                         },
-                        C![
-                            C.block,
-                            C.relative,
-                            C.mt_8,
-                            C.pt_4,
-                            C.pb_2,
-                            C.w_36,
-                            C.rounded_tr_28px,
-                            C.bg_blue_2,
-                            C.shadow_glow,
-                            // sm__
-                            C.sm__mt_20,
-                            C.sm__w_56,
-                            C.sm__pt_10,
-                            C.sm__pb_8,
-                            C.sm__rounded_tr_55px,
-                            // lg__
-                            C.lg__w_96,
-                            C.lg__rounded_tr_90px,
-                        ],
+                        C![],
                         // Extended background
                         div![
-                            C![
-                                C.absolute,
-                                C.left_0,
-                                C.inset_y_0,
-                                C._left_50vw,
-                                C.w_50vw,
-                                C.bg_blue_2,
-                                C.shadow_glow,
-                            ]
+                            C![]
                         ],
                         // Logo
                         img![
-                            C![
-                                C.ml_6,
-                                C.h_20,
-                                C.max_w_none,
-                                // sm__
-                                C.sm__h_32,
-                                // lg__
-                                C.lg__ml_32,
-                                C.lg__h_40,
-                            ],
+                            C![],
                             attrs!{
                                 At::Src => image_src("logo.svg")
                             }
                         ]
                     ],
                     ul![
-                        C![
-                            C.mt_10,
-                            C.text_blue_1,
-                            // sm__
-                            C.sm__mt_24,
-                            // lg__
-                            C.lg__mt_32,
-                        ],
+                        C![],
                         li![
-                            C![
-                                C.my_3,
-                            ],
+                            C![],
                             div![
-                                C![
-                                    C.flex,
-                                    C.flex_no_wrap,
-                                ],
+                                C![],
                                 div![
-                                    C![
-                                        C.text_yellow_4,
-                                        C.mr_2,
-                                        // lg__
-                                        C.lg__mr_4,
-                                    ],
+                                    C![],
                                     "▶\u{fe0e}"
                                 ],
                                 div![
@@ -1013,15 +424,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                             At::Href => "https://github.com/MartinKavik/kavik.cz"
                                         },
                                         h3![
-                                            C![
-                                                C.inline,
-                                                C.text_18,
-                                                C.font_bold,
-                                                // sm__
-                                                C.sm__text_26,
-                                                // lg__
-                                                C.lg__text_45,
-                                            ],
+                                            C![],
                                             "kavik.cz"
                                         ],
                                     ],
@@ -1030,25 +433,11 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             ]
                         ],
                         li![
-                            C![
-                                C.my_3,
-                                // sm__
-                                C.sm__mt_8,
-                                // lg__
-                                C.lg__mt_16,
-                            ],
+                            C![],
                             div![
-                                C![
-                                    C.flex,
-                                    C.flex_no_wrap,
-                                ],
+                                C![],
                                 div![
-                                    C![
-                                        C.text_yellow_4,
-                                        C.mr_2,
-                                        // lg__
-                                        C.lg__mr_4,
-                                    ],
+                                    C![],
                                     "▶\u{fe0e}"
                                 ],
                                 "You can fork it, modify it and use it as your own website."
@@ -1059,45 +448,17 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => "https://github.com/MartinKavik/kavik.cz"
                         },
-                        C![
-                            C.block,
-                            C.mt_10,
-                            C.mb_24,
-                            C.mr_2,
-                            C.text_right,
-                            C.font_display,
-                            // sm__
-                            C.sm__mt_20,
-                            C.sm__mb_56,
-                            // lg__
-                            C.lg__mt_32,
-                            C.lg__mb_64,
-                        ],
+                        C![],
                         span![
-                            C![
-                                C.text_blue_3
-                            ],
+                            C![],
                             "MartinKavik/"
                         ],
                         span![
-                            C![
-                                C.text_blue_2
-                            ],
+                            C![],
                             "kavik.cz"
                         ],
                         img![
-                            C![
-                                C.inline
-                                C.mb_4,
-                                C.ml_px,
-                                C.w_3,
-                                // sm__
-                                C.sm__mb_6,
-                                C.sm__w_4,
-                                // lg__
-                                C.lg__mb_8,
-                                C.lg__w_5,
-                            ],
+                            C![],
                             attrs!{
                                 At::Src => image_src("link_arrow.svg")
                             }
@@ -1108,71 +469,27 @@ pub fn view(base_url: &Url) -> Node<Msg> {
         ],
         // Seed Quickstart section
         section![
-            C![
-                C.rounded_br_140px,
-                C.bg_blue_10,
-                // lg__
-                C.lg__rounded_br_330px,
-            ],
+            C![],
             div![
-                C![
-                    C.flex,
-                    C.flex_col,
-                    C.items_center
-                ],
+                C![],
                 // Section content container
                 div![
-                    C![
-                        C.mt_16,
-                        C.w_xs,
-                        C.px_2,
-                        // sm__
-                        C.sm__mt_40,
-                        C.sm__w_132,
-                        // lg__
-                        C.lg__mt_64,
-                        C.lg__w_216,
-                    ],
+                    C![],
                     // Testimonial
                     div![
-                        C![
-                            C.mt_10,
-                            C.ml_5,
-                            // sm__
-                            C.sm__ml_12,
-                        ],
+                        C![],
                         div![
-                            C![
-                                C.font_display,
-                                C.italic,
-                                C.text_yellow_4
-                            ],
+                            C![],
                             "It's great!"
                         ],
                         div![
-                            C![
-                                C.ml_12,
-                                C.mt_4,
-                                C.font_display,
-                                C.text_15,
-                                C.text_blue_3,
-                                // sm__
-                                C.sm__ml_20,
-                                C.sm__text_20,
-                                // lg__
-                                C.lg__mt_8,
-                                C.lg__ml_40,
-                                C.lg__text_35,
-                            ],
+                            C![],
                             "- ",
                             a![
                                 attrs!{
                                     At::Href => "https://github.com/David-OConnor/seed/issues/200#issuecomment-522247909"
                                 },
-                                C![
-                                    C.underline,
-                                    C.underline_blue_5,
-                                ],
+                                C![],
                                 "rebo"
                             ]
                         ]
@@ -1182,80 +499,25 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => "https://github.com/MartinKavik/seed-quickstart-webpack"
                         },
-                        C![
-                            C.block,
-                            C.relative,
-                            C.mt_12,
-                            C.ml_6,
-                            C.pt_8,
-                            C.pb_6,
-                            C.rounded_tl_28px,
-                            C.bg_blue_2,
-                            C.shadow_glow,
-                            // sm__
-                            C.sm__mt_32,
-                            C.sm__pt_12,
-                            C.sm__pb_10,
-                            C.sm__rounded_tl_55px,
-                            // lg__
-                            C.lg__ml_48,
-                            C.lg__pt_16,
-                            C.lg__pb_12,
-                            C.lg__rounded_tl_90px,
-                        ],
+                        C![],
                         // Extended background
                         div![
-                            C![
-                                C.absolute,
-                                C._right_50vw,
-                                C.inset_y_0,
-                                C.w_50vw,
-                                C.bg_blue_2,
-                                C.shadow_glow,
-                            ]
+                            C![]
                         ],
                         // Logo
                         div![
-                            C![
-                                C.ml_2,
-                                C.font_display,
-                                C.font_bold,
-                                C.text_34,
-                                // sm__
-                                C.sm__ml_4,
-                                C.sm__text_60,
-                                // lg__
-                                C.lg__ml_6,
-                                C.lg__text_80,
-                            ],
+                            C![],
                             "Seed Quickstart"
                         ],
                     ],
                     ul![
-                        C![
-                            C.mt_12,
-                            C.text_blue_1,
-                            // sm__
-                            C.sm__mt_24,
-                            // lg__
-                            C.lg__mt_32,
-                        ],
+                        C![],
                         li![
-                            C![
-                                C.my_3,
-                            ],
+                            C![],
                             div![
-                                C![
-                                    C.flex,
-                                    C.flex_no_wrap,
-                                ],
+                                C![],
                                 div![
-                                    C![
-                                        C.text_yellow_4,
-                                        C.mr_2,
-                                        // lg__
-                                        C.lg__mr_4,
-                                    ],
+                                    C![],
                                     "▶\u{fe0e}"
                                 ],
                                 div![
@@ -1264,15 +526,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                             At::Href => "https://github.com/MartinKavik/seed-quickstart-webpack"
                                         },
                                         h3![
-                                            C![
-                                                C.inline,
-                                                C.text_18,
-                                                C.font_bold,
-                                                // sm__
-                                                C.sm__text_26,
-                                                // lg__
-                                                C.lg__text_45,
-                                            ],
+                                            C![],
                                             "Seed Quickstart"
                                         ],
                                     ],
@@ -1285,47 +539,17 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => "https://github.com/MartinKavik/seed-quickstart-webpack"
                         },
-                        C![
-                            C.block,
-                            C.mt_10,
-                            C.mb_56,
-                            C.text_right,
-                            C.font_display,
-                            C.text_15,
-                            // sm__
-                            C.sm__mt_20,
-                            C.sm__mb_96,
-                            C.sm__text_26,
-                            // lg__
-                            C.lg__mt_32,
-                            C.lg__mb_132,
-                            C.lg__text_45,
-                        ],
+                        C![],
                         span![
-                            C![
-                                C.text_blue_4
-                            ],
+                            C![],
                             "MartinKavik/"
                         ],
                         span![
-                            C![
-                                C.text_blue_2
-                            ],
+                            C![],
                             "seed-quickstart-webpack"
                         ],
                         img![
-                            C![
-                                C.inline
-                                C.mb_4,
-                                C.ml_px,
-                                C.w_3,
-                                // sm__
-                                C.sm__mb_6,
-                                C.sm__w_4,
-                                // lg__
-                                C.lg__mb_8,
-                                C.lg__w_5,
-                            ],
+                            C![],
                             attrs!{
                                 At::Src => image_src("link_arrow.svg")
                             }
@@ -1337,51 +561,16 @@ pub fn view(base_url: &Url) -> Node<Msg> {
         // Hellweb section
         section![
             div![
-                C![
-                    C.flex,
-                    C.flex_col,
-                    C.items_center
-                ],
+                C![],
                 // Section content container
                 div![
-                    C![
-                        C.mt_16,
-                        C.w_xs,
-                        C.px_2,
-                        // sm__
-                        C.sm__mt_40,
-                        C.sm__w_132,
-                        // lg__
-                        C.lg__mt_64,
-                        C.lg__w_236,
-                    ],
+                    C![],
                     // Hellweb container
                     div![
-                        C![
-                            C.relative,
-                            C._mt_40,
-                            C.w_xs,
-                            C.py_12,
-                            C.rounded_tr_140px,
-                            C.bg_gray_1,
-                            // sm__
-                            C.sm__w_132,
-                            C.sm___mt_80,
-                            // lg__
-                            C.lg__w_204,
-                            C.lg___mt_120,
-                            C.lg__rounded_tr_330px,
-                        ],
+                        C![],
                         // Extended background
                         div![
-                            C![
-                                C.absolute,
-                                C.left_0,
-                                C.inset_y_0,
-                                C._left_50vw,
-                                C.w_50vw,
-                                C.bg_gray_1,
-                            ]
+                            C![]
                         ],
                         // Hellweb
                         a![
@@ -1389,18 +578,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                 At::Href => "https://github.com/MartinKavik/hellweb-pain"
                             },
                             img![
-                                C![
-                                    C.mt_1,
-                                    C.ml_8,
-                                    C.h_12,
-                                    // sm__
-                                    C.sm__mt_20,
-                                    C.sm__h_20,
-                                    // lg__
-                                    C.lg__mt_24,
-                                    C.lg__ml_16,
-                                    C.lg__h_32,
-                                ],
+                                C![],
                                 attrs!{
                                     At::Src => image_src("hellweb_logo.svg")
                                 }
@@ -1408,29 +586,13 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         ]
                     ],
                     ul![
-                        C![
-                            C.text_gray_10,
-                            // sm__
-                            C.sm__mt_16,
-                            // lg__
-                            C.sm__mt_24,
-                        ],
+                        C![],
                         li![
-                            C![
-                                C.my_3,
-                            ],
+                            C![],
                             div![
-                                C![
-                                    C.flex,
-                                    C.flex_no_wrap,
-                                ],
+                                C![],
                                 div![
-                                    C![
-                                        C.text_blue_6,
-                                        C.mr_2,
-                                        // lg__
-                                        C.lg__mr_4,
-                                    ],
+                                    C![],
                                     "▶\u{fe0e}"
                                 ],
                                 div![
@@ -1439,15 +601,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                             At::Href => "https://github.com/MartinKavik/hellweb-pain"
                                         },
                                         h3![
-                                            C![
-                                                C.inline,
-                                                C.text_18,
-                                                C.font_bold,
-                                                // sm__
-                                                C.sm__text_26,
-                                                // lg__
-                                                C.lg__text_45,
-                                            ],
+                                            C![],
                                             "Hellweb"
                                         ],
                                     ],
@@ -1456,33 +610,17 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             ]
                         ],
                         li![
-                            C![
-                                C.mt_8,
-                                // sm__
-                                C.sm__mt_16,
-                                // lg__
-                                C.lg__mt_32,
-                            ],
+                            C![],
                             div![
-                                C![
-                                    C.flex,
-                                    C.flex_no_wrap,
-                                ],
+                                C![],
                                 div![
-                                    C![
-                                        C.text_blue_6,
-                                        C.mr_2,
-                                        // lg__
-                                        C.lg__mr_4,
-                                    ],
+                                    C![],
                                     "▶\u{fe0e}"
                                 ],
                                 div![
                                     "What do you hate or what annoys you about ",
                                     span![
-                                        C![
-                                            C.font_bold,
-                                        ],
+                                        C![],
                                         "web design & development"
                                     ],
                                     "? Don't hesitate to create an issue or contact me - ",
@@ -1490,10 +628,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                                         attrs!{
                                             At::Href => MAIL_TO_HELLWEB
                                         },
-                                        C![
-                                            C.underline,
-                                            C.underline_yellow_7,
-                                        ],
+                                        C![],
                                         "martin@hellweb.app"
                                     ]
                                 ]
@@ -1504,42 +639,17 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => "https://github.com/MartinKavik/hellweb-pain"
                         },
-                        C![
-                            C.block
-                            C.mt_10,
-                            C.mr_2,
-                            C.text_right,
-                            // sm__
-                            C.sm__mt_20,
-                            // lg__
-                            C.lg__mt_32,
-                            C.lg__mr_16,
-                        ],
+                        C![],
                         span![
-                            C![
-                                C.text_gray_5
-                            ],
+                            C![],
                             "MartinKavik/"
                         ],
                         span![
-                            C![
-                                C.text_gray_9
-                            ],
+                            C![],
                             "hellweb-pain"
                         ],
                         img![
-                            C![
-                                C.inline
-                                C.mb_4,
-                                C.ml_px,
-                                C.w_3,
-                                // sm__
-                                C.sm__mb_6,
-                                C.sm__w_4,
-                                // lg__
-                                C.lg__mb_8,
-                                C.lg__w_5,
-                            ],
+                            C![],
                             attrs!{
                                 At::Src => image_src("link_arrow.svg")
                             }
@@ -1550,43 +660,15 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                         attrs!{
                             At::Href => Urls::new(base_url).about()
                         },
-                        C![
-                            C.block,
-                            C.mt_20,
-                            C.mb_16,
-                            C.ml_5,
-                            C.flex,
-                            C.items_center,
-                            C.justify_center,
-                            C.text_19,
-                            C.text_gray_10,
-                            C.hover__text_yellow_7,
-                            // sm__
-                            C.sm__mt_40,
-                            C.sm__mb_24,
-                            C.sm__text_28,
-                            // lg__
-                            C.lg__mt_64,
-                            C.lg__mb_48,
-                            C.lg__text_50,
-                        ],
+                        C![],
                         ev(Ev::Click, |_| Msg::ScrollToTop),
                         span![
-                            C![
-                                C.font_semibold
-                            ],
+                            C![],
                             "About"
                         ],
                         "\u{00A0}your new developer",
                         img![
-                            C![
-                                C.mt_1,
-                                C.h_12,
-                                // sm__
-                                C.sm__h_16,
-                                // lg__
-                                C.lg__h_32,
-                            ],
+                            C![],
                             attrs!{
                                 At::Src => image_src("next.svg")
                             }
@@ -1597,95 +679,16 @@ pub fn view(base_url: &Url) -> Node<Msg> {
         ],
         // Circles
         div![
-            C![
-                C.absolute,
-                C.left_1of2,
-                C.top_0,
-                C.mt_310px,
-                C.ml_38,
-                C.w_1240px,
-                C.h_1240px,
-                C.rounded_full,
-                C.border_blue_2,
-                C.border_2,
-                C.opacity_10,
-                // sm__
-                C.sm__ml_64,
-                C.sm__h_2560px,
-                C.sm__w_2560px,
-                // lg__
-                C.lg__mt_1290px,
-                C.lg__ml_108,
-            ]
+            C![]
         ],
         div![
-            C![
-                C.absolute,
-                C.right_1of2,
-                C.top_0,
-                C.mt_790px,
-                C.mr_38,
-                C.w_1240px,
-                C.h_1240px,
-                C.rounded_full,
-                C.border_blue_2,
-                C.border_2,
-                C.opacity_10,
-                // sm__
-                C.sm__mt_1310px,
-                C.sm__mr_64,
-                C.sm__h_2560px,
-                C.sm__w_2560px,
-                // lg__
-                C.lg__mt_2840px,
-                C.lg__mr_108,
-            ]
+            C![]
         ],
         div![
-            C![
-                C.absolute,
-                C.left_1of2,
-                C.top_0,
-                C.mt_1760px,
-                C.ml_38,
-                C.w_1240px,
-                C.h_1240px,
-                C.rounded_full,
-                C.border_blue_2,
-                C.border_2,
-                C.opacity_10,
-                // sm__
-                C.sm__mt_3040px,
-                C.sm__ml_64,
-                C.sm__h_2560px,
-                C.sm__w_2560px,
-                // lg__
-                C.lg__mt_5030px,
-                C.lg__ml_108,
-            ]
+            C![]
         ],
         div![
-            C![
-                C.absolute,
-                C.right_1of2,
-                C.top_0,
-                C.mt_2340px,
-                C.mr_38,
-                C.w_1240px,
-                C.h_1240px,
-                C.rounded_full,
-                C.border_blue_2,
-                C.border_2,
-                C.opacity_10,
-                // sm__
-                C.sm__mt_3870px,
-                C.sm__mr_64,
-                C.sm__h_2560px,
-                C.sm__w_2560px,
-                // lg__
-                C.lg__mt_6070px,
-                C.lg__mr_108,
-            ]
+            C![]
         ],
     ]
 }

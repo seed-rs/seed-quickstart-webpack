@@ -1,47 +1,35 @@
-// @TODO: uncomment once https://github.com/rust-lang/rust/issues/54726 stable
-//#![rustfmt::skip::macros(class)]
-
 #![allow(
     clippy::used_underscore_binding,
     clippy::non_ascii_literal,
     clippy::enum_glob_use,
     clippy::must_use_candidate,
-    clippy::wildcard_imports
+    clippy::wildcard_imports,
+    clippy::match_wildcard_for_single_variants
 )]
 
-mod generated;
+mod css_classes;
 mod page;
 
-use fixed_vec_deque::FixedVecDeque;
-use generated::css_classes::C;
+use crate::css_classes::C;
 use seed::{prelude::*, *};
-use Visibility::*;
 
-const TITLE_SUFFIX: &str = "Kavik.cz";
-// https://mailtolink.me/
-const MAIL_TO_KAVIK: &str = "mailto:martin@kavik.cz?subject=Something%20for%20Martin&body=Hi!%0A%0AI%20am%20Groot.%20I%20like%20trains.";
-const MAIL_TO_HELLWEB: &str =
-    "mailto:martin@hellweb.app?subject=Hellweb%20-%20pain&body=Hi!%0A%0AI%20hate";
+const STATIC_PATH: &str = "assets";
+const IMAGES_PATH: &str = "assets/images";
 const USER_AGENT_FOR_PRERENDERING: &str = "ReactSnap";
-const STATIC_PATH: &str = "static";
-const IMAGES_PATH: &str = "static/images";
 
-const ABOUT: &str = "about";
+const EXAMPLE: &str = "example";
 
 // ------ ------
 //     Init
 // ------ ------
 
 fn init(url: Url, orders: &mut impl Orders<Msg>) -> Model {
-    orders
-        .subscribe(Msg::UrlChanged)
-        .stream(streams::window_event(Ev::Scroll, |_| Msg::Scrolled));
-
+    orders.subscribe(Msg::UrlChanged);
     Model {
         base_url: url.to_base_url(),
+        counter: page::counter::init(&mut orders.proxy(Msg::Counter)),
         page: Page::init(url),
-        scroll_history: ScrollHistory::new(),
-        menu_visibility: Hidden,
+        menu_visible: false,
         in_prerendering: is_in_prerendering(),
     }
 }
@@ -57,51 +45,29 @@ fn is_in_prerendering() -> bool {
 //     Model
 // ------ ------
 
-#[derive(Clone, Copy, Eq, PartialEq)]
-pub enum Visibility {
-    Visible,
-    Hidden,
-}
-
-impl Visibility {
-    pub fn toggle(&mut self) {
-        *self = match self {
-            Visible => Hidden,
-            Hidden => Visible,
-        }
-    }
-}
-
-// We need at least 3 last values to detect scroll direction,
-// because neighboring ones are sometimes equal.
-type ScrollHistory = FixedVecDeque<[i32; 3]>;
-
 pub struct Model {
-    pub base_url: Url,
-    pub page: Page,
-    pub scroll_history: ScrollHistory,
-    pub menu_visibility: Visibility,
+    base_url: Url,
+    counter: page::counter::Model,
+    page: Page,
+    menu_visible: bool,
     pub in_prerendering: bool,
 }
 
 // ------ Page ------
-
-#[derive(Clone, Copy, Eq, PartialEq)]
-pub enum Page {
+#[derive(PartialEq)]
+enum Page {
     Home,
-    About,
+    Example,
     NotFound,
 }
 
 impl Page {
-    pub fn init(mut url: Url) -> Self {
-        let (page, title) = match url.remaining_path_parts().as_slice() {
-            [] => (Self::Home, TITLE_SUFFIX.to_owned()),
-            [ABOUT] => (Self::About, format!("About - {}", TITLE_SUFFIX)),
-            _ => (Self::NotFound, format!("404 - {}", TITLE_SUFFIX)),
-        };
-        document().set_title(&title);
-        page
+    fn init(mut url: Url) -> Self {
+        match url.next_path_part() {
+            None => Self::Home,
+            Some(EXAMPLE) => Self::Example,
+            _ => Self::NotFound,
+        }
     }
 }
 
@@ -115,8 +81,8 @@ impl<'a> Urls<'a> {
         self.base_url()
     }
 
-    pub fn about(self) -> Url {
-        self.base_url().add_path_part(ABOUT)
+    pub fn counter(self) -> page::counter::Urls<'a> {
+        page::counter::Urls::new(self.base_url().add_path_part(EXAMPLE))
     }
 }
 
@@ -124,38 +90,23 @@ impl<'a> Urls<'a> {
 //    Update
 // ------ ------
 
-pub enum Msg {
+enum Msg {
     UrlChanged(subs::UrlChanged),
-    ScrollToTop,
-    Scrolled,
+    Counter(page::counter::Msg),
+    ResetCounter,
     ToggleMenu,
-    HideMenu,
 }
 
-pub fn update(msg: Msg, model: &mut Model, _: &mut impl Orders<Msg>) {
+fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
     match msg {
         Msg::UrlChanged(subs::UrlChanged(url)) => {
             model.page = Page::init(url);
         },
-        Msg::ScrollToTop => window().scroll_to_with_scroll_to_options(
-            web_sys::ScrollToOptions::new().top(0.),
-        ),
-        Msg::Scrolled => {
-            // Some browsers use `document.body.scrollTop`
-            // and other ones `document.documentElement.scrollTop`.
-            let mut position = body().scroll_top();
-            if position == 0 {
-                position = document()
-                    .document_element()
-                    .expect("get document element")
-                    .scroll_top()
-            }
-            *model.scroll_history.push_back() = position;
+        Msg::Counter(msg) => page::counter::update(msg, &mut model.counter),
+        Msg::ResetCounter => {
+            orders.notify(page::counter::DoReset);
         },
-        Msg::ToggleMenu => model.menu_visibility.toggle(),
-        Msg::HideMenu => {
-            model.menu_visibility = Hidden;
-        },
+        Msg::ToggleMenu => model.menu_visible = !model.menu_visible,
     }
 }
 
@@ -163,28 +114,128 @@ pub fn update(msg: Msg, model: &mut Model, _: &mut impl Orders<Msg>) {
 //     View
 // ------ ------
 
-// Notes:
-// - \u{00A0} is the non-breaking space
-//   - https://codepoints.net/U+00A0
-//
-// - "▶\u{fe0e}" - \u{fe0e} is the variation selector, it prevents ▶ to change to emoji in some browsers
-//   - https://codepoints.net/U+FE0E
-
-pub fn view(model: &Model) -> impl IntoNodes<Msg> {
-    div![
-        C![
-            IF!(not(model.in_prerendering) => C.fade_in),
-            C.min_h_screen,
-            C.flex,
-            C.flex_col,
-        ],
-        match model.page {
-            Page::Home => page::home::view(&model.base_url),
-            Page::About => page::about::view(),
-            Page::NotFound => page::not_found::view(),
+fn view(model: &Model) -> impl IntoNodes<Msg> {
+    vec![
+        navbar(model),
+        match &model.page {
+            Page::Home => section![
+                C![
+                    C.fade_in,
+                    C.hero,
+                    C.is_primary,
+                    C.is_bold,
+                    C.is_fullheight_with_navbar
+                ],
+                figure![
+                    C![C.image],
+                    img![
+                        C![C.gear_bgd, C.blur, C.rotate],
+                        attrs! {
+                          At::Width => "70%", At::Height => "70%"
+                          At::Src => image_src("gear.svg")
+                        }
+                    ],
+                ],
+                div![
+                    C![C.hero_body],
+                    div![
+                        C![C.container, C.has_text_centered],
+                        h1![
+                            format!("Counter is {}", model.counter.value),
+                            C![C.title C.is_1]
+                        ],
+                        h2![
+                            "Navigate to the Example page and change",
+                            C![C.subtitle]
+                        ],
+                        button![
+                            C![
+                                C.button,
+                                C.is_primary,
+                                C.is_inverted,
+                                C.is_outlined
+                            ],
+                            "Reset Counter",
+                            ev(Ev::Click, |_| Msg::ResetCounter),
+                            ev(Ev::Click, |_| log!("Reset counter!")),
+                        ]
+                    ]
+                ],
+            ],
+            Page::Example => {
+                page::counter::view(&model.counter).map_msg(Msg::Counter)
+            },
+            Page::NotFound => div!["404"],
         },
-        page::partial::header::view(model),
-        page::partial::footer::view(),
+    ]
+}
+
+fn navbar(model: &Model) -> Node<Msg> {
+    let base_url: &Url = &model.base_url;
+    let current_page: &Page = &model.page;
+
+    nav![
+        C![C.navbar, C.is_light],
+        div![
+            C![C.navbar_brand],
+            a![
+                C![C.navbar_item],
+                attrs! { At::Href => "https://seed-rs.org/"},
+                img![
+                    attrs! {
+                      At::Src => image_src("seed_logo.svg"), At::Alt => "Logo"
+                    },
+                    style! {St::Height => rem(2)}
+                ]
+            ],
+            span![
+                C![C.navbar_burger, IF!(model.menu_visible => C.is_active)],
+                ev(Ev::Click, |_| Msg::ToggleMenu),
+                span![],
+                span![],
+                span![],
+            ]
+        ],
+        div![
+            C![C.navbar_menu, IF!(model.menu_visible => C.is_active)],
+            div![
+                C![C.navbar_start],
+                a![
+                    C![
+                        C.navbar_item,
+                        IF!(*current_page == Page::Home => C.is_active)
+                    ],
+                    attrs! { At::Href => Urls::new(base_url).home() },
+                    "Home"
+                ],
+                a![
+                    C![
+                        C.navbar_item,
+                        IF!(*current_page == Page::Example => C.is_active)
+                    ],
+                    attrs! { At::Href => Urls::new(base_url).counter().counter_url()},
+                    "Example"
+                ],
+                a![
+                    C![C.navbar_item],
+                    "Documentation",
+                    attrs! {At::Href => "https://docs.rs/crate/seed/0.7.0"}
+                ],
+            ],
+            div![
+                C![C.navbar_end],
+                span![
+                    C![C.navbar_item],
+                    a![
+                        attrs! {At::Href => "https://github.com/seed-rs/seed"},
+                        span![
+                            C![C.icon, C.is_medium, C.has_text_dark],
+                            i![C![C.fab, C.fa_2x, C.fa_github]]
+                        ],
+                    ]
+                ]
+            ]
+        ]
     ]
 }
 
@@ -196,15 +247,15 @@ pub fn asset_path(asset: &str) -> String {
     format!("{}/{}", STATIC_PATH, asset)
 }
 
+#[cfg(feature = "wee_alloc")]
+#[global_allocator]
+static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
+
 // ------ ------
 //     Start
 // ------ ------
 
 #[wasm_bindgen(start)]
-pub fn run() {
-    log!("Starting app...");
-
+pub fn start() {
     App::start("app", init, update, view);
-
-    log!("App started.");
 }

@@ -6,7 +6,6 @@ target
 wasm-pack.log
 .idea
 
-src/generated/**
-!src/generated/mod.rs
+css_classes.rs
 !**/.keep
 css_classes.rs

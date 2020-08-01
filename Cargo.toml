@@ -1,10 +1,10 @@
 [package]
-version = "0.1.0"
-name = "kavik_cz"
-repository = "https://github.com/MartinKavik/kavik.cz"
-authors = ["Martin Kavík <martin@kavik.cz>"]
-description = "Personal website kavik.cz"
-categories = ["wasm", "rust", "tailwindcss", "seed", "personal", "website"]
+version = "0.3.0"
+name = "seed_qs_webpack"
+repository = "https://github.com/seed-rs/seed-quickstart-webpack"
+authors = ["Frank Panetta <frank@zuudo.com.au>"]
+description = "Seed framework quick start template"
+categories = ["wasm", "rust", "seed", "frontend"]
 license = "MIT"
 readme = "./README.md"
 edition = "2018"
@@ -13,19 +13,17 @@ edition = "2018"
 crate-type = ["cdylib"]
 
 [dev-dependencies]
-wasm-bindgen-test = "0.3.12"
+wasm-bindgen-test = "0.3.17"
 
 [dependencies]
 # Referenced commit fixes base url and memory bugs in Seed 0.7.0
 # (https://github.com/seed-rs/seed/pull/454 + https://github.com/seed-rs/seed/pull/455).
 # Replace with "0.8.0" once the new Seed version is released.
 seed = { git = "https://github.com/seed-rs/seed", rev = "b25cf59" }
-fixed-vec-deque = "0.1.9"
 
 [dependencies.web-sys]
-version = "0.3.39"
+version = "0.3.44"
 features = [
-  "ScrollToOptions",
   "Navigator",
 ]
 

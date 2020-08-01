@@ -9,7 +9,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = (env, argv) => {
   return {
-    entry: path.resolve(__dirname, "./static/index.css_classes.ts"),
+    entry: path.resolve(__dirname, "./styles/app.scss"),
     output: {
       path: path.resolve(__dirname, "../dist"),
       filename: "css_classes.js"
@@ -18,7 +18,7 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
-          test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/,
+          test: /\.(jpg|jpeg|png|woff(2)?|eot|ttf|svg)(\?[a-z0-9]+)?$/,
           use: [
             {
               loader: "file-loader",
@@ -30,23 +30,20 @@ module.exports = (env, argv) => {
           ]
         },
         {
-          test: /\.ts$/,
-          loader: "ts-loader?configFile=tsconfig.css_classes.json"
-        },
-        {
-          test: /\.css$/,
+          test: /\.s[ac]ss$/i,
           use: [
             "style-loader",
-            "css-loader",
+            'css-loader',
             {
               loader: "postcss-loader",
               options: {
                 config: {
                   ctx: { mode: argv.mode },
-                  path: __dirname
+                  path: __dirname,
                 }
               }
-            }
+            },
+            'sass-loader',
           ]
         }
       ]

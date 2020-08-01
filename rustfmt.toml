@@ -7,7 +7,7 @@ use_try_shorthand = true
 # nightly
 
 ignore = [
-    "src/generated",
+    "src/css_classes.rs"
 ]
 normalize_doc_attributes = true
 reorder_impl_items = true

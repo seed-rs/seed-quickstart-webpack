@@ -1,28 +1,27 @@
+body {
+  overflow: hidden;
+}
+
+.gear_bgd {
+  position: absolute;
+  top: 50vh;
+  left: 50%;
+  z-index: 10;
+  opacity: 0.8;
+}
 
 .blur {
-  filter: blur(7px);
+  filter: blur(10px);
 }
-
-.underline-yellow-7 {
-  text-decoration-color: hsl(36, 77%, 49%)
-}
-
-.underline-blue-5 {
-  text-decoration-color: hsl(205, 65%, 55%)
-}
-
-
 
 /* ====== ====== ANIMATIONS ====== ====== */
 
-
-
 .fade-in {
-	animation: fade-in 500ms linear 200ms both;
+  animation: fade-in 500ms linear 200ms both;
 }
 
 .rotate {
-	animation: rotate-center 1s linear infinite both;
+  animation: rotate-center 120s linear infinite both;
 }
 
 /* ----------------------------------------------
@@ -66,3 +65,36 @@
     transform: rotate(360deg);
   }
 }
+
+.user {
+  @extend %fa-icon;
+  @extend .fas;
+
+  &:before {
+    content: fa-content($fa-var-user);
+  }
+}
+
+.twitter {
+  @extend %fa-icon;
+  @extend .fab;
+
+  &:before {
+    content: fa-content($fa-var-twitter);
+  }
+}
+
+// Set your brand colors
+$purple: #8a4d76;
+$brown: #757763;
+$beige-light: #d0d1cd;
+$beige-lighter: #eff0eb;
+
+// Update Bulma's global variables
+$grey-dark: $brown;
+$grey-light: $beige-light;
+$primary: $purple;
+
+// Update some of Bulma's component variables
+$body-background-color: $beige-lighter;
+$control-border-width: 2px;
