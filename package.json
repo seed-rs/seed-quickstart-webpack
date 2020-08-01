@@ -2,7 +2,7 @@
   "author": "Frank Panetta <frank@zuudo.com.au>",
   "name": "seed-quickstart-webpack",
   "version": "0.8.0",
-  "repository": "https://github.com/MartinKavik/seed-quickstart-webpack",
+  "repository": "https://github.com/seed-rs/seed-quickstart-webpack",
   "license": "MIT",
   "scripts": {
     "start": "yarn generate:css_classes && webpack-dev-server --config webpack.config.js -d",
