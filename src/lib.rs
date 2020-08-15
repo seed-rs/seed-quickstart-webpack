@@ -101,11 +101,11 @@ fn update(msg: Msg, model: &mut Model, orders: &mut impl Orders<Msg>) {
     match msg {
         Msg::UrlChanged(subs::UrlChanged(url)) => {
             model.page = Page::init(url);
-        },
+        }
         Msg::Counter(msg) => page::counter::update(msg, &mut model.counter),
         Msg::ResetCounter => {
             orders.notify(page::counter::DoReset);
-        },
+        }
         Msg::ToggleMenu => model.menu_visible = !model.menu_visible,
     }
 }
@@ -164,8 +164,8 @@ fn view(model: &Model) -> impl IntoNodes<Msg> {
             ],
             Page::Example => {
                 page::counter::view(&model.counter).map_msg(Msg::Counter)
-            },
-            Page::NotFound => div!["404"],
+            }
+            Page::NotFound => page::not_found::view(),
         },
     ]
 }

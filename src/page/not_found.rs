@@ -1,30 +1,30 @@
-use crate::{css_classes::C, Msg};
+#![allow(clippy::needless_pass_by_value, clippy::trivially_copy_pass_by_ref)]
+
+use crate::css_classes::C;
 use seed::{prelude::*, *};
 
-pub fn view() -> Node<Msg> {
-    div![
-        C![],
-        h1![
-            C![],
-            "PAGE NOT FOUND!"
+// ------ ------
+//     View
+// ------ ------
+
+pub fn view<Msg>() -> Node<Msg> {
+    section![
+        C![
+            C.fade_in,
+            C.hero,
+            C.is_bold,
+            C.is_fullheight_with_navbar
         ],
-        // Sad mouth
-        svg![
-            C![],
-            style! {
-                "background" => "rgba(0, 0, 0, 0) none repeat scroll 0% 0%",
-                "transform" => "scaleY(-1)",
-            },
-            attrs! {
-                At::ViewBox => "0 0 100 100",
-                // @TODO: Rewrite once `preserveAspectRatio` is supported.
-                At::Custom("preserveAspectRatio".into()) => "xMidYMid",
-            },
-            path![attrs! {
-                // @TODO: Rewrite once `stroke` is supported.
-                At::Custom("stroke".into()) => "none",
-                At::D => "M10 50A40 40 0 0 0 90 50A40 42 0 0 1 10 50"
-            }]
-        ]
+        div![
+            C![C.hero_body],
+            div![
+                C![C.container, C.has_text_centered],
+                h1![
+                    C![C.title C.is_1],
+                   "404 Page Not Found"
+                ],
+                h2!["An unexpected error has occurred. Please contact the site owner.", C![C.subtitle]],
+            ]
+        ],
     ]
 }
