@@ -11,8 +11,8 @@ module.exports = (env, argv) => {
   return {
     entry: path.resolve(__dirname, "./static/index.css_classes.ts"),
     output: {
-      path: path.resolve(__dirname, "../dist"),
-      filename: "css_classes.js"
+      path: path.resolve(__dirname, "dist"),
+      filename: "css_classes.js",
     },
     plugins: [new WebpackBar(), new CleanWebpackPlugin()],
     module: {
@@ -24,14 +24,14 @@ module.exports = (env, argv) => {
               loader: "file-loader",
               options: {
                 emitFile: false,
-                name: "[path][name].[ext]"
-              }
-            }
-          ]
+                name: "[path][name].[ext]",
+              },
+            },
+          ],
         },
         {
           test: /\.ts$/,
-          loader: "ts-loader?configFile=tsconfig.css_classes.json"
+          loader: "ts-loader?configFile=tsconfig.css_classes.json",
         },
         {
           test: /\.css$/,
@@ -43,13 +43,13 @@ module.exports = (env, argv) => {
               options: {
                 config: {
                   ctx: { mode: argv.mode },
-                  path: __dirname
-                }
-              }
-            }
-          ]
-        }
-      ]
-    }
+                  path: __dirname,
+                },
+              },
+            },
+          ],
+        },
+      ],
+    },
   };
 };

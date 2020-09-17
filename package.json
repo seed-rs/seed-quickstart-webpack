@@ -1,7 +1,7 @@
 {
   "author": "Martin Kavík <martin@kavik.cz>",
   "name": "seed-quickstart-webpack",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "repository": "https://github.com/MartinKavik/seed-quickstart-webpack",
   "license": "MIT",
   "scripts": {

@@ -2,6 +2,11 @@
 
 [UNRELEASED]
 
+[0.7.4]
+
+- Change dist output location
+- Teporarily switch test to Chrome - [Gecko fails](https://github.com/rustwasm/wasm-bindgen/issues/2261)
+
 [0.7.3]
 
 - Upgrade postcss-typed-css-classes to bring in bug fix
