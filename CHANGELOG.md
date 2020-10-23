@@ -2,10 +2,14 @@
 
 [UNRELEASED]
 
+[0.7.5]
+
+- Updated dependencies (including Seed 0.8.0).
+
 [0.7.4]
 
 - Change dist output location
-- Teporarily switch test to Chrome - [Gecko fails](https://github.com/rustwasm/wasm-bindgen/issues/2261)
+- Temporarily switch test to Chrome - [Gecko fails](https://github.com/rustwasm/wasm-bindgen/issues/2261)
 
 [0.7.3]
 
