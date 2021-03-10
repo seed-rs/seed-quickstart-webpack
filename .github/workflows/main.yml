@@ -40,7 +40,7 @@ jobs:
 
       - name: Install Netlify CLI
         if: github.ref == 'refs/heads/master'
-        run: sudo npm install netlify-cli -g
+        run: sudo npm install --unsafe-perm=true netlify-cli -g
 
       - name: Deploy
         if: github.ref == 'refs/heads/master'
