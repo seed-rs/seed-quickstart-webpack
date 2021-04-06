@@ -11,8 +11,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = (env, argv) => {
   return {
     performance: {
-        // Don't break compilation because of WASM file bigger than 244 KB.
-        hints: false
+      // Don't break compilation because of WASM file bigger than 244 KB.
+      hints: false
     },
     entry: {
       // Bundle root with name `app.js`.
@@ -23,7 +23,7 @@ module.exports = (env, argv) => {
       publicPath: '/',
       // You can deploy your site from this folder (after build with e.g. `yarn build:release`)
       path: dist,
-      filename:'[name].[contenthash].js'
+      filename: '[name].[contenthash].js'
     },
     devServer: {
       contentBase: dist,
@@ -50,7 +50,7 @@ module.exports = (env, argv) => {
       new CleanWebpackPlugin(),
       // Extract CSS styles into a file.
       new MiniCssExtractPlugin({
-        filename:'[name].[contenthash].css'
+        filename: '[name].[contenthash].css'
       }),
       // Add scripts, css, ... to html template.
       new HtmlWebpackPlugin({
