@@ -154,7 +154,7 @@ pub fn view() -> Node<Msg> {
                             C.py_10,
                             C.bg_gray_1,
                             C.flex,
-                            C.flex_no_wrap,
+                            C.flex_nowrap,
                             // sm__
                             C.sm__pl_4,
                             C.sm__py_16,
@@ -198,7 +198,7 @@ pub fn view() -> Node<Msg> {
                                 C.pr_5,
                                 C.py_10,
                                 C.flex,
-                                C.flex_no_wrap,
+                                C.flex_nowrap,
                                 // sm__
                                 C.sm__pl_4,
                                 C.sm__py_16,
@@ -246,7 +246,7 @@ pub fn view() -> Node<Msg> {
                             C.pr_4,
                             C.py_10,
                             C.flex,
-                            C.flex_no_wrap,
+                            C.flex_nowrap,
                             C.bg_gray_1
                             // sm__
                             C.sm__pl_4,
@@ -303,7 +303,7 @@ pub fn view() -> Node<Msg> {
                                 C.pr_5,
                                 C.py_10,
                                 C.flex,
-                                C.flex_no_wrap,
+                                C.flex_nowrap,
                                 // sm__
                                 C.sm__pl_4,
                                 C.sm__py_16,
@@ -486,7 +486,7 @@ pub fn view() -> Node<Msg> {
                     C![
                         C.w_76,
                         C.flex,
-                        C.flex_no_wrap
+                        C.flex_nowrap
                         // sm__
                         C.sm__w_132,
                         // lg__
@@ -525,7 +525,7 @@ pub fn view() -> Node<Msg> {
                             C.ml_5,
                             C.w_64,
                             C.flex,
-                            C.flex_no_wrap,
+                            C.flex_nowrap,
                             // sm__
                             C.sm__mt_24,
                             C.sm__ml_8,
@@ -563,7 +563,7 @@ pub fn view() -> Node<Msg> {
                         C.mt_16,
                         C.w_76,
                         C.flex,
-                        C.flex_no_wrap,
+                        C.flex_nowrap,
                         // sm__
                         C.sm__mt_24,
                         C.sm__w_132,
@@ -618,7 +618,7 @@ pub fn view() -> Node<Msg> {
                             C.ml_6,
                             C.w_76,
                             C.flex,
-                            C.flex_no_wrap,
+                            C.flex_nowrap,
                             // sm__
                             C.sm__mt_24,
                             C.sm__ml_8,
@@ -773,7 +773,7 @@ pub fn view() -> Node<Msg> {
                         li![
                             C![
                                 C.flex,
-                                C.flex_no_wrap
+                                C.flex_nowrap
                             ],
                             div![
                                 C![
@@ -801,7 +801,7 @@ pub fn view() -> Node<Msg> {
                             C![
                                 C.mt_10,
                                 C.flex,
-                                C.flex_no_wrap,
+                                C.flex_nowrap,
                                 // sm__
                                 C.sm__mt_16,
                                 // lg__
@@ -894,7 +894,7 @@ pub fn view() -> Node<Msg> {
                         li![
                             C![
                                 C.flex,
-                                C.flex_no_wrap
+                                C.flex_nowrap
                             ],
                             div![
                                 C![
@@ -929,7 +929,7 @@ pub fn view() -> Node<Msg> {
                             C![
                                 C.mt_10,
                                 C.flex,
-                                C.flex_no_wrap,
+                                C.flex_nowrap,
                                 // sm__
                                 C.sm__mt_16
                                 // lg__
@@ -961,7 +961,7 @@ pub fn view() -> Node<Msg> {
                             C![
                                 C.mt_10,
                                 C.flex,
-                                C.flex_no_wrap,
+                                C.flex_nowrap,
                                 // sm__
                                 C.sm__mt_16,
                                 // lg__
@@ -1051,7 +1051,7 @@ pub fn view() -> Node<Msg> {
                 li![
                     C![
                         C.flex,
-                        C.flex_no_wrap
+                        C.flex_nowrap
                     ],
                     div![
                         C![
@@ -1072,7 +1072,7 @@ pub fn view() -> Node<Msg> {
                     C![
                         C.mt_10,
                         C.flex,
-                        C.flex_no_wrap
+                        C.flex_nowrap
                         // sm__
                         C.sm__mt_20
                         // lg__
@@ -1159,7 +1159,7 @@ pub fn view() -> Node<Msg> {
                 li![
                     C![
                         C.flex,
-                        C.flex_no_wrap
+                        C.flex_nowrap
                     ],
                     div![
                         C![
@@ -1215,7 +1215,7 @@ pub fn view() -> Node<Msg> {
                     C.text_19,
                     C.text_gray_10,
                     C.flex,
-                    C.whitespace_no_wrap,
+                    C.whitespace_nowrap,
                     C.md__hover__text_yellow_7,
                     // sm__
                     C.sm__mt_32,

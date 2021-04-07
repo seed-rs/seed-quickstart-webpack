@@ -207,7 +207,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             div![
                                 C![
                                     C.flex,
-                                    C.flex_no_wrap,
+                                    C.flex_nowrap,
                                 ],
                                 div![
                                     C![
@@ -229,7 +229,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             div![
                                 C![
                                     C.flex,
-                                    C.flex_no_wrap,
+                                    C.flex_nowrap,
                                 ],
                                 div![
                                     C![
@@ -250,7 +250,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             div![
                                 C![
                                     C.flex,
-                                    C.flex_no_wrap,
+                                    C.flex_nowrap,
                                 ],
                                 div![
                                     C![
@@ -271,7 +271,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             div![
                                 C![
                                     C.flex,
-                                    C.flex_no_wrap,
+                                    C.flex_nowrap,
                                 ],
                                 div![
                                     C![
@@ -514,7 +514,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             div![
                                 C![
                                     C.flex,
-                                    C.flex_no_wrap,
+                                    C.flex_nowrap,
                                 ],
                                 div![
                                     C![
@@ -558,7 +558,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             div![
                                 C![
                                     C.flex,
-                                    C.flex_no_wrap,
+                                    C.flex_nowrap,
                                 ],
                                 div![
                                     C![
@@ -583,7 +583,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             div![
                                 C![
                                     C.flex,
-                                    C.flex_no_wrap,
+                                    C.flex_nowrap,
                                 ],
                                 div![
                                     C![
@@ -786,7 +786,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             div![
                                 C![
                                     C.flex,
-                                    C.flex_no_wrap,
+                                    C.flex_nowrap,
                                 ],
                                 div![
                                     C![
@@ -996,7 +996,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             div![
                                 C![
                                     C.flex,
-                                    C.flex_no_wrap,
+                                    C.flex_nowrap,
                                 ],
                                 div![
                                     C![
@@ -1040,7 +1040,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             div![
                                 C![
                                     C.flex,
-                                    C.flex_no_wrap,
+                                    C.flex_nowrap,
                                 ],
                                 div![
                                     C![
@@ -1247,7 +1247,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             div![
                                 C![
                                     C.flex,
-                                    C.flex_no_wrap,
+                                    C.flex_nowrap,
                                 ],
                                 div![
                                     C![
@@ -1422,7 +1422,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             div![
                                 C![
                                     C.flex,
-                                    C.flex_no_wrap,
+                                    C.flex_nowrap,
                                 ],
                                 div![
                                     C![
@@ -1466,7 +1466,7 @@ pub fn view(base_url: &Url) -> Node<Msg> {
                             div![
                                 C![
                                     C.flex,
-                                    C.flex_no_wrap,
+                                    C.flex_nowrap,
                                 ],
                                 div![
                                     C![
