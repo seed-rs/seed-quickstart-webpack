@@ -43,6 +43,9 @@ module.exports = (env, argv) => {
         errors: true
       },
     },
+    experiments: {
+      asyncWebAssembly: true,
+    },
     plugins: [
       // Show compilation progress bar in console.
       new WebpackBar(),
@@ -63,16 +66,18 @@ module.exports = (env, argv) => {
 
       // You can find files from folder `../static` on url `http://my-site.com/static/`.
       // And favicons in the root.
-      new CopyWebpackPlugin([
-        {
-          from: "static",
-          to: "static"
-        },
-        {
-          from: "favicons",
-          to: ""
-        }
-      ]),
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: "static",
+            to: "static"
+          },
+          {
+            from: "favicons",
+            to: ""
+          }
+        ]
+      }),
     ],
     // Webpack try to guess how to resolve imports in this order:
     resolve: {
@@ -110,7 +115,15 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.ts$/,
-          loader: "ts-loader?configFile=tsconfig.json"
+          use: [
+            {
+              loader: "ts-loader",
+              options: {
+                configFile: "tsconfig.css_classes.json"
+              }
+            }
+          ]
+
         },
         {
           test: /\.css$/,
@@ -120,14 +133,11 @@ module.exports = (env, argv) => {
             {
               loader: "postcss-loader",
               options: {
-                config: {
-                  // Path to postcss.config.js.
-                  path: __dirname,
-                  // Pass mode into `postcss.config.js` (see more info in that file).
-                  ctx: { mode: argv.mode }
+                postcssOptions: {
+                  config: path.resolve(__dirname, "postcss.config.js"),
                 }
-              }
-            }
+              },
+            },
           ]
         }
       ]
