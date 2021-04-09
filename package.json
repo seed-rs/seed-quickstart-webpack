@@ -5,7 +5,7 @@
   "repository": "https://github.com/MartinKavik/seed-quickstart-webpack",
   "license": "MIT",
   "scripts": {
-    "start": "yarn generate:css_classes && webpack serve --config webpack.config.js -d eval --mode=development",
+    "start": "yarn generate:css_classes && webpack serve --config webpack.config.js --mode=development",
     "start:release": "yarn generate:css_classes && webpack serve --config webpack.config.js --mode=production",
     "build": "yarn generate:css_classes && webpack --config webpack.config --mode=development",
     "build:release": "yarn generate:css_classes && webpack --config webpack.config --mode=production",
