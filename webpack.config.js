@@ -43,6 +43,7 @@ module.exports = (env, argv) => {
         errors: true
       },
     },
+    devtool: "eval",
     experiments: {
       asyncWebAssembly: true,
     },
