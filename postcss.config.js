@@ -6,7 +6,7 @@ module.exports = ({ file, options, env }) => {
       require("tailwindcss")('tailwind.config.js'),
       require("postcss-typed-css-classes")({
         generator: "rust",
-        purge: options.mode === "production",
+        purge: env === "production",
         output_filepath: "src/generated/css_classes.rs",
         content: [
           { path: ['src/**/*.rs'] },
