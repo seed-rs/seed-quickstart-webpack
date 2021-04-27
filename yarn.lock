@@ -3865,10 +3865,10 @@ postcss-selector-parser@^6.0.2, postcss-selector-parser@^6.0.4:
     uniq "^1.0.1"
     util-deprecate "^1.0.2"
 
-postcss-typed-css-classes@^0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/postcss-typed-css-classes/-/postcss-typed-css-classes-0.2.3.tgz#0f66780b4ebdb4704b86a674207c758eaced935d"
-  integrity sha512-5fad0xiCnvKjA0WAkHFISPs+NPNKUh75A0g0pUbFxr/cQrg0xIZ03eUhRc9Biqt0rVJMVbkhIB0g1TtX2cxLEw==
+postcss-typed-css-classes@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/postcss-typed-css-classes/-/postcss-typed-css-classes-0.2.4.tgz#29b6190a80215d39c5bfc1f519c3c4fbb59fdba1"
+  integrity sha512-9zJ5PopBvF1B0MIBSUaMJ/55Kw8xBqBwWeU9Umo6ODLhix1qP0AO4hySqDAE9IKWC3dQh77/GwDyWR6oEI7hLQ==
   dependencies:
     fast-glob "^3.2.4"
     postcss "7.0.29"
