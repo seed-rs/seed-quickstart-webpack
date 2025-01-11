@@ -12,7 +12,7 @@ And I like Rust and documentation.
 
 ---
 
-[**LIVE DEMO**: quickstart-webpack.seed-rs.org](https://quickstart-webpack.seed-rs.org)
+~~**LIVE DEMO**: quickstart-webpack.seed-rs.org~~
 
 Main components:
 
@@ -260,7 +260,7 @@ And how to setup Github Actions with deploy into Netlify.
 
 # Used in projects
 
-- [seed-rs/seed-rs.org](https://github.com/seed-rs/seed-rs.org)
+- ~~seed-rs/seed-rs.org~~
 - [MartinKavik/kavik.cz](https://github.com/MartinKavik/kavik.cz)
 - _[create PR or Issue]_
 
