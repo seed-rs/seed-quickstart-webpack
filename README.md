@@ -231,7 +231,7 @@ And how to setup Github Actions with deploy into Netlify.
 
 ### Manual Deployment
 
-1. Run `yarn build:realease`.
+1. Run `yarn build:release`.
 1. Check if build works by running `yarn serve:dist` and view in a browser.
 1. Deploy the contents of the `dist` directory to a web server.
 
